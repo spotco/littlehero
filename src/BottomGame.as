@@ -8,6 +8,7 @@ package {
 		public var _player:Player = new Player();
 		public var _player_projectiles:FlxGroup = new FlxGroup();
 		public var _enemies:FlxGroup = new FlxGroup();
+		public var _particles:FlxGroup = new FlxGroup();
 		
 		public override function create():void {
 			var bg:FlxSprite = new FlxSprite(0, 0, Resource.BOTTOM_BG);
@@ -21,7 +22,7 @@ package {
 			this.add(fg);
 			
 			SwordPlayerProjectile.cons(_player_projectiles).init(_player);
-			
+			CrossBowPlayerProjectile.cons(_player_projectiles).init(_player);
 			
 			TinySpiderEnemy.cons(_enemies).init(200, 200);
 			TinySpiderEnemy.cons(_enemies).init(800, 200);
@@ -49,13 +50,6 @@ package {
 						enem._do_remove();
 					}
 				}
-			}
-			
-			if (FlxG.mouse.justPressed()) {
-				var dv:Vector3D = new Vector3D(FlxG.mouse.x - _player.get_center().x, FlxG.mouse.y - _player.get_center().y);
-				dv.normalize();
-				dv.scaleBy(7);
-				ArrowPlayerProjectile.cons(_player_projectiles).init(_player.get_center().x, _player.get_center().y, dv.x, dv.y);
 			}
 			
 		}

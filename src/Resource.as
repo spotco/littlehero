@@ -9,8 +9,10 @@ package {
 		
 		[Embed(source = "../resc/bottom_player/player.png")] public static var PLAYER:Class;
 		
-		[Embed(source = "../resc/bottom_item/gun.png")] public static var GUN:Class;
+		[Embed(source = "../resc/bottom_item/crossbow.png")] public static var CROSSBOW:Class;
 		[Embed(source = "../resc/bottom_item/sword.png")] public static var SWORD:Class;
+		
+		[Embed(source = "../resc/bottom_ui/arrow_reticule.png")] public static var ARROW_RETICULE:Class;
 		
 		[Embed(source = "../resc/bottom_enemy/spider.png")] public static var SPIDER:Class;
 	}
