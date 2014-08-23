@@ -15,7 +15,7 @@ package player_projectiles {
 		
 		public function ArrowPlayerProjectile() {
 			super();
-			this.makeGraphic(5, 5, 0xFF0000FF);
+			this.loadGraphic(Resource.ARROW);
 		}
 		
 		var _vx:Number = 0, _vy:Number = 0, _ct:Number = 0;
@@ -23,6 +23,8 @@ package player_projectiles {
 			this.reset(x, y);
 			_vx = vx;
 			_vy = vy;
+			this.angle = Util.pt_to_flxrotation(_vx, _vy) - 90;
+			this.setOriginToCorner();
 			_ct = 300;
 			return this;
 		}

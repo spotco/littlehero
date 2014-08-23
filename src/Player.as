@@ -97,8 +97,8 @@ package  {
 		
 		private var _get_center:FlxPoint = new FlxPoint();
 		public function get_center():FlxPoint {
-			_get_center.x = this._x + 10;
-			_get_center.y = this._y + 10;
+			_get_center.x = this._x + 13;
+			_get_center.y = this._y + 13;
 			return _get_center;
 		}
 		

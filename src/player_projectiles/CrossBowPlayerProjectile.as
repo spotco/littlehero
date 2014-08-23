@@ -41,6 +41,7 @@ package player_projectiles {
 			
 			this.x = this._follow._x - this.frameWidth/2 + g._player._body.frameWidth/2 + v.x + offset_left.x;
 			this.y = this._follow._y - this.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_left.y;
+			
 			this.angle = _follow._angle;
 			
 			if (FlxG.mouse.pressed()) {
@@ -55,7 +56,21 @@ package player_projectiles {
 				var dv:Vector3D = new Vector3D(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
 				dv.normalize();
 				dv.scaleBy(10);
-				ArrowPlayerProjectile.cons(g._player_projectiles).init(this.x, this.y, dv.x, dv.y);
+				
+				var forward:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
+				forward.scaleBy(30);
+				
+				var left:Vector3D = forward.crossProduct(Util.Z_VEC);
+				left.normalize();
+				left.scaleBy(20);
+			
+				ArrowPlayerProjectile.cons(g._player_projectiles).init(
+					this.x,
+					this.y,
+					dv.x, 
+					dv.y
+				);
+				
 			}
 		}
 		

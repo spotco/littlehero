@@ -11,6 +11,7 @@ package {
 		
 		[Embed(source = "../resc/bottom_item/crossbow.png")] public static var CROSSBOW:Class;
 		[Embed(source = "../resc/bottom_item/sword.png")] public static var SWORD:Class;
+		[Embed(source = "../resc/bottom_item/arrow.png")] public static var ARROW:Class;
 		
 		[Embed(source = "../resc/bottom_ui/arrow_reticule.png")] public static var ARROW_RETICULE:Class;
 		
