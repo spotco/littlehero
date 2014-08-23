@@ -6,7 +6,7 @@ package  {
 	
 	public class Player extends FlxGroup {
 		
-		var _body:FlxSprite = new FlxSprite(0, 0, Resource.PLAYER);
+		public var _body:FlxSprite = new FlxSprite(0, 0, Resource.PLAYER);
 		
 		public var _x:Number, _y:Number;
 		public var _vx:Number = 0, _vy:Number = 0;
@@ -48,6 +48,10 @@ package  {
 			_angle += Util.lerp_deg(_angle, _tar_ang, 0.2);
 			_body.angle = _angle;
 			
+			if (FlxG.mouse.justPressed() || Util.get_right_mouse_just_down()) {
+				SwordPlayerProjectile.cons(g._player_projectiles).init(this);
+			}
+			
 			player_control();
 			
 			update_position();
@@ -80,8 +84,19 @@ package  {
 				_vy *= 0.5;
 			}
 			
-			_x +=_vx;
-			_y +=_vy;
+			_x += _vx;
+			_y += _vy;
+			
+			if (_x < 0) {
+				_x = 0;
+			} else if (_x > Util.WID) {
+				_x = Util.WID;
+			}
+			if (_y < 0) {
+				_y = 0;
+			} else if (_y > Util.HEI) {
+				_y = Util.HEI;
+			}
 		}
 		
 		private var _get_center:FlxPoint = new FlxPoint();

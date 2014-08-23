@@ -4,7 +4,7 @@ package player_projectiles {
 
 	public class BasePlayerProjectile extends FlxSprite {
 		
-		public function _update():void { }
+		public function _update(g:BottomGame):void { }
 		public function _should_remove():Boolean { return true; }
 		public function _do_remove():void { }
 		

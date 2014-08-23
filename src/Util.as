@@ -264,6 +264,21 @@ package  {
 			return _flxrotation_to_pt;
 		}
 		
+		static var _right_mouse_down:Boolean = false;
+		static var _right_mouse_just_down:Boolean = false;
+		public static function set_right_mouse_down(t:Boolean):void {
+			_right_mouse_down = t;
+			_right_mouse_just_down = t;
+		}
+		public static function get_right_mouse_down():Boolean {
+			return _right_mouse_down;
+		}
+		public static function get_right_mouse_just_down():Boolean {
+			var rtv:Boolean = _right_mouse_just_down;
+			_right_mouse_just_down = false;
+			return rtv;
+		}
+		
 	}
 
 }

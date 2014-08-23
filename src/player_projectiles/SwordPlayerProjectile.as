@@ -4,6 +4,9 @@ package player_projectiles {
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
+	import org.flixel.plugin.photonstorm.FlxCollision;
+	import org.flixel.FlxG;
+	import enemy.BaseEnemy;
 	public class SwordPlayerProjectile extends BasePlayerProjectile {
 		
 		public static function cons(g:FlxGroup):SwordPlayerProjectile {
@@ -17,7 +20,10 @@ package player_projectiles {
 		
 		public function SwordPlayerProjectile() {
 			super();
-			this.loadGraphic(Resource.SWORD);
+			this.makeGraphic(20, 75, 0xFF0000FF);
+			this.frameWidth = 20;
+			this.frameHeight = 75;
+			//this.loadGraphic(Resource.SWORD);
 		}
 		
 		var _follow:Player;
@@ -25,20 +31,24 @@ package player_projectiles {
 		public function init(follow:Player):SwordPlayerProjectile {
 			this.reset(follow._x, follow._y);
 			this._follow = follow;
-			this._ct = 10;
+			this._ct = 99999;
 			return this;
 		}
 		
-		public override function _update():void {
-			var rtv:FlxPoint = Util.flxrotation_to_pt(_follow._angle);
-			var offset:Vector3D = Util.normalized(rtv.x, rtv.y);
-			offset.scaleBy(-10);
+		public override function _update(g:BottomGame):void {
+			var v:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
+			v.scaleBy(this.frameHeight / 2);
 			
+			this.x = this._follow._x + offset.x - this.frameWidth/2 + g._player._body.frameWidth/2 + v.x;
+			this.y = this._follow._y + offset.y - this.frameHeight/2 + g._player._body.frameHeight / 2 + v.y;
 			
-			this.x = this._follow._x + offset.x - 20;
-			this.y = this._follow._y + offset.y - 20;
 			this.angle = _follow._angle;
 			this._ct--;
+			for each (var enem:BaseEnemy in g._enemies.members) {
+				if (enem.alive && enem._invuln_ct <= 0 && FlxCollision.pixelPerfectCheck(this,enem)) {
+					enem.hit(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50);
+				}
+			}
 		}
 		
 		public override function _should_remove():Boolean {
