@@ -20,10 +20,7 @@ package player_projectiles {
 		
 		public function SwordPlayerProjectile() {
 			super();
-			this.makeGraphic(20, 75, 0xFF0000FF);
-			this.frameWidth = 20;
-			this.frameHeight = 75;
-			//this.loadGraphic(Resource.SWORD);
+			this.loadGraphic(Resource.SWORD);
 		}
 		
 		var _follow:Player;
@@ -31,9 +28,14 @@ package player_projectiles {
 		public function init(follow:Player):SwordPlayerProjectile {
 			this.reset(follow._x, follow._y);
 			this._follow = follow;
-			this._ct = 99999;
+			
+			_last_mouse_x = FlxG.mouse.x;
+			_last_mouse_y = FlxG.mouse.y;
+			
 			return this;
 		}
+		
+		var _last_mouse_x:Number, _last_mouse_y:Number, _hold_sword_ct:Number = 0;
 		
 		public override function _update(g:BottomGame):void {
 			var v:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
@@ -42,6 +44,17 @@ package player_projectiles {
 			this.x = this._follow._x + offset.x - this.frameWidth/2 + g._player._body.frameWidth/2 + v.x;
 			this.y = this._follow._y + offset.y - this.frameHeight/2 + g._player._body.frameHeight / 2 + v.y;
 			
+			if (Util.point_dist(_last_mouse_x, _last_mouse_y, FlxG.mouse.x, FlxG.mouse.y) > 40) {
+				this.alpha = 1;
+				this._hold_sword_ct = 1;
+			} else {
+				if (this._hold_sword_ct > 0) {
+					this._hold_sword_ct--;
+				} else if (this.alpha > 0) {
+					this.alpha -= 0.05;
+				}
+			}
+			
 			this.angle = _follow._angle;
 			this._ct--;
 			for each (var enem:BaseEnemy in g._enemies.members) {
@@ -49,10 +62,13 @@ package player_projectiles {
 					enem.hit(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50);
 				}
 			}
+			
+			_last_mouse_x = FlxG.mouse.x;
+			_last_mouse_y = FlxG.mouse.y;
 		}
 		
 		public override function _should_remove():Boolean {
-			return this._ct <= 0;
+			return false;
 		}
 		
 		public override function _do_remove():void {

@@ -48,10 +48,6 @@ package  {
 			_angle += Util.lerp_deg(_angle, _tar_ang, 0.2);
 			_body.angle = _angle;
 			
-			if (FlxG.mouse.justPressed() || Util.get_right_mouse_just_down()) {
-				SwordPlayerProjectile.cons(g._player_projectiles).init(this);
-			}
-			
 			player_control();
 			
 			update_position();
