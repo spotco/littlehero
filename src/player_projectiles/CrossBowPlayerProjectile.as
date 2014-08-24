@@ -77,7 +77,8 @@ package player_projectiles {
 					g._player._arrowretic.y + g._player._arrowretic.frameHeight/2,
 					dv.x, 
 					dv.y,
-					200
+					200,
+					g
 				);
 				
 			}

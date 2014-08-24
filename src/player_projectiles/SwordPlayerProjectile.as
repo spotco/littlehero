@@ -7,6 +7,8 @@ package player_projectiles {
 	import org.flixel.plugin.photonstorm.FlxCollision;
 	import org.flixel.FlxG;
 	import enemy.BaseEnemy;
+	import particles.RotateFadeParticle;
+	
 	public class SwordPlayerProjectile extends BasePlayerProjectile {
 		
 		public static function cons(g:FlxGroup):SwordPlayerProjectile {
@@ -18,16 +20,17 @@ package player_projectiles {
 			return rtv;
 		}
 		
+		var _hitbox:FlxSprite = new FlxSprite(0, 0, Resource.SWORD_HITBOX);
 		public function SwordPlayerProjectile() {
 			super();
 			this.loadGraphic(Resource.SWORD);
 		}
 		
 		var _follow:Player;
-		public function init(follow:Player):SwordPlayerProjectile {
+		public function init(follow:Player, g:BottomGame):SwordPlayerProjectile {
 			this.reset(follow._x, follow._y);
 			this._follow = follow;
-			
+			g._hitboxes.add(_hitbox);
 			_last_mouse_x = FlxG.mouse.x;
 			_last_mouse_y = FlxG.mouse.y;
 			
@@ -36,6 +39,11 @@ package player_projectiles {
 		
 		var _last_mouse_x:Number, _last_mouse_y:Number, _hold_sword_ct:Number = 0;
 		public override function _update(g:BottomGame):void {
+			
+			_hitbox.x = this.x;
+			_hitbox.y = this.y;
+			_hitbox.angle = this.angle;
+			
 			var v:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
 			v.scaleBy(this.frameHeight / 2);
 			
@@ -63,9 +71,10 @@ package player_projectiles {
 			
 			this.angle = _follow._angle;
 			for each (var enem:BaseEnemy in g._enemies.members) {
-				if (enem.alive && enem._invuln_ct <= 0 && sword_speed > 25 && FlxCollision.pixelPerfectCheck(this,enem)) {
-					enem.hit(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50);
-					//trace(sword_speed);
+				if (enem.alive && enem._invuln_ct <= 0 && sword_speed > 25 && FlxCollision.pixelPerfectCheck(this._hitbox,enem._hitbox)) {
+					enem._knockback(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50);
+					enem._hit(g);
+					enem._health -= 5;
 				}
 			}
 			

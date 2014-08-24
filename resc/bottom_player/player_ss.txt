@@ -1,0 +1,1 @@
+[6]player_7.png[5]player_6.png[4]player_5.png[3]player_4.png[2]player_3.png[1]player_2.png[0]player_1.pngwidth:32 px, height:49 px

@@ -7,7 +7,7 @@ package  {
 	
 	public class Player extends FlxGroup {
 		
-		public var _body:FlxSprite = new FlxSprite(0, 0, Resource.PLAYER);
+		public var _body:FlxSprite = new FlxSprite();
 		
 		public var _arrowretic:ArrowReticuleUIParticle;
 		
@@ -15,6 +15,10 @@ package  {
 		public var _vx:Number = 0, _vy:Number = 0;
 		public var _angle:Number = 0.0;
 		public function Player() {
+			_body.loadGraphic(Resource.PLAYER_SS, true, false, 32, 49);
+			_body.addAnimation("walk", [0, 1, 2, 3, 4, 5, 6], 15);
+			_body.addAnimation("stand", [3], 10);
+			_body.play("walk");
 			this.add(_body);
 			this._x = Util.WID / 2;
 			this._y = Util.HEI / 2;
@@ -78,9 +82,11 @@ package  {
 				
 				_vx = _control_vec.x;
 				_vy = _control_vec.y;
+				_body.play("walk");
 			} else {
 				_vx *= 0.5;
 				_vy *= 0.5;
+				_body.play("stand");
 			}
 			
 			_x += _vx;

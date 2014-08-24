@@ -1,6 +1,8 @@
 package enemy {
 	import flash.geom.Vector3D;
 	import org.flixel.*;
+	import particles.*;
+	
 	public class TinySpiderEnemy extends BaseEnemy{
 		
 		public static function cons(g:FlxGroup):TinySpiderEnemy {
@@ -14,21 +16,36 @@ package enemy {
 		
 		public function TinySpiderEnemy() {
 			super();
-			this.makeGraphic(40, 40, 0xFF0000FF);
-			//this.loadGraphic(Resource.SPIDER);
+			this.loadGraphic(Resource.BLOB_SS, true, false, 100, 100);
+			this.addAnimation("walk", [0, 1, 2,3,4,5,6], 10);
+			
+			_hitbox.loadGraphic(Resource.BLOB_HITBOX);
+			
 		}
 		
 		var _state:int = 0;
 		var _ct:Number = 0;
 		var _tar_pos:FlxPoint = new FlxPoint(0, 0);
-		public function init(x:Number,y:Number):TinySpiderEnemy {
+		public function init(x:Number,y:Number, g:BottomGame):TinySpiderEnemy {
 			this.reset(x, y);
+			this.play("walk");
 			_state = 0;
 			_ct = 20;
+			g._hitboxes.add(_hitbox);
+			this._max_health = 5;
+			this._health = 5;
 			return this;
 		}
 		
+		public override function track_healthbar():void {
+			if (_healthbar)_healthbar.trackParent(30, 0);
+		}
+		
 		public override function _update(g:BottomGame):void {
+			super._update(g);
+			
+			_hitbox.x = this.x + 25;
+			_hitbox.y = this.y + 25;
 			if (this._invuln_ct > 0) {
 				this.invuln_update();
 				return;
@@ -59,11 +76,17 @@ package enemy {
 				}
 			}
 		}
-		public override function _should_remove():Boolean { 
-			return false; 
+		public override function _should_kill():Boolean { 
+			return _health <= 0
 		}
-		public override function _do_remove():void {
+		public override function _do_kill(g:BottomGame):void {
+			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random( -20, 20), this.y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3));
+			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random( -20, 20), this.y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(5,10));
+			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random(-20,20), this.y+ Util.float_random(-20,20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(5,10));
+			
 			this.kill();
+			this._kill(g);
+			
 		}
 		
 	}
