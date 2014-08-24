@@ -2,6 +2,8 @@ package enemy {
 	import flash.geom.Vector3D;
 	import org.flixel.*;
 	import particles.*;
+	import org.flixel.plugin.photonstorm.FlxCollision;
+	import pickups.*;
 	
 	public class TinySpiderEnemy extends BaseEnemy{
 		
@@ -33,8 +35,8 @@ package enemy {
 			_state = 0;
 			_ct = 20;
 			g._hitboxes.add(_hitbox);
-			this._max_health = 30;
-			this._health = 30;
+			this._max_health = 14;
+			this._health = 14;
 			return this;
 		}
 		
@@ -51,10 +53,20 @@ package enemy {
 				this.invuln_update();
 				_state = 0;
 				_ct = 30;
+				this.color = 0xCC99FF;
 				return;
 			} else if (this._stun_ct > 0) {
 				this.stun_update();
+				this.color = 0xCC99FF;
 				return;
+			}
+			this.color = 0xFFFFFF;
+			if (this.hit_player(g)) {
+				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
+				v.normalize();
+				v.scaleBy(15);
+				g._player.hit(v.x, v.y, 1);
+				FlxG.shake(0.01, 0.15);
 			}
 			
 			if (_state == 0) {
@@ -63,10 +75,10 @@ package enemy {
 			
 			} else if (_state == 1) {
 				var dp:Vector3D = Util.normalized(g._player._x - this.x, g._player._y - this.y);
-				dp.scaleBy(30);
+				dp.scaleBy(20);
 				
-				_tar_pos.x = this.x + Util.float_random( -50, 50) + dp.x;
-				_tar_pos.y = this.y + Util.float_random( -50, 50) + dp.y;
+				_tar_pos.x = this.x + Util.float_random( -80, 80) + dp.x;
+				_tar_pos.y = this.y + Util.float_random( -80, 80) + dp.y;
 				_state = 2;
 				
 			} else if (_state == 2) {
@@ -79,6 +91,10 @@ package enemy {
 					dv.scaleBy(spd);
 					this.x += dv.x;
 					this.y += dv.y;
+					if (this.hit_wall()) {
+						_state = 0;
+						_ct = 20;
+					}
 				}
 			}
 		}
@@ -90,6 +106,10 @@ package enemy {
 			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random( -20, 20), this.y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(5,10));
 			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random(-20,20), this.y+ Util.float_random(-20,20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(5,10));
 			
+			SmallFollowPickup.cons(g._pickups).init(this.x,this.y);
+			SmallFollowPickup.cons(g._pickups).init(this.x,this.y);
+			SmallFollowPickup.cons(g._pickups).init(this.x,this.y);
+			
 			this.kill();
 			this._kill(g);
 			
@@ -99,6 +119,10 @@ package enemy {
 			_get_center.x = this.x + 35;
 			_get_center.y = this.y + 35;
 			return _get_center;
+		}
+		
+		public override function get_knockback_mult():Number {
+			return 3;
 		}
 		
 	}

@@ -4,6 +4,8 @@ package {
 	import player_projectiles.*;
 	import enemy.*;
 	import particles.*;
+	import pickups.*;
+	
 	public class BottomGame extends FlxState{
 		
 		public var _player:Player = new Player();
@@ -11,13 +13,14 @@ package {
 		public var _enemies:FlxGroup = new FlxGroup();
 		public var _particles:FlxGroup = new FlxGroup();
 		public var _healthbars:FlxGroup = new FlxGroup();
-		
+		public var _pickups:FlxGroup = new FlxGroup();
 		public var _hitboxes:FlxGroup = new FlxGroup();
 		
 		public var _bottom_game_ui:BottomGameUI = new BottomGameUI();
 		
 		public override function create():void {
 			this.add(new FlxSprite(0, 0, Resource.BOTTOM_BG));
+			this.add(_pickups);
 			this.add(_player);
 			this.add(_enemies);
 			this.add(_player_projectiles);
@@ -25,15 +28,17 @@ package {
 			this.add(new FlxSprite(0, 0, Resource.BOTTOM_FG));
 			this.add(_bottom_game_ui);
 			this.add(_healthbars);
+			
 			//this.add(_hitboxes);
 			
-			SwordPlayerProjectile.cons(_player_projectiles).init(_player,this);
+			_player._sword = SwordPlayerProjectile.cons(_player_projectiles).init(_player,this);
 			CrossBowPlayerProjectile.cons(_player_projectiles).init(_player);
 			
 			TinySpiderEnemy.cons(_enemies).init(200, 200, this);
 			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
 			TinySpiderEnemy.cons(_enemies).init(400, 400, this);
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
+			
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
@@ -79,6 +84,15 @@ package {
 					part._update(this);
 					if (part._should_remove()) {
 						part._do_remove();
+					}
+				}
+			}
+			
+			for each (var pick:BasePickup in _pickups.members) {
+				if (pick.alive) {
+					pick._update(this);
+					if (pick._should_remove()) {
+						pick._do_remove(this);
 					}
 				}
 			}

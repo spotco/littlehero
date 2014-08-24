@@ -10,6 +10,7 @@ package  {
 		public var _body:FlxSprite = new FlxSprite();
 		
 		public var _arrowretic:ArrowReticuleUIParticle;
+		public var _sword:SwordPlayerProjectile;
 		
 		public var _x:Number, _y:Number;
 		public var _vx:Number = 0, _vy:Number = 0;
@@ -37,6 +38,21 @@ package  {
 		
 		private var _mov = new Vector3D();
 		public function _update(g:BottomGame):void {
+			
+			if (_invuln_ct > 0) {
+				_invuln_ct--;
+				_x += _vx;
+				_y += _vy;
+				_vx *= 0.8;
+				_vy *= 0.8;
+				this.update_position();
+				_body.alpha = Math.floor(_invuln_ct / 5) % 2 == 0?1:0.5;
+				_body.color = 0xFF0000;
+				return;
+			} else {
+				_body.color = 0xFFFFFF;
+				_body.alpha = 1;
+			}
 			
 			var facing_x:Number = 0.0;
 			var facing_y:Number = 0.0;
@@ -111,6 +127,13 @@ package  {
 			return _get_center;
 		}
 		
+		public var _invuln_ct:Number = 0;
+		public function hit(dx:Number, dy:Number, damage:Number):void {
+			_invuln_ct = 30;
+			GameStats._health -= damage;
+			_vx = dx;
+			_vy = dy;
+		}
 	}
 
 }

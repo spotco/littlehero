@@ -217,10 +217,11 @@ package  {
 			return Math.sqrt(Math.pow(x_1 - x_0, 2) + Math.pow(y_1 - y_0, 2));
 		}
 		
-		public static function cons_text(x:Number, y:Number, text:String, color:uint = 0xFF000000, font_size:int = 8):FlxText {
-			var rtv = new FlxText(x, y, 0, text,font_size);
-			rtv.color = color;
-			return rtv;
+		public static function cons_text(x:Number, y:Number, text:String, color:uint = 0xFFFFFF, font_size:int = 20):FlxText {
+			var _score:FlxText = new FlxText(x,y , 500, text);
+			_score.color = color;
+			_score.setFormat("system", font_size);
+			return _score;
 		}
 		
 		static var _normalized:Vector3D = new Vector3D();

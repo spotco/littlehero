@@ -4,20 +4,30 @@ package
 	import org.flixel.FlxSprite;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import org.flixel.FlxText;
 	
 	public class BottomGameUI extends FlxGroup{
 		
 		var _energy_bar:FlxSprite = new FlxSprite();
+		
+		var _hp_text:FlxText = Util.cons_text(0, 3, "HP: 0/0", 0xFFFFFF, 35);
+		var _gold_text:FlxText = Util.cons_text(0, 50, "Gold: 0", 0xFFFFFF, 14);
 		
 		public function BottomGameUI() {
 			_energy_bar.loadGraphic(Resource.ENERGY_BAR_GREEN);
 			_energy_bar.y = Util.HEI - _energy_bar.frameHeight;
 			this.add(_energy_bar);
 			energy_bar_pct(1);
+			
+			this.add(Util.cons_text(0, Util.HEI - 35, "Energy"));
+			this.add(_gold_text);
+			this.add(_hp_text);
 		}
 		
 		public function _update(g:BottomGame):void {
 			this.energy_bar_pct(GameStats._energy / GameStats._max_energy);
+			this._hp_text.text = "HP: " + GameStats._health + "/" + GameStats._max_health;
+			this._gold_text.text = "Gold: " + GameStats._gold;
 		}
 		
 		private static var ENERGY_BAR_GREEN:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_GREEN);

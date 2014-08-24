@@ -33,10 +33,12 @@ package player_projectiles {
 			g._hitboxes.add(_hitbox);
 			_last_mouse_x = FlxG.mouse.x;
 			_last_mouse_y = FlxG.mouse.y;
-			
+			this.set_scale(GameStats._sword_scale);
+			this._hitbox.set_scale(GameStats._sword_scale);
 			return this;
 		}
 		
+		public var _sword_invuln:Boolean = false;
 		var _last_mouse_x:Number, _last_mouse_y:Number, _hold_sword_ct:Number = 0;
 		public override function _update(g:BottomGame):void {
 			
@@ -56,11 +58,13 @@ package player_projectiles {
 			
 			var sword_speed:Number = Util.point_dist(_last_mouse_x, _last_mouse_y, FlxG.mouse.x, FlxG.mouse.y);
 			
+			
 			if (sword_speed > 40 && !FlxG.mouse.pressed() && GameStats._energy/GameStats._max_energy > 0.2) {
 				GameStats._energy -= 10;
 				GameStats._just_used_energy_ct = GameStats._sword_just_used_energy_ct;
 				this.alpha = 1;
 				this._hold_sword_ct = 5;
+				_sword_invuln = true;
 			} else {
 				if (this._hold_sword_ct > 0) {
 					if (GameStats._energy > 0) {
@@ -69,10 +73,14 @@ package player_projectiles {
 					} else {
 						this._hold_sword_ct = 0;
 					}
+					_sword_invuln = true;
 					
 				} else if (this.alpha > 0) {
 					if (GameStats._energy > 0) GameStats._energy -= 3;
 					this.alpha -= 0.05;
+					_sword_invuln = false;
+				} else {
+					_sword_invuln = false;
 				}
 			}
 			

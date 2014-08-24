@@ -2,7 +2,16 @@ package enemy {
 	import flash.geom.Vector3D;
 	import org.flixel.*;
 	import org.flixel.plugin.photonstorm.FlxBar;
+	import org.flixel.plugin.photonstorm.FlxCollision;
 	public class BaseEnemy extends FlxSprite{
+		
+		public function get_knockback_mult():Number {
+			return 1;
+		}
+		
+		public function hit_player(g:BottomGame):Boolean {
+			return g._player._invuln_ct <= 0 && !g._player._sword._sword_invuln && FlxCollision.pixelPerfectCheck(this._hitbox, g._player._body);
+		}
 		
 		public function _update(g:BottomGame):void {
 			this.track_healthbar();
@@ -68,22 +77,21 @@ package enemy {
 		}
 		
 		
-		private function hit_wall():Boolean {
+		public function hit_wall():Boolean {
 			var rtv:Boolean = false;
-			this.get_center();
-			if (this._get_center.x < 0) {
+			if (this.x < 0) {
 				this.x = 0;
 				rtv = true;
 			}
-			if (this._get_center.x > Util.WID) {
+			if (this.x > Util.WID) {
 				this.x = Util.WID;
 				rtv = true;
 			}
-			if (this._get_center.y < 0) {
+			if (this.y < 0) {
 				this.y = 0;
 				rtv = true;
 			}
-			if (this._get_center.y > Util.HEI-50) {
+			if (this.y > Util.HEI-50) {
 				this.y = Util.HEI-50;
 				rtv = true;
 			}
@@ -92,7 +100,7 @@ package enemy {
 		
 		public function _knockback(dx:Number, dy:Number, invuln_ct:Number, knockback:Number = 14, stun_ct:Number = 0) {
 			var dv:Vector3D = Util.normalized(dx, dy);
-			dv.scaleBy(knockback);
+			dv.scaleBy(knockback * this.get_knockback_mult());
 			_vx = dv.x;
 			_vy = dv.y;
 			_invuln_ct = invuln_ct;
