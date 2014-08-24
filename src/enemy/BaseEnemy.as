@@ -98,7 +98,7 @@ package enemy {
 			return rtv;
 		}
 		
-		public function _knockback(dx:Number, dy:Number, invuln_ct:Number, knockback:Number = 14, stun_ct:Number = 0) {
+		public function _knockback(dx:Number, dy:Number, invuln_ct:Number, knockback:Number = 14, stun_ct:Number = 0):void {
 			var dv:Vector3D = Util.normalized(dx, dy);
 			dv.scaleBy(knockback * this.get_knockback_mult());
 			_vx = dv.x;

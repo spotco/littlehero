@@ -44,6 +44,9 @@ package {
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
 			
+			JellyEnemy.cons(_enemies).init(200, 200, this);
+			BulletEnemy.cons(_enemies).init(700, 300,0,0,99999, this);
+			
 			_player._arrowretic = ArrowReticuleUIParticle.cons(_particles).init(_player, true);
 			ArrowReticuleUIParticle.cons(_particles).init(_player, false);
 			SweatParticle.cons(_particles);

@@ -29,9 +29,17 @@ package {
 		[Embed(source = "../resc/bottom_enemy/eyeder_hitbox.png")] public static var EYEDER_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/blob_ss.png")] public static var BLOB_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/blob_hitbox.png")] public static var BLOB_HITBOX:Class;
+		[Embed(source = "../resc/bottom_enemy/bullet.png")] public static var BULLET:Class;
 		
 		[Embed(source = "../resc/bottom_fx/explosion.png")] public static var EXPLOSION:Class;
 		[Embed(source = "../resc/bottom_fx/sweat_ss.png")] public static var SWEAT_SS:Class;
+		
+		[Embed(source = "../resc/top_bg/bg.png")] public static var TOP_BG:Class;
+		[Embed(source = "../resc/top_bg/bully_center.png")] public static var TOP_BULLY_CENTER:Class;
+		[Embed(source = "../resc/top_bg/bully_left.png")] public static var TOP_BULLY_LEFT:Class;
+		[Embed(source = "../resc/top_bg/bully_right.png")] public static var TOP_BULLY_RIGHT:Class;
+		[Embed(source = "../resc/top_bg/player.png")] public static var TOP_PLAYER:Class;
+		[Embed(source = "../resc/top_bg/teacher.png")] public static var TOP_TEACHER:Class;
 	}
 
 }

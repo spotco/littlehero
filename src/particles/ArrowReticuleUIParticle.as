@@ -39,7 +39,7 @@ package particles {
 		
 		public override function _update(g:BottomGame):void {
 			var offset_forward:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
-			offset_forward.scaleBy(30);
+			offset_forward.scaleBy(15);
 			
 			var offset_left:Vector3D = Util.Z_VEC.crossProduct(offset_forward);
 			offset_left.normalize();
