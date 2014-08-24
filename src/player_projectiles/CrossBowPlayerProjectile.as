@@ -37,7 +37,7 @@ package player_projectiles {
 			
 			var offset_left:Vector3D = Util.Z_VEC.crossProduct(v);
 			offset_left.normalize();
-			offset_left.scaleBy( -15);
+			offset_left.scaleBy( -13.5);
 			
 			this.x = this._follow._x - this.frameWidth/2 + g._player._body.frameWidth/2 + v.x + offset_left.x;
 			this.y = this._follow._y - this.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_left.y;

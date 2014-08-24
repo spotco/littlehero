@@ -46,6 +46,7 @@ package {
 			
 			_player._arrowretic = ArrowReticuleUIParticle.cons(_particles).init(_player, true);
 			ArrowReticuleUIParticle.cons(_particles).init(_player, false);
+			SweatParticle.cons(_particles);
 		}
 		
 		public static var _freeze_frame:Number = 0;

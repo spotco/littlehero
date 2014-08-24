@@ -9,25 +9,33 @@ package
 	public class BottomGameUI extends FlxGroup{
 		
 		var _energy_bar:FlxSprite = new FlxSprite();
+		var _health_bar:FlxSprite = new FlxSprite();
 		
-		var _hp_text:FlxText = Util.cons_text(0, 3, "HP: 0/0", 0xFFFFFF, 35);
-		var _gold_text:FlxText = Util.cons_text(0, 50, "Gold: 0", 0xFFFFFF, 14);
+		var _gold_text:FlxText = Util.cons_text(2, 40, "GOLD: 0", 0xFFFFFF, 12);
 		
 		public function BottomGameUI() {
+			_health_bar.loadGraphic(Resource.HEARTS_FULL);
+			_health_bar.x = -55;
+			_health_bar.y = 0;
+			_health_bar.set_scale(0.75);
+			this.health_bar_pct(1);
+			this.add(_health_bar);//16
+			
 			_energy_bar.loadGraphic(Resource.ENERGY_BAR_GREEN);
-			_energy_bar.y = Util.HEI - _energy_bar.frameHeight;
+			_energy_bar.set_scale(0.75);
+			_energy_bar.x = -8 * 0.75;
+			_energy_bar.y = 30 * 0.75;
 			this.add(_energy_bar);
 			energy_bar_pct(1);
 			
-			this.add(Util.cons_text(0, Util.HEI - 35, "Energy"));
+			this.add(Util.cons_text(2, 24, "ENG:",0xFFFFFF,12));
 			this.add(_gold_text);
-			this.add(_hp_text);
 		}
 		
 		public function _update(g:BottomGame):void {
 			this.energy_bar_pct(GameStats._energy / GameStats._max_energy);
-			this._hp_text.text = "HP: " + GameStats._health + "/" + GameStats._max_health;
-			this._gold_text.text = "Gold: " + GameStats._gold;
+			this.health_bar_pct(GameStats._health / GameStats._max_health);
+			this._gold_text.text = "GOLD: " + GameStats._gold;
 		}
 		
 		private static var ENERGY_BAR_GREEN:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_GREEN);
@@ -48,17 +56,38 @@ package
 				}
 				_energy_bar.framePixels.copyPixels(
 					tar.framePixels,
-					new Rectangle(0, 0, tar.width, tar.height),
+					new Rectangle(0, 0, tar.width-1, tar.height),
 					new Point(0, 0)
 				);
 				_energy_bar.framePixels.copyPixels(
 					ENERGY_BAR_EMPTY.framePixels, 
-					new Rectangle(ENERGY_BAR_EMPTY.width * pct, 0, ENERGY_BAR_EMPTY.width - ENERGY_BAR_EMPTY.width * pct, ENERGY_BAR_EMPTY.height), 
-					new Point(ENERGY_BAR_EMPTY.width * pct, 0)
+					new Rectangle(tar.width * pct, 0, tar.width - tar.width * pct, tar.height), 
+					new Point(tar.width * pct, 0)
 				);
 				_energy_bar_pct = pct;
 			}
 			
+		}
+		
+		private static var HEALTH_BAR_EMPTY:FlxSprite = new FlxSprite(0, 0, Resource.HEARTS_EMPTY);
+		private static var HEALTH_BAR_FULL:FlxSprite = new FlxSprite(0, 0, Resource.HEARTS_FULL);
+		var _health_bar_pct:Number = 1;
+		private function health_bar_pct(pct:Number) {
+			if (pct != _health_bar_pct) {
+				var tar:FlxSprite = HEALTH_BAR_FULL;
+				_health_bar.framePixels.copyPixels(
+					tar.framePixels,
+					new Rectangle(0, 0, tar.width, tar.height),
+					new Point(0, 0)
+				);
+				tar = HEALTH_BAR_EMPTY;
+				_health_bar.framePixels.copyPixels(
+					tar.framePixels,
+					new Rectangle(tar.width * pct, 0, tar.width - tar.width * pct, tar.height),
+					new Point(tar.width*pct,0)
+				);
+				_health_bar_pct = pct;
+			}
 		}
 		
 	}

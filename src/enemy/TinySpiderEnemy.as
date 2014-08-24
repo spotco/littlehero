@@ -18,10 +18,10 @@ package enemy {
 		
 		public function TinySpiderEnemy() {
 			super();
-			this.loadGraphic(Resource.BLOB_SS, true, false, 100, 100);
-			this.addAnimation("walk", [0, 1, 2,3,4,5,6], 10);
-			
-			_hitbox.loadGraphic(Resource.BLOB_HITBOX);
+			this.loadGraphic(Resource.EYEDER_SS, true, false, 71, 70);
+			this.addAnimation("walk", [0, 1], 10);
+			this.addAnimation("stand", [0], 0);
+			_hitbox.loadGraphic(Resource.EYEDER_HITBOX);
 			
 		}
 		
@@ -31,7 +31,9 @@ package enemy {
 		public function init(x:Number,y:Number, g:BottomGame):TinySpiderEnemy {
 			this.reset(x, y);
 			this.play("walk");
-			this.set_scale(Util.float_random(0.85,1.05));
+			this.set_scale(0.5);
+			_hitbox.set_scale(0.5);
+			
 			_state = 0;
 			_ct = 20;
 			g._hitboxes.add(_hitbox);
@@ -47,8 +49,8 @@ package enemy {
 		public override function _update(g:BottomGame):void {
 			super._update(g);
 			
-			_hitbox.x = this.x + 25;
-			_hitbox.y = this.y + 25;
+			_hitbox.x = this.x + 15;
+			_hitbox.y = this.y + 15;
 			if (this._invuln_ct > 0) {
 				this.invuln_update();
 				_state = 0;
@@ -71,17 +73,23 @@ package enemy {
 			
 			if (_state == 0) {
 				_ct--;
+				this.play("stand");
 				if (_ct <= 0) _state = 1;
 			
 			} else if (_state == 1) {
 				var dp:Vector3D = Util.normalized(g._player._x - this.x, g._player._y - this.y);
 				dp.scaleBy(20);
-				
+				this.play("walk");
 				_tar_pos.x = this.x + Util.float_random( -80, 80) + dp.x;
 				_tar_pos.y = this.y + Util.float_random( -80, 80) + dp.y;
+				
+				var v:Vector3D = Util.normalized(_tar_pos.x - this.x, _tar_pos.y - this.y);
+				this.angle = Util.pt_to_flxrotation(v.x, v.y) + 90;
+				
 				_state = 2;
 				
 			} else if (_state == 2) {
+				this.play("walk");
 				var spd:Number = 5;
 				if (Util.pt_dist(this.x, this.y, _tar_pos.x, _tar_pos.y) < spd + 0.1) {
 					_state = 0;
