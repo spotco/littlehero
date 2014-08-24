@@ -19,7 +19,7 @@ package enemy {
 		public function TinySpiderEnemy() {
 			super();
 			this.loadGraphic(Resource.EYEDER_SS, true, false, 71, 70);
-			this.addAnimation("walk", [0, 1], 10);
+			this.addAnimation("walk", [0, 1], 20);
 			this.addAnimation("stand", [0], 0);
 			_hitbox.loadGraphic(Resource.EYEDER_HITBOX);
 			

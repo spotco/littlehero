@@ -1,0 +1,1 @@
+[2]enemy-Bullet_3.png[1]enemy-Bullet_2.png[0]enemy-Bullet_1.pngwidth:12 px, height:12 px

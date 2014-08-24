@@ -84,7 +84,8 @@ package player_projectiles {
 						dv.x, 
 						dv.y,
 						200,
-						g
+						g,
+						2-g._player._arrowretic._ang/45
 					);
 				}
 				

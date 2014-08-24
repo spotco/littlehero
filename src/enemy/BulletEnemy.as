@@ -17,13 +17,15 @@ package enemy {
 		
 		public function BulletEnemy() {
 			super();
-			this.loadGraphic(Resource.BULLET);
-			_hitbox.loadGraphic(Resource.BULLET);
+			this.loadGraphic(Resource.BULLET, true, false, 12, 12);
+			this.addAnimation("play", [0, 1, 2], 10);
+			_hitbox.loadGraphic(Resource.BULLET,true,false,12,12);
 		}
 		
 		var _ct:Number = 0;
 		public function init(x:Number,y:Number,vx:Number, vy:Number, ct:Number, g:BottomGame):BulletEnemy {
 			this.reset(x, y);
+			this.play("play");
 			_vx = vx;
 			_vy = vy;
 			_ct = ct;
@@ -57,7 +59,7 @@ package enemy {
 			return _health <= 0 || _ct < 0;
 		}
 		public override function _do_kill(g:BottomGame):void {			
-			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random( -20, 20), this.y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3));
+			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random( -20, 20), this.y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(0.8, 1.2));
 			this.kill();
 			this._kill(g);
 			

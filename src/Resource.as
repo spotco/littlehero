@@ -29,7 +29,9 @@ package {
 		[Embed(source = "../resc/bottom_enemy/eyeder_hitbox.png")] public static var EYEDER_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/blob_ss.png")] public static var BLOB_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/blob_hitbox.png")] public static var BLOB_HITBOX:Class;
-		[Embed(source = "../resc/bottom_enemy/bullet.png")] public static var BULLET:Class;
+		[Embed(source = "../resc/bottom_enemy/bullet_ss.png")] public static var BULLET:Class;
+		[Embed(source = "../resc/bottom_enemy/boar_ss.png")] public static var BOAR:Class;
+		[Embed(source = "../resc/bottom_enemy/boar_hitbox.png")] public static var BOAR_HITBOX:Class;
 		
 		[Embed(source = "../resc/bottom_fx/explosion.png")] public static var EXPLOSION:Class;
 		[Embed(source = "../resc/bottom_fx/sweat_ss.png")] public static var SWEAT_SS:Class;

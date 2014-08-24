@@ -49,6 +49,12 @@ package enemy {
 			return _get_center;
 		}
 		
+		public function set_center(x:Number, y:Number):void {
+			this.get_center();
+			var off_x:Number = _get_center.x - this.x, off_y:Number = _get_center.y - this.y;
+			this.set_position(x - off_x, y - off_y);
+		}
+		
 		public var _vx:Number = 0, _vy:Number = 0;
 		public var _invuln_ct:Number = 0;
 		public var _stun_ct:Number = 0;
@@ -77,22 +83,31 @@ package enemy {
 		}
 		
 		
+		protected var _hit_wall_top:Boolean = false, _hit_wall_bottom:Boolean = false, _hit_wall_left:Boolean = false, _hit_wall_right:Boolean = false;
 		public function hit_wall():Boolean {
 			var rtv:Boolean = false;
-			if (this.x < 0) {
-				this.x = 0;
+			_hit_wall_bottom = false;
+			_hit_wall_left = false;
+			_hit_wall_right = false;
+			_hit_wall_top = false;
+			if (this.get_center().x < 0) {
+				this.set_center(0, this.get_center().y);
+				_hit_wall_left = true;
 				rtv = true;
 			}
-			if (this.x > Util.WID) {
-				this.x = Util.WID;
+			if (this.get_center().x > Util.WID) {
+				this.set_center(Util.WID, this.get_center().y);
+				_hit_wall_right = true;
 				rtv = true;
 			}
-			if (this.y < 0) {
-				this.y = 0;
+			if (this.get_center().y < 0) {
+				this.set_center(this.get_center().x, 0);
+				_hit_wall_top = true;;
 				rtv = true;
 			}
-			if (this.y > Util.HEI-50) {
-				this.y = Util.HEI-50;
+			if (this.get_center().y > Util.HEI) {
+				this.set_center(this.get_center().x, Util.HEI);
+				_hit_wall_bottom = true;
 				rtv = true;
 			}
 			return rtv;
@@ -105,6 +120,10 @@ package enemy {
 			_vy = dv.y;
 			_invuln_ct = invuln_ct;
 			_stun_ct = stun_ct;
+		}
+		
+		public function _arrow_stun_mult():Number {
+			return 1;
 		}
 	}
 

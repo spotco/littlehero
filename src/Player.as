@@ -41,11 +41,10 @@ package  {
 			
 			if (_invuln_ct > 0) {
 				_invuln_ct--;
-				_x += _vx;
-				_y += _vy;
 				_vx *= 0.8;
 				_vy *= 0.8;
 				this.update_position();
+				player_control(1, true);
 				_body.alpha = Math.floor(_invuln_ct / 5) % 2 == 0?1:0.5;
 				_body.color = 0xFF0000;
 				return;
@@ -77,7 +76,7 @@ package  {
 		}
 		
 		var _control_vec:Vector3D = new Vector3D;
-		private function player_control():void {
+		private function player_control(scf:Number = 5, add:Boolean = false):void {
 			_control_vec.x = 0;
 			_control_vec.y = 0;
 			if (Util.is_key(Util.MOVE_LEFT)) {
@@ -94,10 +93,14 @@ package  {
 			}
 			if (_control_vec.length != 0) {
 				_control_vec.normalize();
-				_control_vec.scaleBy(5);
-				
-				_vx = _control_vec.x;
-				_vy = _control_vec.y;
+				_control_vec.scaleBy(scf);
+				if (add) {
+					_vx += _control_vec.x;
+					_vy += _control_vec.y;
+				} else {
+					_vx = _control_vec.x;
+					_vy = _control_vec.y;
+				}
 				_body.play("walk");
 			} else {
 				_vx *= 0.5;
@@ -110,8 +113,8 @@ package  {
 			
 			if (_x < 0) {
 				_x = 0;
-			} else if (_x > Util.WID) {
-				_x = Util.WID;
+			} else if (_x > Util.WID-50) {
+				_x = Util.WID-50;
 			}
 			if (_y < 0) {
 				_y = 0;

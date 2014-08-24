@@ -4,6 +4,7 @@ package enemy {
 	import particles.*;
 	import org.flixel.plugin.photonstorm.FlxCollision;
 	import pickups.*;
+	
 	public class JellyEnemy extends BaseEnemy {
 		
 		public static function cons(g:FlxGroup):JellyEnemy {
@@ -23,19 +24,21 @@ package enemy {
 			_hitbox.loadGraphic(Resource.BLOB_HITBOX);
 			
 		}
+		public override function track_healthbar():void {
+			if (_healthbar)_healthbar.trackParent(30, 0);
+		}
 		
+		var _xdir:Number = 1;
+		var _tar:FlxPoint = new FlxPoint();
+		var _delay:Number = 0;
 		public function init(x:Number,y:Number, g:BottomGame):JellyEnemy {
 			this.reset(x, y);
+			this.set_tar();
 			this.play("walk");
-			
 			g._hitboxes.add(_hitbox);
 			this._max_health = 36;
 			this._health = 36;
 			return this;
-		}
-		
-		public override function track_healthbar():void {
-			if (_healthbar)_healthbar.trackParent(30, 0);
 		}
 		
 		public override function _update(g:BottomGame):void {
@@ -43,10 +46,12 @@ package enemy {
 			_hitbox.x = this.x + 25;
 			_hitbox.y = this.y + 25;
 			if (this._invuln_ct > 0) {
+				this.set_tar();
 				this.invuln_update();
 				this.color = 0xCC99FF;
 				return;
 			} else if (this._stun_ct > 0) {
+				this.set_tar();
 				this.stun_update();
 				this.color = 0xCC99FF;
 				return;
@@ -59,6 +64,49 @@ package enemy {
 				g._player.hit(v.x, v.y, 1);
 				FlxG.shake(0.01, 0.15);
 			}
+			
+			if (_delay > 0) {
+				_delay--;
+				
+				if (_delay <= 0) {
+					this.set_tar();
+					
+					if (Util.pt_dist(this.get_center().x, this.get_center().y, g._player._x, g._player._y) > 40) {
+						var i:Number = 0.0;
+						while (i < 3.14 * 2) {
+							var dv:Vector3D = Util.normalized(Math.cos(i), Math.sin(i));
+							dv.scaleBy(2);
+							BulletEnemy.cons(g._enemies).init(this.get_center().x, this.get_center().y, dv.x, dv.y,600,g);
+							i += 0.785;
+						}
+					}
+				}
+				
+			} else if (Util.pt_dist(this.get_center().x, this.get_center().y, _tar.x, _tar.y) < 2) {
+				_delay = Util.float_random(10, 40);
+				this.play("stand");
+				
+			} else {
+				var p:FlxPoint = Util.drp_pos(Util.flxpt(this.get_center().x,this.get_center().y), _tar, 60);
+				this.set_center(p.x, p.y);
+				this.play("walk");
+				
+			}
+		}
+		
+		private function set_tar():Boolean {
+			var brk:Number = 0;
+			while (brk < 10) {
+				brk++;
+				var v:Vector3D = Util.normalized(Util.float_random(60, 120) * Util.sig_n(Util.float_random(-1,1)), Util.float_random( -100, 100));
+				v.scaleBy(50);
+				_tar.x = this.get_center().x + v.x;
+				_tar.y = this.get_center().y + v.y;
+				if (_tar.x > 0 && _tar.x < Util.WID && _tar.y > 0 && _tar.y < Util.HEI) {
+					return true;
+				}
+			}
+			return false;
 		}
 		
 		public override function _should_kill():Boolean { 
@@ -68,11 +116,9 @@ package enemy {
 			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random( -20, 20), this.y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3));
 			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random( -20, 20), this.y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(5,10));
 			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random(-20,20), this.y+ Util.float_random(-20,20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(5,10));
-			
-			SmallFollowPickup.cons(g._pickups).init(this.x,this.y);
-			SmallFollowPickup.cons(g._pickups).init(this.x,this.y);
-			SmallFollowPickup.cons(g._pickups).init(this.x,this.y);
-			
+			for (var i:int = 0; i < 8; i++) {
+				SmallFollowPickup.cons(g._pickups).init(this.x,this.y);
+			}
 			this.kill();
 			this._kill(g);
 			

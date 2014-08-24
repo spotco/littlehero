@@ -34,13 +34,14 @@ package player_projectiles {
 			_last_mouse_x = FlxG.mouse.x;
 			_last_mouse_y = FlxG.mouse.y;
 			this.set_scale(GameStats._sword_scale);
-			this._hitbox.set_scale(GameStats._sword_scale);
+			this._hitbox.set_scale(GameStats._sword_scale * GameStats._sword_scale);
 			return this;
 		}
 		
 		public var _sword_invuln:Boolean = false;
 		var _last_mouse_x:Number, _last_mouse_y:Number, _hold_sword_ct:Number = 0;
 		public override function _update(g:BottomGame):void {
+			var sword_speed:Number = Util.point_dist(_last_mouse_x, _last_mouse_y, FlxG.mouse.x, FlxG.mouse.y);
 			
 			_hitbox.x = this.x;
 			_hitbox.y = this.y;
@@ -55,9 +56,6 @@ package player_projectiles {
 			
 			this.x = this._follow._x - this.frameWidth/2 + g._player._body.frameWidth/2 + v.x + offset_right.x;
 			this.y = this._follow._y - this.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_right.y;
-			
-			var sword_speed:Number = Util.point_dist(_last_mouse_x, _last_mouse_y, FlxG.mouse.x, FlxG.mouse.y);
-			
 			
 			if (sword_speed > 40 && !FlxG.mouse.pressed() && GameStats._energy/GameStats._max_energy > 0.2) {
 				GameStats._energy -= 10;
@@ -85,6 +83,7 @@ package player_projectiles {
 			}
 			
 			this.angle = _follow._angle;
+			
 			for each (var enem:BaseEnemy in g._enemies.members) {
 				if (enem.alive && enem._invuln_ct <= 0 && this.alpha > 0.1 && sword_speed > 25 && FlxCollision.pixelPerfectCheck(this._hitbox,enem._hitbox)) {
 					enem._knockback(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50, GameStats._sword_knockback, GameStats._sword_stun);
