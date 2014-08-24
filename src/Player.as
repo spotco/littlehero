@@ -2,11 +2,14 @@ package  {
 	import flash.geom.Vector3D;
 	import misc.FlxGroupSprite;
 	import org.flixel.*;
+	import particles.ArrowReticuleUIParticle;
 	import player_projectiles.*;
 	
 	public class Player extends FlxGroup {
 		
 		public var _body:FlxSprite = new FlxSprite(0, 0, Resource.PLAYER);
+		
+		public var _arrowretic:ArrowReticuleUIParticle;
 		
 		public var _x:Number, _y:Number;
 		public var _vx:Number = 0, _vy:Number = 0;
@@ -97,8 +100,8 @@ package  {
 		
 		private var _get_center:FlxPoint = new FlxPoint();
 		public function get_center():FlxPoint {
-			_get_center.x = this._x + 13;
-			_get_center.y = this._y + 13;
+			_get_center.x = this._x + 17.5;
+			_get_center.y = this._y + 17.5;
 			return _get_center;
 		}
 		

@@ -19,13 +19,13 @@ package player_projectiles {
 		}
 		
 		var _vx:Number = 0, _vy:Number = 0, _ct:Number = 0;
-		public function init(x:Number, y:Number, vx:Number, vy:Number):ArrowPlayerProjectile {
+		public function init(x:Number, y:Number, vx:Number, vy:Number, ct:Number):ArrowPlayerProjectile {
 			this.reset(x, y);
 			_vx = vx;
 			_vy = vy;
 			this.angle = Util.pt_to_flxrotation(_vx, _vy) - 90;
 			this.setOriginToCorner();
-			_ct = 300;
+			_ct = ct;
 			return this;
 		}
 		

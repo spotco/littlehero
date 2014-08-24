@@ -52,10 +52,17 @@ package player_projectiles {
 				}
 			}
 			
-			if (FlxG.mouse.justReleased()) {
-				var dv:Vector3D = new Vector3D(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
-				dv.normalize();
-				dv.scaleBy(10);
+			if (FlxG.mouse.justReleased() && GameStats._energy > 5) {
+				GameStats._energy -= 5;
+				GameStats._just_used_energy_ct = 5;
+				
+				var dv_ang:Number = Util.pt_to_flxrotation(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
+				var ang:Number = g._player._arrowretic._ang;
+				var dvoff_ang:Number = Util.float_random( 0, Math.abs(ang))*1.2 * Util.float_random( -1, 1);
+				dv_ang += dvoff_ang;
+				
+				var dv:Vector3D = new Vector3D(Util.flxrotation_to_pt(dv_ang).x, Util.flxrotation_to_pt(dv_ang).y);
+				dv.scaleBy(20);
 				
 				var forward:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
 				forward.scaleBy(30);
@@ -63,12 +70,14 @@ package player_projectiles {
 				var left:Vector3D = forward.crossProduct(Util.Z_VEC);
 				left.normalize();
 				left.scaleBy(20);
+				
 			
 				ArrowPlayerProjectile.cons(g._player_projectiles).init(
-					this.x,
-					this.y,
+					g._player._arrowretic.x + g._player._arrowretic.frameWidth/2,
+					g._player._arrowretic.y + g._player._arrowretic.frameHeight/2,
 					dv.x, 
-					dv.y
+					dv.y,
+					200
 				);
 				
 			}

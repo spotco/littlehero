@@ -48,7 +48,9 @@ package player_projectiles {
 			
 			var sword_speed:Number = Util.point_dist(_last_mouse_x, _last_mouse_y, FlxG.mouse.x, FlxG.mouse.y);
 			
-			if (sword_speed > 40) {
+			if (sword_speed > 40 && !FlxG.mouse.pressed() && GameStats._energy/GameStats._max_energy > 0.2) {
+				GameStats._energy -= 5;
+				GameStats._just_used_energy_ct = 30;
 				this.alpha = 1;
 				this._hold_sword_ct = 1;
 			} else {
@@ -63,7 +65,7 @@ package player_projectiles {
 			for each (var enem:BaseEnemy in g._enemies.members) {
 				if (enem.alive && enem._invuln_ct <= 0 && sword_speed > 25 && FlxCollision.pixelPerfectCheck(this,enem)) {
 					enem.hit(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50);
-					trace(sword_speed);
+					//trace(sword_speed);
 				}
 			}
 			

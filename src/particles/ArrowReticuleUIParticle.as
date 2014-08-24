@@ -26,11 +26,14 @@ package particles {
 		
 		var _follow:Player;
 		var _plus:Boolean;
-		var _ang:Number = 45;
+		public var _ang:Number = 45;
+		var _disp_ang:Number = 45;
 		public function init(follow:Player, plus:Boolean):ArrowReticuleUIParticle {
 			_follow = follow;
 			_plus = plus;
 			_ang = 45;
+			_disp_ang = _ang;
+			this.setOriginToCorner;
 			return this;
 		}
 		
@@ -42,20 +45,19 @@ package particles {
 			offset_left.normalize();
 			offset_left.scaleBy( -15);
 			
-			this.x = _follow._x - this.frameWidth/2 + g._player._body.frameWidth/2 + offset_left.x + offset_forward.x;
-			this.y = _follow._y  - this.frameHeight / 2 + g._player._body.frameHeight / 2 + offset_left.y + offset_forward.y;
+			this.x = _follow.get_center().x - this.frameWidth/2 + offset_left.x + offset_forward.x;
+			this.y = _follow.get_center().y  - this.frameHeight / 2 + offset_left.y + offset_forward.y;
 			
 			if (FlxG.mouse.pressed()) {
 				this.alpha = 1;
 				this._ang *= 0.95;
+				this._disp_ang = _ang;
 			} else {
 				if (this.alpha > 0) this.alpha -= 0.1;
-				if (this.alpha == 0) {
-					this._ang = 45;
-				}
+				this._ang = 45;
 			}
 			
-			this.angle = _follow._angle + _ang * (_plus?1:-1);
+			this.angle = _follow._angle + _disp_ang * (_plus?1:-1);
 		}
 		
 	}
