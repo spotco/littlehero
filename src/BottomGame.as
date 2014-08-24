@@ -34,13 +34,24 @@ package {
 			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
 			TinySpiderEnemy.cons(_enemies).init(400, 400, this);
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
+			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
+			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
+			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
+			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
 			
 			_player._arrowretic = ArrowReticuleUIParticle.cons(_particles).init(_player, true);
 			ArrowReticuleUIParticle.cons(_particles).init(_player, false);
 		}
 		
+		public static var _freeze_frame:Number = 0;
+		
 		public override function update():void {
 			super.update();
+			if (_freeze_frame > 0) {
+				_freeze_frame--;
+				return;
+			}
+
 			_player._update(this);
 			_bottom_game_ui._update(this);
 			
@@ -57,7 +68,7 @@ package {
 			for each (var enem:BaseEnemy in _enemies.members) {
 				if (enem.alive) {
 					enem._update(this);
-					if (enem._should_kill()) {
+					if (enem._should_kill() && enem._invuln_ct <= 0) {
 						enem._do_kill(this);
 					}
 				}
@@ -76,7 +87,17 @@ package {
 				GameStats._just_used_energy_ct--;
 				
 			} else if (GameStats._energy < GameStats._max_energy) {
-				GameStats._energy = Math.min(GameStats._energy + 0.2, GameStats._max_energy);
+				var pct:Number = GameStats._energy / GameStats._max_energy;
+				if (pct < 0.2) {
+					GameStats._energy = Math.min(GameStats._energy + 0.025 * GameStats._max_energy, GameStats._max_energy);
+				} else if (pct < 0.4) {
+					GameStats._energy = Math.min(GameStats._energy + 0.02 * GameStats._max_energy, GameStats._max_energy);
+				} else if (pct < 0.7) {
+					GameStats._energy = Math.min(GameStats._energy + 0.01 * GameStats._max_energy, GameStats._max_energy);
+				} else {
+					GameStats._energy = Math.min(GameStats._energy + 0.005 * GameStats._max_energy, GameStats._max_energy);
+				}
+				
 			}
 			
 		}

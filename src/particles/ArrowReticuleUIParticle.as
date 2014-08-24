@@ -48,9 +48,11 @@ package particles {
 			this.x = _follow.get_center().x - this.frameWidth/2 + offset_left.x + offset_forward.x;
 			this.y = _follow.get_center().y  - this.frameHeight / 2 + offset_left.y + offset_forward.y;
 			
-			if (FlxG.mouse.pressed()) {
+			if (GameStats._energy < 10) {
+				this.alpha = 0;
+			} else if (FlxG.mouse.pressed()) {
 				this.alpha = 1;
-				this._ang *= 0.95;
+				this._ang *= GameStats._bow_focus_factor;
 				this._disp_ang = _ang;
 			} else {
 				if (this.alpha > 0) this.alpha -= 0.1;

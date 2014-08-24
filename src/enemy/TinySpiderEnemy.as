@@ -29,11 +29,12 @@ package enemy {
 		public function init(x:Number,y:Number, g:BottomGame):TinySpiderEnemy {
 			this.reset(x, y);
 			this.play("walk");
+			this.set_scale(Util.float_random(0.85,1.05));
 			_state = 0;
 			_ct = 20;
 			g._hitboxes.add(_hitbox);
-			this._max_health = 5;
-			this._health = 5;
+			this._max_health = 30;
+			this._health = 30;
 			return this;
 		}
 		
@@ -48,6 +49,11 @@ package enemy {
 			_hitbox.y = this.y + 25;
 			if (this._invuln_ct > 0) {
 				this.invuln_update();
+				_state = 0;
+				_ct = 30;
+				return;
+			} else if (this._stun_ct > 0) {
+				this.stun_update();
 				return;
 			}
 			
@@ -87,6 +93,12 @@ package enemy {
 			this.kill();
 			this._kill(g);
 			
+		}
+		
+		public override function get_center():FlxPoint {
+			_get_center.x = this.x + 35;
+			_get_center.y = this.y + 35;
+			return _get_center;
 		}
 		
 	}

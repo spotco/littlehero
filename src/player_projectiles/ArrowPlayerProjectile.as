@@ -46,11 +46,13 @@ package player_projectiles {
 			
 			for each (var enem:BaseEnemy in g._enemies.members) {
 				if (enem.alive && enem._invuln_ct <= 0 && FlxCollision.pixelPerfectCheck(this,enem._hitbox)) {
-					enem._knockback(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 10);
+					enem._knockback(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 5, GameStats._bow_knockback, GameStats._bow_stun);
 					this._ct = 0;
 					enem._hit(g);
-					enem._health -= 1;
-					RotateFadeParticle.cons(g._particles).init(enem.x, enem.y).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1,1.3));
+					enem._health -= GameStats._bow_damage;
+					RotateFadeParticle.cons(g._particles).init(enem.x, enem.y).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1, 1.3));
+					FlxG.shake(0.005, 0.035);
+					BottomGame._freeze_frame = 3;
 				}
 			}
 			this._ct--;

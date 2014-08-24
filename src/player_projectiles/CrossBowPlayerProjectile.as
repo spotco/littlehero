@@ -52,13 +52,13 @@ package player_projectiles {
 				}
 			}
 			
-			if (FlxG.mouse.justReleased() && GameStats._energy > 5) {
-				GameStats._energy -= 5;
-				GameStats._just_used_energy_ct = 5;
+			if (FlxG.mouse.justReleased() && GameStats._energy > 10) {
+				GameStats._energy -= 10;
+				GameStats._just_used_energy_ct = Math.max(GameStats._just_used_energy_ct,GameStats._bow_just_used_energy_ct);
 				
 				var dv_ang:Number = Util.pt_to_flxrotation(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
 				var ang:Number = g._player._arrowretic._ang;
-				var dvoff_ang:Number = Util.float_random( 0, Math.abs(ang))*1.2 * Util.float_random( -1, 1);
+				var dvoff_ang:Number = Util.float_random( 0, Math.abs(ang))* GameStats._bow_spread_factor * Util.float_random( -1, 1);
 				dv_ang += dvoff_ang;
 				
 				var dv:Vector3D = new Vector3D(Util.flxrotation_to_pt(dv_ang).x, Util.flxrotation_to_pt(dv_ang).y);
@@ -70,6 +70,8 @@ package player_projectiles {
 				var left:Vector3D = forward.crossProduct(Util.Z_VEC);
 				left.normalize();
 				left.scaleBy(20);
+				
+				FlxG.shake(0.005,0.035);
 				
 			
 				ArrowPlayerProjectile.cons(g._player_projectiles).init(

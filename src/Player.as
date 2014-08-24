@@ -99,8 +99,8 @@ package  {
 			}
 			if (_y < 0) {
 				_y = 0;
-			} else if (_y > Util.HEI) {
-				_y = Util.HEI;
+			} else if (_y > Util.HEI-50) {
+				_y = Util.HEI-50;
 			}
 		}
 		
