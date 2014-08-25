@@ -20,7 +20,7 @@ package enemy {
 			this.loadGraphic(Resource.BOAR, true, false, 250, 258);
 			this.addAnimation("stand", [0]);
 			this.addAnimation("ready", [1]);
-			this.addAnimation("charge", [1]);
+			this.addAnimation("charge", [2]);
 			_hitbox.loadGraphic(Resource.BOAR_HITBOX);
 			
 		}
@@ -68,6 +68,11 @@ package enemy {
 			if (_mode == 0) { //track
 				this.angle += Util.lerp_deg(this.angle, Util.pt_to_flxrotation(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y) - 90, 0.2);
 				_ct--;
+				if (_ct < 30) {
+					this.play("ready");
+				} else {
+					this.play("stand");
+				}
 				if (_ct <= 0) {
 					_mode = 1;
 					FlxG.shake(0.01, 0.1);
@@ -77,6 +82,7 @@ package enemy {
 				if (_ct % 10 == 0) {
 					FlxG.shake(0.0075, 0.05);
 				}
+				this.play("charge");
 				var dir:FlxPoint = Util.flxrotation_to_pt(this.angle + 90);
 				_vx = dir.x * 8;
 				_vy = dir.y * 8;
@@ -94,6 +100,7 @@ package enemy {
 					_ct = 30;
 				}
 			} else if (_mode == 2) { //bounceback
+				this.play("stand");
 				this.x += _vx;
 				this.y += _vy;
 				_vx *= 0.92;

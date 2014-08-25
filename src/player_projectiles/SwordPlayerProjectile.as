@@ -20,9 +20,18 @@ package player_projectiles {
 			return rtv;
 		}
 		
-		var _hitbox:FlxSprite = new FlxSprite(0, 0, Resource.SWORD_HITBOX);
+		var _hitbox:FlxSprite;
 		public function SwordPlayerProjectile() {
 			super();
+			if (GameStats._sword_scale <= 1.3) {
+				_hitbox = new FlxSprite(0, 0, Resource.SWORD_HITBOX_1); //1
+			} else if (GameStats._sword_scale <= 1.8) {
+				_hitbox = new FlxSprite(0, 0, Resource.SWORD_HITBOX_2);//1.5
+			} else if (GameStats._sword_scale <= 2.6) {
+				_hitbox = new FlxSprite(0, 0, Resource.SWORD_HITBOX_3);//2
+			} else {
+				_hitbox = new FlxSprite(0, 0, Resource.SWORD_HITBOX_4);//2
+			}
 			this.loadGraphic(Resource.SWORD);
 		}
 		
@@ -34,7 +43,7 @@ package player_projectiles {
 			_last_mouse_x = FlxG.mouse.x;
 			_last_mouse_y = FlxG.mouse.y;
 			this.set_scale(GameStats._sword_scale);
-			this._hitbox.set_scale(GameStats._sword_scale * GameStats._sword_scale);
+			//this._hitbox.set_scale(GameStats._sword_scale);
 			return this;
 		}
 		
@@ -42,9 +51,10 @@ package player_projectiles {
 		var _last_mouse_x:Number, _last_mouse_y:Number, _hold_sword_ct:Number = 0;
 		public override function _update(g:BottomGame):void {
 			var sword_speed:Number = Util.point_dist(_last_mouse_x, _last_mouse_y, FlxG.mouse.x, FlxG.mouse.y);
-			
+			/*
 			_hitbox.x = this.x;
 			_hitbox.y = this.y;
+			*/
 			_hitbox.angle = this.angle;
 			
 			var v:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
@@ -56,6 +66,9 @@ package player_projectiles {
 			
 			this.x = this._follow._x - this.frameWidth/2 + g._player._body.frameWidth/2 + v.x + offset_right.x;
 			this.y = this._follow._y - this.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_right.y;
+			
+			_hitbox.x = this._follow._x - _hitbox.frameWidth / 2 + g._player._body.frameWidth / 2 + v.x + offset_right.x;
+			_hitbox.y = this._follow._y - _hitbox.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_right.y;
 			
 			if (sword_speed > 40 && !FlxG.mouse.pressed() && GameStats._energy/GameStats._max_energy > 0.2) {
 				GameStats._energy -= 10;

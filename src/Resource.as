@@ -11,7 +11,11 @@ package {
 		
 		[Embed(source = "../resc/bottom_item/crossbow.png")] public static var CROSSBOW:Class;
 		[Embed(source = "../resc/bottom_item/sword.png")] public static var SWORD:Class;
-		[Embed(source = "../resc/bottom_item/sword_hitbox.png")] public static var SWORD_HITBOX:Class;
+		[Embed(source = "../resc/bottom_item/sword_hitbox.png")] public static var SWORD_HITBOX_1:Class;
+		[Embed(source = "../resc/bottom_item/sword_hitbox_2.png")] public static var SWORD_HITBOX_2:Class;
+		[Embed(source = "../resc/bottom_item/sword_hitbox_3.png")] public static var SWORD_HITBOX_3:Class;
+		[Embed(source = "../resc/bottom_item/sword_hitbox_4.png")] public static var SWORD_HITBOX_4:Class;
+		
 		[Embed(source = "../resc/bottom_item/arrow_hitbox.png")] public static var ARROW_HITBOX:Class;
 		[Embed(source = "../resc/bottom_item/arrow.png")] public static var ARROW:Class;
 		[Embed(source = "../resc/bottom_item/gold.png")] public static var GOLD:Class;
@@ -27,9 +31,11 @@ package {
 		
 		[Embed(source = "../resc/bottom_enemy/eyeder_ss.png")] public static var EYEDER_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/eyeder_hitbox.png")] public static var EYEDER_HITBOX:Class;
+		[Embed(source = "../resc/bottom_enemy/big_eyeder_ss.png")] public static var BIG_EYEDER_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/blob_ss.png")] public static var BLOB_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/blob_hitbox.png")] public static var BLOB_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/bullet_ss.png")] public static var BULLET:Class;
+		[Embed(source = "../resc/bottom_enemy/bullet_hitbox.png")] public static var BULLET_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/boar_ss.png")] public static var BOAR:Class;
 		[Embed(source = "../resc/bottom_enemy/boar_hitbox.png")] public static var BOAR_HITBOX:Class;
 		

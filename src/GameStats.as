@@ -22,7 +22,7 @@ package  {
 		public static var _sword_damage:Number = 5;
 		public static var _sword_knockback:Number = 10;
 		public static var _sword_stun:Number = 1;
-		public static var _sword_scale:Number = 2;
+		public static var _sword_scale:Number = 3;
 		
 		public static var _knockback_damage:Number = 10;
 

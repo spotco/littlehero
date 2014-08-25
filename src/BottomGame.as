@@ -34,11 +34,13 @@ package {
 			_player._sword = SwordPlayerProjectile.cons(_player_projectiles).init(_player,this);
 			CrossBowPlayerProjectile.cons(_player_projectiles).init(_player);
 			
+			/*
+			BigSpiderEnemy.cons(_enemies).init(200, 200, this);
+			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
+			JellyEnemy.cons(_enemies).init(200, 200, this);
 			
-			TinySpiderEnemy.cons(_enemies).init(200, 200, this);
 			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
 			TinySpiderEnemy.cons(_enemies).init(400, 400, this);
-			/*
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
 			
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
@@ -56,9 +58,9 @@ package {
 			JellyEnemy.cons(_enemies).init(700, 300, this);
 			BoarEnemy.cons(_enemies).init(200, 200, this);
 			BoarEnemy.cons(_enemies).init(800, 400, this);
-			*/
-			BoarEnemy.cons(_enemies).init(300, 400, this);
 			
+			BoarEnemy.cons(_enemies).init(300, 400, this);
+			*/
 			_player._arrowretic = ArrowReticuleUIParticle.cons(_particles).init(_player, true);
 			ArrowReticuleUIParticle.cons(_particles).init(_player, false);
 			SweatParticle.cons(_particles);

@@ -19,7 +19,7 @@ package enemy {
 			super();
 			this.loadGraphic(Resource.BULLET, true, false, 12, 12);
 			this.addAnimation("play", [0, 1, 2], 10);
-			_hitbox.loadGraphic(Resource.BULLET,true,false,12,12);
+			_hitbox.loadGraphic(Resource.BULLET_HITBOX);
 		}
 		
 		var _ct:Number = 0;

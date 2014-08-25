@@ -31,6 +31,7 @@ package enemy {
 		var _xdir:Number = 1;
 		var _tar:FlxPoint = new FlxPoint();
 		var _delay:Number = 0;
+		var _red_ct:Number = 0;
 		public function init(x:Number,y:Number, g:BottomGame):JellyEnemy {
 			this.reset(x, y);
 			this.set_tar();
@@ -56,7 +57,8 @@ package enemy {
 				this.color = 0xCC99FF;
 				return;
 			}
-			this.color = 0xFFFFFF;
+			_red_ct--;
+			if (_red_ct <= 0) this.color = 0xFFFFFF;
 			if (this.hit_player(g)) {
 				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
 				v.normalize();
@@ -79,6 +81,8 @@ package enemy {
 							BulletEnemy.cons(g._enemies).init(this.get_center().x, this.get_center().y, dv.x, dv.y,600,g);
 							i += 0.785;
 						}
+						this.color = 0xFF0000;
+						_red_ct = 10;
 					}
 				}
 				
