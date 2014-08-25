@@ -166,7 +166,7 @@ package enemy {
 			_arrows_to_stun--;
 			if (_arrows_to_stun <= 0 && !_pass_stunned) {
 				_pass_stunned = true;
-				_stun_ct = 100;
+				_stun_ct = 80;
 			}
 		}
 		public override function _knockback(dx:Number, dy:Number, invuln_ct:Number, knockback:Number = 14, stun_ct:Number = 0):void {
@@ -209,8 +209,8 @@ package enemy {
 			return 0;
 		}
 		
-		public override function _arrow_damage_mult():Number { return (_stun_ct > 0)?0.4:0.025; }
-		public override function _sword_damage_mult():Number { return (_stun_ct > 0)?1.5:0; }
+		public override function _arrow_damage_mult():Number { return (_stun_ct > 0)?0.2:0.025; }
+		public override function _sword_damage_mult():Number { return (_stun_ct > 0)?0.7:0; }
 		
 	}
 

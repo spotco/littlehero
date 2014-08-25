@@ -35,6 +35,7 @@ package enemy {
 			g._hitboxes.add(_butt_hitbox);
 			this.play("stand");
 			this._max_health = 60;
+			//this._health = 5;
 			this._health = this._max_health;
 			g._bottom_game_ui.track_boss(this);
 			_side = Util.float_random(0, 2) < 1?1:0;
@@ -116,17 +117,17 @@ package enemy {
 				var mod:Number = 50;
 				var pct:Number = 4;
 				if (this._health / this._max_health < 0.25) {
-					mod = 25;
-					pct = 3;
+					mod = 33;
+					pct = 5;
 				} else if (this._health / this._max_health < 0.5) {
 					mod = 40;
-					pct = 3.5;
+					pct = 6;
 				} else if (this._health / this._max_health < 0.75) {
 					mod = 50;
-					pct = 4;
+					pct = 7;
 				} else {
 					mod = 50;
-					pct = 6;
+					pct = 8;
 				}
 				
 				if (_ct%mod==0&&Util.alive_ct(g)<8) {
@@ -140,7 +141,7 @@ package enemy {
 				}
 				if (_ct <= 0) {
 					_mode = 2;
-					_ct = 100;
+					_ct = 70;
 					FlxG.shake(0.01, 0.15);
 				}
 				this._hitbox = _body_hitbox;
@@ -166,7 +167,7 @@ package enemy {
 					this.color = 0xFF0000;
 					_red_ct = 10;
 				}
-				if (_ct == 195 || _ct == 180 || _ct == 165 || _ct == 35 || _ct == 20 || _ct == 5) {
+				if (_ct == 195 || _ct == 180  || _ct == 20 || _ct == 5) {
 					var i:Number = 0;
 					while (i < 3.14 * 2) {
 						var pos:FlxPoint = Util.flxpt(_butt_hitbox.x+45, _butt_hitbox.y+60);
@@ -198,11 +199,23 @@ package enemy {
 			
 		}
 		public override function _hit(g:BottomGame, bow:Boolean = false):void {
+			if (!bow) {
+				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
+				v.normalize();
+				v.scaleBy(7);
+				g._player.knockback(v.x, v.y, 25);
+				if (_mode == 3) {
+					_ct = 0;
+				} else if (_mode == 2) {
+					_mode = 3;
+					_ct = 6;
+				}
+			}
 		}
 		
 		public override function _knockback(dx:Number, dy:Number, invuln_ct:Number, knockback:Number = 14, stun_ct:Number = 0):void {
 			if (_mode == 2 || _mode == 3 || _mode == 4) {
-				_invuln_ct = invuln_ct;
+				_invuln_ct = Math.min(5,invuln_ct);
 			}
 		}
 		
@@ -211,7 +224,7 @@ package enemy {
 		}
 		
 		public override function _arrow_damage_mult():Number { return (_mode == 2 || _mode == 3 || _mode == 4)?0.15:0; }
-		public override function _sword_damage_mult():Number { return (_mode == 2 || _mode == 3 || _mode == 4)?3:0; }
+		public override function _sword_damage_mult():Number { return (_mode == 2 || _mode == 3 || _mode == 4)?1.4:0; }
 		
 		
 		
@@ -227,7 +240,11 @@ package enemy {
 			}
 			
 			for (var j:int = 0; j < 150; j++) {
-				SmallFollowPickup.cons(g._pickups).init(Util.float_random(0,Util.WID),this.y+40+Util.float_random(-100,100),3);
+				SmallFollowPickup.cons(g._pickups).init(
+					this.get_center().x + Util.float_random(-150,150),
+					this.get_center().y + Util.float_random( -150,150),
+					3
+				);
 			}
 			for each (var enem:BaseEnemy in g._enemies.members) {
 				if (enem.alive) enem._health = 0;

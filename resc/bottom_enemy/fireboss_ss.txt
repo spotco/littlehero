@@ -1,0 +1,1 @@
+[3]fireboss_1.png[2]fireboss_2.png[1]fireboss_3.png[0]fireboss_nofire.pngwidth:363 px, height:334 px

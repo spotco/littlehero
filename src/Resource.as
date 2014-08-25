@@ -46,6 +46,8 @@ package {
 		[Embed(source = "../resc/bottom_enemy/spider_ss.png")] public static var SPIDER_BOSS_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/spider_hitbox.png")] public static var SPIDER_BOSS_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/spider_bodyhitbox.png")] public static var SPIDER_BOSS_BODY_HITBOX:Class;
+		[Embed(source = "../resc/bottom_enemy/fireboss_ss.png")] public static var FIREBOSS_SS:Class;
+		[Embed(source = "../resc/bottom_enemy/fireboss_fist.png")] public static var FIREBOSS_FIST:Class;
 		
 		[Embed(source = "../resc/bottom_fx/explosion.png")] public static var EXPLOSION:Class;
 		[Embed(source = "../resc/bottom_fx/sweat_ss.png")] public static var SWEAT_SS:Class;

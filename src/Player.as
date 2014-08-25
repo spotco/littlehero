@@ -48,6 +48,19 @@ package  {
 				_body.alpha = Math.floor(_invuln_ct / 5) % 2 == 0?1:0.5;
 				_body.color = 0xFF0000;
 				return;
+				
+			} else if (_knockback_ct > 0) {
+				_knockback_ct --;
+				//player_control(1,true);
+				_body.color = 0xFFFFFF;
+				_body.alpha = 1;
+				_x += _knockback.x;
+				_y += _knockback.y;
+				_knockback.x *= 0.93;
+				_knockback.y *= 0.93;
+				this.update_position();
+				return;
+				
 			} else {
 				_body.color = 0xFFFFFF;
 				_body.alpha = 1;
@@ -136,6 +149,14 @@ package  {
 			GameStats._health -= damage;
 			_vx = dx;
 			_vy = dy;
+		}
+		
+		public var _knockback_ct:Number = 0;
+		public var _knockback:FlxPoint = new FlxPoint(0, 0);
+		public function knockback(dx:Number, dy:Number, ct:Number):void {
+			_knockback_ct = ct;
+			_knockback.x = dx;
+			_knockback.y = dy;
 		}
 	}
 

@@ -102,8 +102,8 @@ package player_projectiles {
 					enem._knockback(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50, GameStats._sword_knockback, GameStats._sword_stun);
 					enem._hit(g);
 					enem._health -= GameStats._sword_damage * enem._sword_damage_mult();
-					FlxG.shake(0.005, 0.075);
-					BottomGame._freeze_frame = 6;
+					FlxG.shake(0.01, 0.075);
+					BottomGame._freeze_frame = Math.max(6,BottomGame._freeze_frame);
 				}
 			}
 			
