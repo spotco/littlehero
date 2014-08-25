@@ -65,6 +65,8 @@ package {
 	
 		[Embed(source = "../resc/shop/shop_icon.png")] public static var SHOP_ICON:Class;
 		[Embed(source = "../resc/shop/shop_bg.png")] public static var SHOP_BG:Class;
+		[Embed(source = "../resc/shop/continue.png")] public static var SHOP_CONTINUE:Class;
+		[Embed(source = "../resc/shop/shop_text_back.png")] public static var SHOP_TEXT_BACK:Class;
 	}
 	
 

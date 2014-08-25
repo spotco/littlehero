@@ -219,8 +219,8 @@ package  {
 			return Math.sqrt(Math.pow(x_1 - x_0, 2) + Math.pow(y_1 - y_0, 2));
 		}
 		
-		public static function cons_text(x:Number, y:Number, text:String, color:uint = 0xFFFFFF, font_size:int = 20):FlxText {
-			var _score:FlxText = new FlxText(x,y , 1000, text);
+		public static function cons_text(x:Number, y:Number, text:String, color:uint = 0xFFFFFF, font_size:int = 20, width:Number = 1000):FlxText {
+			var _score:FlxText = new FlxText(x,y , width, text);
 			_score.color = color;
 			_score.setFormat("system", font_size);
 			return _score;
