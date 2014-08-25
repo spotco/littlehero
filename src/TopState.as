@@ -23,7 +23,7 @@ package  {
 		
 		var _maintext:ScrollText;
 		
-		var _click_to_continue:FlxText
+		var _click_to_continue:FlxText;
 		
 		public override function create():void {
 			this.add(_bg);
@@ -34,12 +34,32 @@ package  {
 			this.add(_bully_right);
 			this.add(_cage);
 			
+			if (GameStats._story >= 1) {
+				_bully_right.loadGraphic(Resource.TOP_BULLY_RIGHT_EMPTY);	
+			}
+			if (GameStats._story >= 2) {
+				_bully_left.loadGraphic(Resource.TOP_BULLY_LEFT_EMPTY);
+			}	
+			if (GameStats._story >= 3) {
+				_bully_center.loadGraphic(Resource.TOP_BULLY_CENTER_EMPTY);
+			}
+			
 			_click_to_continue = Util.cons_text(5, 5, "Click to Continue", 0xFFFFFF, 24);
 			this.add(_click_to_continue);
 			
 			var maintext:FlxText = Util.cons_text(Util.WID * 0.5, Util.HEI * 0.15, "", 0xFFFFFF, 24, 400);
 			this.add(maintext);
-			_maintext = new ScrollText(maintext, "Save Me! Defeat the three evil bosses!", 5);
+			var text:String = "";
+			if (GameStats._story >= 3) {
+				FlxG.switchState(new GameEndState());
+			} else if (GameStats._story >= 2) {
+				text = "Save Me! One final boss left!";
+			} else if (GameStats._story >= 1) {
+				text = "Save Me! Only two bosses left!";
+			} else {
+				text = "Save Me! Defeat the three evil bosses!";
+			}
+			_maintext = new ScrollText(maintext, text, 5);
 			
 			_player.x = Util.WID * 0.6;
 			_player.y = Util.HEI * 0.4;
@@ -53,6 +73,15 @@ package  {
 			this.add(_particles);
 			_fade_cover.makeGraphic(1000, 500, 0xFF000000);
 			this.add(_fade_cover);
+			
+			ChatManager._inst = new ChatManager();
+			ChatManager._inst.show_back(true);
+			ChatManager._inst.pick_message_set(
+				GameStats._story == 0?ChatManager.m_top_0:
+				GameStats._story == 1?ChatManager.m_top_1:
+				ChatManager.m_top_2
+			);
+			this.add(ChatManager._inst);
 		}
 		
 		private function set_bully_y():void {
@@ -68,7 +97,12 @@ package  {
 		var _fadeout:Boolean = false;
 		var _fadein:Boolean = true;
 		
+		var _ending_ct:Number = 0;
+		var _chat_anim_ct:Number = 0;
+		
 		public override function update():void {
+			super.update();
+			ChatManager._inst._update();
 			if (_fadein) {
 				_fade_cover.alpha -= 0.05;
 				if (_fade_cover.alpha <= 0) {
@@ -86,6 +120,17 @@ package  {
 				}
 				return;
 			}
+			
+			if (GameEndState._ending) {
+				_ending_ct++;
+				if (_ending_ct == 30) {
+					_player.loadGraphic(Resource.TOP_PLAYER_AWAKE);
+				} else if (_ending_ct == 120) {
+					_player.loadGraphic(Resource.TOP_PLAYER);
+					GameEndState._ending = false;
+				}
+			}
+			
 			for each (var part:BaseParticle in _particles.members) {
 				if (part.alive) {
 					part._update(null);
@@ -95,12 +140,7 @@ package  {
 				}
 			}
 			
-			if (!_fadein && _state == 0) {
-				if (FlxG.mouse.justPressed()) {
-					_state = 1;
-					_ct = 0;
-				}
-			}
+			if (!_fadein && _state == 0) {}
 			
 			if (_state == 0) { 
 				this._click_to_continue.alpha = 1;
@@ -109,6 +149,26 @@ package  {
 				_bully_right_offsety *= 0.95;
 				_teacher_offsety *= 0.95;
 				this.set_bully_y();
+				_chat_anim_ct++;
+				if (_chat_anim_ct%20 == 0 && !ChatManager._inst._text_scroll.finished()) {
+					if (ChatManager._inst._cur_sprite == ChatManager._inst._teacher_sprite) {
+						_teacher_offsety = -8;
+					}
+					if (ChatManager._inst._cur_sprite == ChatManager._inst._snakeboss_sprite) {
+						_bully_right_offsety = -8;
+					}
+					if (ChatManager._inst._cur_sprite == ChatManager._inst._spider_sprite) {
+						_bully_left_offsety = -8;
+					}
+					if (ChatManager._inst._cur_sprite == ChatManager._inst._fireboss_sprite) {
+						_bully_center_offsety = -8;
+					}
+				}
+				if (FlxG.mouse.justPressed()) {
+					_state = 1;
+					_ct = 0;
+					this.remove(ChatManager._inst);
+				}
 				
 			} else if (_state == 1) {
 				this._click_to_continue.alpha = 0;

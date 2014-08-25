@@ -32,7 +32,11 @@ package enemy {
 			this.play("stand");
 			g._hitboxes.add(_hitbox);
 			this._max_health = 35;
-			this._health = 35;
+			if (Main.BOSS_1_HEALTH) {
+				this._health = 1;
+			} else {
+				this._health = this._max_health;
+			}
 			
 			_follow = follow;
 			_offset = offset;

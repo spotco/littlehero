@@ -45,6 +45,9 @@ package pickups {
 			return this;
 		}
 		
+		public static var _HEALTH_SPAWN:Number = 20;
+		public static var _HEALTH_SPAWN_2:Number = 40;
+		
 		var _picked_up:Boolean = false;
 		public override function _update(g:BottomGame):void {
 			
@@ -55,7 +58,7 @@ package pickups {
 					if (_type == 0) {
 						GameStats._gold++;
 					} else {
-						GameStats._health += 0.5;
+						GameStats._health = Math.min(GameStats._health+0.5,GameStats._max_health);
 					}
 				}
 			} else if (dist < 60) {

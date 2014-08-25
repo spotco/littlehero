@@ -28,6 +28,8 @@ package  {
 
 		public static var _health_regen:Number = 0;
 		public static var _armor_mult:Number = 1;
+		
+		public static var _story:Number = 2;
 	}
 
 }

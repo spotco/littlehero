@@ -20,11 +20,11 @@ package  {
 			
 			//row 1
 			"bow_damage_1": {
-				"price":100,
+				"price":105,
 				"name":"Bow Damage+",
 				"desc":"Increase Bow Damage.",
 				"func":function() {
-					GameStats._bow_damage += 3;
+					GameStats._bow_damage += 1;
 					GameStats._bow_knockback += 2;
 					GameStats._bow_stun += 5;
 				},
@@ -45,7 +45,6 @@ package  {
 				"desc":"Increase Sword Damage",
 				"func":function() {
 					GameStats._sword_damage += 4;
-					GameStats._sword_knockback += 5;
 				},
 				"linkto":["sword_size_1"]
 			},
@@ -67,16 +66,17 @@ package  {
 				"name":"Energy+",
 				"desc":"Increase Energy",
 				"func":function() {
-					GameStats._energy += 200;
+					GameStats._max_energy += 400;
 				},
 				"linkto":["energy_2","health_2"]
 			},
 			"sword_size_1": {
 				"price":100,
-				"name":"Sword+",
-				"desc":"Increase Sword Power.",
+				"name":"Sword Size+",
+				"desc":"Bigger Sword. More Knockback",
 				"func":function() {
 					GameStats._sword_scale = Math.max(GameStats._sword_scale, 1.5);
+					GameStats._sword_knockback += 5;
 				},
 				"linkto":["health_2","sword_recharge_1"]
 			},
@@ -87,7 +87,7 @@ package  {
 				"name":"Bow Damage++",
 				"desc":"Increase Bow Damage",
 				"func":function() {
-					GameStats._bow_damage += 6;
+					GameStats._bow_damage += 2;
 					GameStats._bow_knockback += 4;
 					GameStats._bow_stun += 5;
 				},
@@ -98,7 +98,7 @@ package  {
 				"name":"Energy++",
 				"desc":"Increase Energy.",
 				"func":function() {
-					GameStats._energy += 1000;
+					GameStats._max_energy += 1000;
 				},
 				"linkto":["bow_accuracy_2","health_3"]
 			},
@@ -166,7 +166,6 @@ package  {
 				"desc":"Increase Sword Damage.",
 				"func":function() {
 					GameStats._sword_damage += 8;
-					GameStats._sword_knockback += 8;	
 				},
 				"linkto":["sword_size_2"]
 			},
@@ -199,9 +198,10 @@ package  {
 			"sword_size_2": {
 				"price":100,
 				"name":"Sword Size++",
-				"desc":"Bigger Sword",
+				"desc":"Bigger Sword. More Knockback",
 				"func":function() {
 					GameStats._sword_scale = Math.max(GameStats._sword_scale, 2);	
+					GameStats._sword_knockback += 8;	
 				}
 			}
 		};

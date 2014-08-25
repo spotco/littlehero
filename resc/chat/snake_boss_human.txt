@@ -1,0 +1,1 @@
+[2]portraits_0009_snakeboss-hurt.png[1]portraits_0010_snakeboss-talk.png[0]portraits_0011_snakeboss-idle.pngwidth:120 px, height:146 px

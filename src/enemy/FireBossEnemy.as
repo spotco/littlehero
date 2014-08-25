@@ -36,8 +36,11 @@ package enemy {
 			g._bottom_game_ui.track_boss(this);
 			g._hitboxes.add(_hitbox);
 			this._max_health = 3;
-			this._health = this._max_health;
-			this.play("fire");
+			if (Main.BOSS_1_HEALTH) {
+				this._health = 1;
+			} else {
+				this._health = this._max_health;
+			}
 			
 			RotateFadeParticle.cons(g._particles).init(this.get_center().x + Util.float_random( -20, 20), this.get_center().y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3));
 			RotateFadeParticle.cons(g._particles).init(this.get_center().x + Util.float_random( -20, 20), this.get_center().y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(1,2));
@@ -236,7 +239,7 @@ package enemy {
 				_vx = dv.x;
 				_vy = dv.y;
 				_mode = 2;
-			} else {
+			} else if (!bow) {
 				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
 				v.normalize();
 				v.scaleBy(13);
@@ -272,6 +275,7 @@ package enemy {
 			BottomGame._freeze_frame = 10;
 			this.kill();
 			this._kill(g);
+			g.boss_defeated();
 		}
 		
 		public override function get_center():FlxPoint {

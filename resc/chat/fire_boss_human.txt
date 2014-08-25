@@ -1,0 +1,1 @@
+[2]portraits_0003_fireboss_hurt.png[1]portraits_0004_fireboss_talk.png[0]portraits_0005_fireboss_idle.pngwidth:120 px, height:146 px

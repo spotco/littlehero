@@ -18,17 +18,20 @@ package {
 		
 		public var _bottom_game_ui:BottomGameUI = new BottomGameUI();
 		
+		var _bg:FlxSprite = new FlxSprite(0, 0, Resource.BOTTOM_BG);
+		var _fg:FlxSprite = new FlxSprite(0, 0, Resource.BOTTOM_FG)
+		
 		public override function create():void {
+			trace("world", GameStats._story);
+			GameWaves.reset(GameStats._story);
 			
-			GameWaves.reset(0);
-			
-			this.add(new FlxSprite(0, 0, Resource.BOTTOM_BG));
+			this.add(_bg);
 			this.add(_pickups);
 			this.add(_player);
 			this.add(_enemies);
 			this.add(_player_projectiles);
 			this.add(_particles);
-			this.add(new FlxSprite(0, 0, Resource.BOTTOM_FG));
+			this.add(_fg );
 			this.add(_bottom_game_ui);
 			this.add(_healthbars);
 			
@@ -47,17 +50,40 @@ package {
 			GameStats._health = GameStats._max_health;
 		}
 		
+		var _fadeout_can_move:Boolean = false;
+		public function boss_defeated():void {
+			_fadeout_to = new TopState();
+			GameStats._story++;
+			_fadeout = true;
+			_fadeout_can_move = true;
+		}
+		
 		public static var _freeze_frame:Number = 0;
 		
 		var _fade_cover:FlxSprite = new FlxSprite();
 		var _fadeout:Boolean = false;
 		var _fadein:Boolean = true;
 		var _fadeout_to:FlxState;
+		var _spin_out_ct:Number = 0;
 		var _ct:Number = 0;
+		
+		function fadeout(f:FlxSprite) { if (f.alpha > 0) f.alpha -= 0.02; }
 		
 		public override function update():void {
 			super.update();
-			if (_fadein) {
+			_bottom_game_ui._update(this);
+			if (_spin_out_ct > 0) {
+				_spin_out_ct--;
+				fadeout(_fg);
+				fadeout(_bg);
+				_player._body.angle += 12.5;
+				for each (var u:FlxSprite in _player_projectiles.members) fadeout(u);
+				for each (var u:FlxSprite in _particles.members) fadeout(u);
+				for each (var u:FlxSprite in _enemies.members) fadeout(u);
+				for each (var u:FlxSprite in _pickups.members) fadeout(u);
+				return;
+				
+			} else if (_fadein) {
 				_fade_cover.alpha -= 0.05;
 				if (_fade_cover.alpha <= 0) {
 					_fade_cover.alpha = 0;
@@ -66,13 +92,20 @@ package {
 				return;
 				
 			} else if (_fadeout) {
-				_fade_cover.alpha += 0.05;
+				if (_fadeout_can_move) {
+					_fade_cover.alpha += 0.002;
+				} else {
+					_fade_cover.alpha += 0.05;
+				}
+				
 				if (_fade_cover.alpha >= 1) {
 					_fade_cover.alpha = 1;
 					_fadeout = false;
 					FlxG.switchState(_fadeout_to);
 				}
-				return;
+				if (!_fadeout_can_move) {
+					return;
+				}
 			}
 			
 			if (_freeze_frame > 0) {
@@ -88,13 +121,13 @@ package {
 			
 			GameWaves._update(this);
 			if (GameStats._health <= 0) {
+				_spin_out_ct = 50;
 				_fadeout = true;
-				_fadeout_to = new TopState();
+				_fadeout_to = new ShopState();
 				return;
 			}
 
 			_player._update(this);
-			_bottom_game_ui._update(this);
 			
 			
 			for each (var pproj:BasePlayerProjectile in _player_projectiles.members) {

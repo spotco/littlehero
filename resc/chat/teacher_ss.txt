@@ -1,0 +1,1 @@
+[2]portraits_0000_teacher-sad.png[1]portraits_0001_teacher-talk.png[0]portraits_0002_teacher-idle.pngwidth:120 px, height:146 px

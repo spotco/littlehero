@@ -61,7 +61,11 @@ package {
 		[Embed(source = "../resc/top_bg/bully_center.png")] public static var TOP_BULLY_CENTER:Class;
 		[Embed(source = "../resc/top_bg/bully_left.png")] public static var TOP_BULLY_LEFT:Class;
 		[Embed(source = "../resc/top_bg/bully_right.png")] public static var TOP_BULLY_RIGHT:Class;
+		[Embed(source = "../resc/top_bg/bully_center_empty.png")] public static var TOP_BULLY_CENTER_EMPTY:Class;
+		[Embed(source = "../resc/top_bg/bully_left_empty.png")] public static var TOP_BULLY_LEFT_EMPTY:Class;
+		[Embed(source = "../resc/top_bg/bully_right_empty.png")] public static var TOP_BULLY_RIGHT_EMPTY:Class;
 		[Embed(source = "../resc/top_bg/player.png")] public static var TOP_PLAYER:Class;
+		[Embed(source = "../resc/top_bg/player_awake.png")] public static var TOP_PLAYER_AWAKE:Class;
 		[Embed(source = "../resc/top_bg/teacher.png")] public static var TOP_TEACHER:Class;
 		[Embed(source = "../resc/top_bg/princess.png")] public static var TOP_PRINCESS:Class;
 		[Embed(source = "../resc/top_bg/knight.png")] public static var TOP_KNIGHT:Class;
@@ -71,6 +75,12 @@ package {
 		[Embed(source = "../resc/shop/shop_bg.png")] public static var SHOP_BG:Class;
 		[Embed(source = "../resc/shop/continue.png")] public static var SHOP_CONTINUE:Class;
 		[Embed(source = "../resc/shop/shop_text_back.png")] public static var SHOP_TEXT_BACK:Class;
+		
+		[Embed(source = "../resc/chat/chat_cover.png")] public static var CHAT_COVER:Class;
+		[Embed(source = "../resc/chat/teacher_ss.png")] public static var CHAT_TEACHER_SS:Class;
+		[Embed(source = "../resc/chat/spider_boss_human.png")] public static var CHAT_SPIDERBOSS_SS:Class;
+		[Embed(source = "../resc/chat/snake_boss_human.png")] public static var CHAT_SNAKEBOSS_SS:Class;
+		[Embed(source = "../resc/chat/fire_boss_human.png")] public static var CHAT_FIREBOSS_SS:Class;
 	}
 	
 

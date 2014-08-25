@@ -35,8 +35,11 @@ package enemy {
 			g._hitboxes.add(_butt_hitbox);
 			this.play("stand");
 			this._max_health = 60;
-			//this._health = 5;
-			this._health = this._max_health;
+			if (Main.BOSS_1_HEALTH) {
+				this._health = 1;
+			} else {
+				this._health = this._max_health;
+			}
 			g._bottom_game_ui.track_boss(this);
 			_side = Util.float_random(0, 2) < 1?1:0;
 			this.pick_side();
@@ -253,7 +256,7 @@ package enemy {
 			BottomGame._freeze_frame = 10;
 			this.kill();
 			this._kill(g);
-			
+			g.boss_defeated();
 		}
 		
 		public override function get_center():FlxPoint {

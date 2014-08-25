@@ -10,7 +10,6 @@ package
 	public class BottomGameUI extends FlxGroup{
 		
 		var _boss_bar:FlxSprite = new FlxSprite();
-		var _boss_text:FlxText;
 		
 		var _energy_bar:FlxSprite = new FlxSprite();
 		var _health_bar:FlxSprite = new FlxSprite();
@@ -52,9 +51,6 @@ package
 			_boss_bar.y = 480;
 			this.add(_boss_bar);
 			
-			_boss_text = Util.cons_text(0, 455, "Boss", 0xFFFFFF, 20);
-			_boss_text.alpha = 0;
-			this.add(_boss_text);
 			this.boss_bar_pct(0);
 			
 			_red_overlay.alpha = 0;
@@ -64,17 +60,31 @@ package
 		var _boss_in_bar_anim:Number = 0;
 		var _track_boss:BaseEnemy = null;
 		public function track_boss(enem:BaseEnemy):void {
-			_boss_text.alpha = 1;
 			_track_boss = enem;
 			_boss_in_bar_anim = 0;
+			ChatManager._inst = new ChatManager();
+			ChatManager._inst.show_back(false);
+			this.add(ChatManager._inst);
+			ChatManager._inst.pick_message_set(
+				GameStats._story == 0?ChatManager.m_boss_0:
+				GameStats._story == 1?ChatManager.m_boss_1:
+				ChatManager.m_boss_2
+			);
 		}
 		
 		var _last_health:Number = 0;
 		public function _update(g:BottomGame):void {
+			if (_track_boss != null) {
+				ChatManager._inst._update();
+				if (_track_boss._health <= 0) {
+					this.remove(ChatManager._inst);
+				}
+			}
+			
 			this.energy_bar_pct(GameStats._energy / GameStats._max_energy);
 			this.health_bar_pct(GameStats._health / GameStats._max_health);
 			this._gold_text.text = "GOLD: " + GameStats._gold;
-			_wave_text.text = "WAVE: " + GameWaves._wave;
+			_wave_text.text = "WAVE: " + (GameWaves._wave-1);
 			_wave_ct_text.text = "NEXT: " + GameWaves._ct;
 			_wave_ct_text.alpha = (GameWaves._ct < 0 ? 0:1);
 			

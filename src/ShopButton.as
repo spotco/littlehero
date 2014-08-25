@@ -16,6 +16,9 @@ package  {
 			this.y = y - this.frameHeight / 2;
 			_info = info;
 			_items = items;
+			this.color = 0x888888;
+			this.set_scale(0.4);
+			this.alpha = 0.6;
 		}
 		
 		public function mouse_over():Boolean {

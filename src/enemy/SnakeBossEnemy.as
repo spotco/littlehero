@@ -42,7 +42,12 @@ package enemy {
 			g._bottom_game_ui.track_boss(this);
 			g._hitboxes.add(_hitbox);
 			this._max_health = 50;
-			this._health = this._max_health;
+			if (Main.BOSS_1_HEALTH) {
+				this._health = 1;
+			} else {
+				this._health = this._max_health;
+			}
+			
 			return this;
 		}
 		
@@ -196,6 +201,7 @@ package enemy {
 			BottomGame._freeze_frame = 10;
 			this.kill();
 			this._kill(g);
+			g.boss_defeated();
 			
 		}
 		
