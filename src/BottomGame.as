@@ -36,52 +36,62 @@ package {
 			
 			_player._sword = SwordPlayerProjectile.cons(_player_projectiles).init(_player,this);
 			CrossBowPlayerProjectile.cons(_player_projectiles).init(_player);
-
-			
-			//BoarEnemy.cons(_enemies).init(200, 200, this);
-			//BoarEnemy.cons(_enemies).init(800, 400, this);
-			//BoarEnemy.cons(_enemies).init(300, 400, this);
-			/*
-			BigSpiderEnemy.cons(_enemies).init(200, 200, this);
-			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
-			JellyEnemy.cons(_enemies).init(200, 200, this);
-			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
-			TinySpiderEnemy.cons(_enemies).init(400, 400, this);
-			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
-			
-			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
-			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
-			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
-			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
-			
-			JellyEnemy.cons(_enemies).init(200, 200, this);
-			JellyEnemy.cons(_enemies).init(700, 300, this);
-			
-			TinySpiderEnemy.cons(_enemies).init(200, 200, this);
-			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
-			TinySpiderEnemy.cons(_enemies).init(400, 400, this);
-			
-			JellyEnemy.cons(_enemies).init(700, 300, this);
-			
-			BoarEnemy.cons(_enemies).init(200, 200, this);
-			BoarEnemy.cons(_enemies).init(800, 400, this);
-			BoarEnemy.cons(_enemies).init(300, 400, this);
-			*/
-			
 			_player._arrowretic = ArrowReticuleUIParticle.cons(_particles).init(_player, true);
 			ArrowReticuleUIParticle.cons(_particles).init(_player, false);
 			SweatParticle.cons(_particles);
+			
+			_fade_cover = new FlxSprite();
+			_fade_cover.makeGraphic(1000, 500, 0xFF000000);
+			this.add(_fade_cover);
+			
+			GameStats._health = GameStats._max_health;
 		}
 		
 		public static var _freeze_frame:Number = 0;
 		
+		var _fade_cover:FlxSprite = new FlxSprite();
+		var _fadeout:Boolean = false;
+		var _fadein:Boolean = true;
+		var _fadeout_to:FlxState;
+		var _ct:Number = 0;
+		
 		public override function update():void {
 			super.update();
+			if (_fadein) {
+				_fade_cover.alpha -= 0.05;
+				if (_fade_cover.alpha <= 0) {
+					_fade_cover.alpha = 0;
+					_fadein = false;
+				}
+				return;
+				
+			} else if (_fadeout) {
+				_fade_cover.alpha += 0.05;
+				if (_fade_cover.alpha >= 1) {
+					_fade_cover.alpha = 1;
+					_fadeout = false;
+					FlxG.switchState(_fadeout_to);
+				}
+				return;
+			}
+			
 			if (_freeze_frame > 0) {
 				_freeze_frame--;
 				return;
 			}
+			_ct++;
+			if (_ct % 250 == 0) {
+				if (GameStats._health < GameStats._max_health) {
+					GameStats._health = Math.min(GameStats._max_health, GameStats._health + GameStats._health_regen);
+				}
+			}
+			
 			GameWaves._update(this);
+			if (GameStats._health <= 0) {
+				_fadeout = true;
+				_fadeout_to = new TopState();
+				return;
+			}
 
 			_player._update(this);
 			_bottom_game_ui._update(this);
@@ -137,7 +147,6 @@ package {
 				} else {
 					GameStats._energy = Math.min(GameStats._energy + 0.005 * GameStats._max_energy, GameStats._max_energy);
 				}
-				
 			}
 			
 		}

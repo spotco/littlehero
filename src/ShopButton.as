@@ -19,15 +19,15 @@ package  {
 		}
 		
 		public function mouse_over():Boolean {
-			return Util.pt_dist(FlxG.mouse.x, FlxG.mouse.y, this.x + 30, this.y + 30) < 30;
+			return Util.pt_dist(FlxG.mouse.x, FlxG.mouse.y, this.x + 30, this.y + 30) < 20;
 		}
 		
-		public function _update(shop:ShopState):void {
+		public function _update(shop:ShopState):Boolean {
 			
 			if (shop.own_item(_info)) {
-				this.color = 0xDDDDDD;
-				this.set_scale(0.6);
-				this.alpha = 0.6;
+				this.color = 0xFFFFCC;
+				this.set_scale(0.7);
+				this.alpha = 0.7;
 				if (mouse_over()) {
 					shop.hover_info(_info);
 					this.alpha = 0.8;
@@ -57,6 +57,7 @@ package  {
 					shop.hover_info(_info);
 				}	
 			}
+			return this.mouse_over();
 		}
 		
 	}

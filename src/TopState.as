@@ -31,6 +31,9 @@ package  {
 			_bully_center.x = Util.WID / 2 - _bully_center.width/2;
 			_bully_right.x = Util.WID - _bully_right.width;
 			this.set_bully_y();
+			
+			_fade_cover.makeGraphic(1000, 500, 0xFF000000);
+			this.add(_fade_cover);
 		}
 		
 		private function set_bully_y():void {
@@ -40,7 +43,32 @@ package  {
 			_teacher.y = Util.HEI * 0.22 + _teacher_offsety;
 		}
 		
+		var _fade_cover:FlxSprite = new FlxSprite();
+		var _fadeout:Boolean = false;
+		var _fadein:Boolean = true;
+		
 		public override function update():void {
+			if (_fadein) {
+				_fade_cover.alpha -= 0.05;
+				if (_fade_cover.alpha <= 0) {
+					_fade_cover.alpha = 0;
+					_fadein = false;
+				}
+				return;
+				
+			} else if (_fadeout) {
+				_fade_cover.alpha += 0.05;
+				if (_fade_cover.alpha >= 1) {
+					_fade_cover.alpha = 1;
+					_fadeout = false;
+					FlxG.switchState(new ShopState());
+				}
+				return;
+			}
+			if (FlxG.mouse.justPressed()) {
+				_fadeout = true;
+			}
+			
 			if (Util.float_random(0, 50) < 1) {
 				_bully_right_offsety = -10;
 			}

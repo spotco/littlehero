@@ -33,19 +33,7 @@ package  {
 			var skip_when_empty:Boolean = true;
 			if (_ct <= 0) {
 				if (_world == 0) {
-					if (_wave == 0) {
-						//FireBossEnemy.cons(g._enemies).init(200, 200, g);
-						//SpiderBossEnemy.cons(g._enemies).init(200, 200, g);
-						SnakeBossEnemy.cons(g._enemies).init(-100, -100, g);
-						_ct = 5;
-						_wave++;
-						/*
-						SnakeBossEnemy.cons(g._enemies).init(-100, -100, g);
-						BoarEnemy.cons(g._enemies).init(200, 200, g);
-						*/
-						
-					}
-					/*if (_wave == 0) {						
+					if (_wave == 0) {						
 						_ct = 50;
 						_wave++;
 					} else if (_wave == 1) {
@@ -82,11 +70,9 @@ package  {
 							random_spot_not_near_player(g);
 							JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 						}
-						
-						
 						_ct = 5000;
 						_wave++
-					}*/
+					}
 					
 				}
 				

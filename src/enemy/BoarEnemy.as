@@ -61,7 +61,7 @@ package enemy {
 				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
 				v.normalize();
 				v.scaleBy(15);
-				g._player.hit(v.x, v.y, 1);
+				g._player.hit(v.x, v.y, 2);
 				FlxG.shake(0.01, 0.15);
 			}
 			
