@@ -24,7 +24,7 @@ package enemy {
 		
 		public var _max_health:Number = 1;
 		public var _health:Number = 1;
-		public function _hit(g:BottomGame):void {
+		public function _hit(g:BottomGame, bow:Boolean = false):void {
 			if (this._health > 0 && _healthbar == null) {
 				_healthbar = new FlxBar(0, 0, FlxBar.FILL_LEFT_TO_RIGHT, 30, 4, this, "_health", 0, this._max_health);
 				g._healthbars.add(_healthbar);
@@ -122,9 +122,9 @@ package enemy {
 			_stun_ct = stun_ct;
 		}
 		
-		public function _arrow_stun_mult():Number {
-			return 1;
-		}
+		public function _arrow_stun_mult():Number { return 1; }
+		public function _arrow_damage_mult():Number { return 1; }
+		public function _sword_damage_mult():Number { return 1; }
 	}
 
 }

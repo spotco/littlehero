@@ -18,7 +18,7 @@ package  {
 		}
 		
 		static var _random_spot:FlxPoint = new FlxPoint();
-		private static function random_spot_not_near_player(g:BottomGame):FlxPoint {
+		public static function random_spot_not_near_player(g:BottomGame):FlxPoint {
 			_random_spot.x = Util.float_random(0+50, Util.WID-50);
 			_random_spot.y = Util.float_random(0 + 50, Util.HEI - 50);
 			while (Util.pt_dist(_random_spot.x, _random_spot.y, g._player.get_center().x, g._player.get_center().y) < 100) {
@@ -33,7 +33,12 @@ package  {
 			var skip_when_empty:Boolean = true;
 			if (_ct <= 0) {
 				if (_world == 0) {
-					if (_wave == 0) {						
+					if (_wave == 0) {
+						SnakeBossEnemy.cons(g._enemies).init(900, 100, g);
+						_ct = 5;
+						_wave++;
+					}
+					/*if (_wave == 0) {						
 						_ct = 50;
 						_wave++;
 					} else if (_wave == 1) {
@@ -74,7 +79,7 @@ package  {
 						
 						_ct = 5000;
 						_wave++
-					}
+					}*/
 					
 				}
 				
@@ -82,7 +87,7 @@ package  {
 			
 			var ct_alive:Number = 0;
 			for each (var enem:BaseEnemy in g._enemies.members) {
-				if (enem.alive && enem.x > -20 && enem.x < 1020 && enem.y > -20 && enem.y < 520) ct_alive++;
+				if (enem.alive && Util.pt_in_world(enem.x,enem.y,20) && !(enem is BulletEnemy)) ct_alive++;
 			}
 			if (ct_alive == 0) {
 				_ct = Math.min(30, _ct);

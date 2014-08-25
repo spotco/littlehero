@@ -1,5 +1,6 @@
 package  
 {
+	import enemy.BaseEnemy;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxSprite;
 	import flash.geom.Point;
@@ -7,6 +8,9 @@ package
 	import org.flixel.FlxText;
 	
 	public class BottomGameUI extends FlxGroup{
+		
+		var _boss_bar:FlxSprite = new FlxSprite();
+		var _boss_text:FlxText;
 		
 		var _energy_bar:FlxSprite = new FlxSprite();
 		var _health_bar:FlxSprite = new FlxSprite();
@@ -40,6 +44,24 @@ package
 			_wave_ct_text = Util.cons_text(0, 25, "NEXT: 0", 0xFFFFFF, 14);
 			_wave_ct_text.alignment = "right";
 			this.add(_wave_ct_text);
+			
+			
+			_boss_bar.loadGraphic(Resource.BOSS_BAR_EMPTY);
+			_boss_bar.y = 480;
+			this.add(_boss_bar);
+			
+			_boss_text = Util.cons_text(0, 455, "Boss", 0xFFFFFF, 20);
+			_boss_text.alpha = 0;
+			this.add(_boss_text);
+			this.boss_bar_pct(0);
+		}
+		
+		var _boss_in_bar_anim:Number = 0;
+		var _track_boss:BaseEnemy = null;
+		public function track_boss(enem:BaseEnemy):void {
+			_boss_text.alpha = 1;
+			_track_boss = enem;
+			_boss_in_bar_anim = 0;
 		}
 		
 		public function _update(g:BottomGame):void {
@@ -49,12 +71,39 @@ package
 			_wave_text.text = "WAVE: " + GameWaves._wave;
 			_wave_ct_text.text = "NEXT: " + GameWaves._ct;
 			_wave_ct_text.alpha = (GameWaves._ct < 0 ? 0:1);
+			
+			if (_track_boss != null) {
+				if (_boss_in_bar_anim < 1) {
+					_boss_in_bar_anim += 0.01;
+					this.boss_bar_pct(_boss_in_bar_anim);
+				} else {
+					this.boss_bar_pct(_track_boss._health / _track_boss._max_health);
+				}
+			}
+		}
+		
+		private static var BOSS_BAR_RED:FlxSprite = new FlxSprite(0, 0, Resource.BOSS_BAR_RED);
+		private static var BOSS_BAR_EMPTY:FlxSprite = new FlxSprite(0, 0, Resource.BOSS_BAR_EMPTY);
+		var _boss_bar_pct:Number = 0;
+		private function boss_bar_pct(pct:Number):void {
+			if (pct != _boss_bar_pct) {
+				var tar:FlxSprite = BOSS_BAR_RED;
+				_boss_bar.framePixels.copyPixels(
+					tar.framePixels,
+					new Rectangle(0, 0, tar.width-1, tar.height),
+					new Point(0, 0)
+				);
+				_boss_bar.framePixels.copyPixels(
+					BOSS_BAR_EMPTY.framePixels, 
+					new Rectangle(tar.width * pct, 0, tar.width - tar.width * pct, tar.height), 
+					new Point(tar.width * pct, 0)
+				);
+			}
 		}
 		
 		private static var ENERGY_BAR_GREEN:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_GREEN);
 		private static var ENERGY_BAR_YELLOW:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_YELLOW);
 		private static var ENERGY_BAR_RED:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_RED);
-		
 		private static var ENERGY_BAR_EMPTY:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_EMPTY);
 		var _energy_bar_pct:Number = 1;
 		private function energy_bar_pct(pct:Number):void {
@@ -102,6 +151,8 @@ package
 				_health_bar_pct = pct;
 			}
 		}
+		
+		
 		
 	}
 

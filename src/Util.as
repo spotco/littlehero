@@ -1,4 +1,6 @@
 package  {
+	import enemy.BaseEnemy;
+	import enemy.BulletEnemy;
 	import flash.display.Sprite;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
@@ -278,6 +280,18 @@ package  {
 			var rtv:Boolean = _right_mouse_just_down;
 			_right_mouse_just_down = false;
 			return rtv;
+		}
+		
+		public static function pt_in_world(x:Number, y:Number, buffer:Number = 100):Boolean {
+			return x > -buffer && x < 1000+buffer && y > -buffer && y < 500+buffer;
+		}
+		
+		public static function alive_ct(g:BottomGame):Number {
+			var ct_alive:Number = 0;
+			for each (var enem:BaseEnemy in g._enemies.members) {
+				if (enem.alive && Util.pt_in_world(enem.x,enem.y,2000) && !(enem is BulletEnemy)) ct_alive++;
+			}
+			return ct_alive;
 		}
 		
 	}

@@ -29,6 +29,9 @@ package {
 		[Embed(source = "../resc/bottom_ui/energy_bar_red.png")] public static var ENERGY_BAR_RED:Class;
 		[Embed(source = "../resc/bottom_ui/energy_bar_empty.png")] public static var ENERGY_BAR_EMPTY:Class;
 		
+		[Embed(source = "../resc/bottom_ui/boss_bar_red.png")] public static var BOSS_BAR_RED:Class;
+		[Embed(source = "../resc/bottom_ui/boss_bar_empty.png")] public static var BOSS_BAR_EMPTY:Class;
+		
 		[Embed(source = "../resc/bottom_enemy/eyeder_ss.png")] public static var EYEDER_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/eyeder_hitbox.png")] public static var EYEDER_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/big_eyeder_ss.png")] public static var BIG_EYEDER_SS:Class;
@@ -38,6 +41,8 @@ package {
 		[Embed(source = "../resc/bottom_enemy/bullet_hitbox.png")] public static var BULLET_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/boar_ss.png")] public static var BOAR:Class;
 		[Embed(source = "../resc/bottom_enemy/boar_hitbox.png")] public static var BOAR_HITBOX:Class;
+		[Embed(source = "../resc/bottom_enemy/snake_boss_ss.png")] public static var SNAKE_BOSS_SS:Class;
+		[Embed(source = "../resc/bottom_enemy/snake_boss_hitbox.png")] public static var SNAKE_BOSS_HITBOX:Class;
 		
 		[Embed(source = "../resc/bottom_fx/explosion.png")] public static var EXPLOSION:Class;
 		[Embed(source = "../resc/bottom_fx/sweat_ss.png")] public static var SWEAT_SS:Class;

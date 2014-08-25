@@ -1,0 +1,1 @@
+[9]snakeboss_1.png[8]snakeboss_2.png[7]snakeboss_3.png[6]snakeboss_4.png[5]snakeboss_5.png[4]snakeboss_flip_1.png[3]snakeboss_flip_2.png[2]snakeboss_flip_3.png[1]snakeboss_flip_4.png[0]snakeboss_flip_5.pngwidth:1342 px, height:156 px

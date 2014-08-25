@@ -101,7 +101,7 @@ package player_projectiles {
 				if (enem.alive && enem._invuln_ct <= 0 && this.alpha > 0.1 && sword_speed > 25 && FlxCollision.pixelPerfectCheck(this._hitbox,enem._hitbox)) {
 					enem._knockback(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50, GameStats._sword_knockback, GameStats._sword_stun);
 					enem._hit(g);
-					enem._health -= GameStats._sword_damage;
+					enem._health -= GameStats._sword_damage * enem._arrow_damage_mult();
 					FlxG.shake(0.005, 0.075);
 					BottomGame._freeze_frame = 6;
 				}

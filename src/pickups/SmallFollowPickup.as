@@ -23,12 +23,12 @@ package pickups {
 		public var _vel:FlxPoint = new FlxPoint();
 		var _flash_ct:int = 0;
 		var _magneted:Boolean = false;
-		public function init(x:Number, y:Number, type:Number = 0):SmallFollowPickup {
+		public function init(x:Number, y:Number, scf:Number = 1):SmallFollowPickup {
 			this.loadGraphic(Resource.GOLD);
 			this.reset(x, y);
 			_ct = 0;
-			_vel.x = Util.float_random(-13,13);
-			_vel.y = Util.float_random(-13,13);
+			_vel.x = Util.float_random(-13 * scf,13* scf);
+			_vel.y = Util.float_random(-13 *scf,13* scf);
 			_magneted = false;
 			_picked_up = false;
 			return this;

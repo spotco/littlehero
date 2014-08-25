@@ -52,7 +52,7 @@ package enemy {
 			}
 		}
 		
-		public override function _hit(g:BottomGame):void {}
+		public override function _hit(g:BottomGame, bow:Boolean = false):void {}
 		public override function _kill(g:BottomGame):void {}
 		
 		public override function _should_kill():Boolean { 
@@ -71,9 +71,7 @@ package enemy {
 			return _get_center;
 		}
 		
-		public override function _knockback(dx:Number, dy:Number, invuln_ct:Number, knockback:Number = 14, stun_ct:Number = 0):void {
-			
-		}
+		public override function _knockback(dx:Number, dy:Number, invuln_ct:Number, knockback:Number = 14, stun_ct:Number = 0):void {}
 		
 	}
 

@@ -46,18 +46,20 @@ package player_projectiles {
 			_hitbox.angle = this.angle;
 			
 			for each (var enem:BaseEnemy in g._enemies.members) {
-				if (enem.alive && enem._invuln_ct <= 0 && FlxCollision.pixelPerfectCheck(this,enem._hitbox)) {
+				if (enem.alive && enem._invuln_ct <= 0 && Util.pt_in_world(this.x,this.y) && FlxCollision.pixelPerfectCheck(this,enem._hitbox)) {
 					enem._knockback(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, Math.floor(5 * enem._arrow_stun_mult()), GameStats._bow_knockback * enem._arrow_stun_mult(), GameStats._bow_stun * enem._arrow_stun_mult());
 					this._ct = 0;
-					enem._hit(g);
-					enem._health -= GameStats._bow_damage * _mult;
-					RotateFadeParticle.cons(g._particles).init(enem.get_center().x, enem.get_center().y).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1, 1.3));
+					enem._hit(g, true);
+					enem._health -= GameStats._bow_damage * _mult * enem._arrow_damage_mult();
+					RotateFadeParticle.cons(g._particles).init(this.x + _vx*1.5, this.y + _vy*1.5).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1, 1.3));
 					FlxG.shake(0.005, 0.035);
 					BottomGame._freeze_frame = 3;
 				}
 			}
 			this._ct--;
 		}
+		
+
 		
 		public override function _should_remove():Boolean { return _ct <= 0; }
 		public override function _do_remove():void { this.kill(); }
