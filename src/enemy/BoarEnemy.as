@@ -36,8 +36,8 @@ package enemy {
 			
 			this.play("stand");
 			g._hitboxes.add(_hitbox);
-			this._max_health = 64;
-			this._health = 64;
+			this._max_health = 100;
+			this._health = 100;
 			_mode = 0;
 			_ct = Util.float_random(100,300);
 			return this;

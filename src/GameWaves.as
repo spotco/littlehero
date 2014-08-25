@@ -43,7 +43,7 @@ package  {
 			
 			var ct_alive:Number = 0;
 			for each (var enem:BaseEnemy in g._enemies.members) {
-				if (enem.alive && Util.pt_in_world(enem.x,enem.y,20) && !(enem is BulletEnemy)) ct_alive++;
+				if (enem.alive /*&& Util.pt_in_world(enem.x,enem.y,20) */&& !(enem is BulletEnemy)) ct_alive++;
 			}
 			if (ct_alive == 0) {
 				_ct = Math.min(30, _ct);
@@ -56,48 +56,191 @@ package  {
 				_wave++;
 				
 			} else if (_wave == 1) {
-				for (var i:int = 0; i < 3; i++) {
+				for (var i:int = 0; i < 10; i++) {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-				
-				_ct = 5000;
-				_wave ++;
-				
-			} else if (_wave == 2) {
-				FireBossEnemy.cons(g._enemies).init( -100, -100, g);
+				for (var i:int = 0; i < 5; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+										
 				_ct = 5000;
 				_wave++;
+			} else if (_wave == 2) {
+				for (var i:int = 0; i < 7; i++) {
+					random_spot_not_near_player(g);
+					JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 1; i++) {
+					random_spot_not_near_player(g);
+					BoarEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+										
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 3) {
+				for (var i:int = 0; i < 10; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 20; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 4) {
+				for (var i:int = 0; i < 10; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 5; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 5; i++) {
+					random_spot_not_near_player(g);
+					JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					BoarEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 5) {
+				for (var i:int = 0; i < 5; i++) {
+					random_spot_not_near_player(g);
+					BoarEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 10; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 5; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 6) {
+				for (var i:int = 0; i < 1; i++) {
+					random_spot_not_near_player(g);
+					FireBossEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 500000;
+				_wave++;
+
 			}
 		}
 		
 		public static function world_1(g:BottomGame):void {
-			if (_wave == 0) {
+			if (_wave == 0) {						
 				_ct = 50;
-				_wave++;
-				
+				_wave++;					
 			} else if (_wave == 1) {
-				for (var i:int = 0; i < 3; i++) {
+				for (var i:int = 0; i < 10; i++) {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
 				
 				_ct = 5000;
-				_wave ++;
-				
+				_wave++;
 			} else if (_wave == 2) {
-				SpiderBossEnemy.cons(g._enemies).init( -100, -100, g);
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 4; i++) {
+					random_spot_not_near_player(g);
+					JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 3) {
+				for (var i:int = 0; i < 1; i++) {
+					random_spot_not_near_player(g);
+					BoarEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 4) {
+				for (var i:int = 0; i < 1; i++) {
+					random_spot_not_near_player(g);
+					BoarEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 5; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 5) {
+				for (var i:int = 3; i < 5; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 3; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					BoarEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 500000;
+				_wave++;
+			} else if (_wave == 6) {
+				for (var i:int = 0; i < 1; i++) {
+					random_spot_not_near_player(g);
+					SpiderBossEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
 				_ct = 5000;
 				_wave++;
 			}
 		}
 			
 		public static function world_0(g:BottomGame):void {
-			if (_wave == 0) {
+			if (_wave == 0) {						
 				_ct = 50;
-				_wave++;
-				
+				_wave++;					
 			} else if (_wave == 1) {
+				for (var i:int = 0; i < 1; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 2) {
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 3) {
 				for (var i:int = 0; i < 3; i++) {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
@@ -105,10 +248,61 @@ package  {
 				
 				_ct = 5000;
 				_wave ++;
+			} else if (_wave == 4) {
+				for (var i:int = 0; i < 5; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
 				
-			} else if (_wave == 2) {
-				SnakeBossEnemy.cons(g._enemies).init( -100, -100, g);
 				_ct = 5000;
+				_wave++;
+			} else if (_wave == 5) {
+				for (var i:int = 0; i < 5; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 6) {
+				for (var i:int = 0; i < 3; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 1; i++) {
+					random_spot_not_near_player(g);
+					JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 7) {
+				for (var i:int = 0; i < 3; i++) {
+					random_spot_not_near_player(g);
+					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				for (var i:int = 0; i < 2; i++) {
+					random_spot_not_near_player(g);
+					JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 5000;
+				_wave++;
+			} else if (_wave == 8) {
+				for (var i:int = 0; i < 1; i++) {
+					random_spot_not_near_player(g);
+					SnakeBossEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				}
+				
+				_ct = 500000;
 				_wave++;
 			}
 		}

@@ -20,18 +20,18 @@ package  {
 			
 			//row 1
 			"bow_damage_1": {
-				"price":105,
+				"price":25,
 				"name":"Bow Damage+",
 				"desc":"Increase Bow Damage.",
 				"func":function() {
-					GameStats._bow_damage += 1;
+					GameStats._bow_damage += 3;
 					GameStats._bow_knockback += 2;
 					GameStats._bow_stun += 5;
 				},
 				"linkto":["bow_accuracy_1"]
 			},
 			"hp_1": {
-				"price":100,
+				"price":25,
 				"name":"HP+",
 				"desc":"Increase HP.",
 				"func":function() {
@@ -40,18 +40,19 @@ package  {
 				"linkto":["energy_1"]
 			},
 			"sword_damage_1": {
-				"price":100,
+				"price":25,
 				"name":"Sword Damage+",
 				"desc":"Increase Sword Damage",
 				"func":function() {
 					GameStats._sword_damage += 4;
+					GameStats._sword_knockback += 5;
 				},
 				"linkto":["sword_size_1"]
 			},
 			
 			//row 2
 			"bow_accuracy_1": {
-				"price":100,
+				"price":50,
 				"name":"Bow Accuracy+",
 				"desc":"Increase Bow Accuracy.",
 				"func":function() {
@@ -62,48 +63,47 @@ package  {
 				"linkto":["bow_damage_2","energy_2"]
 			},
 			"energy_1": {
-				"price":100,
+				"price":50,
 				"name":"Energy+",
 				"desc":"Increase Energy",
 				"func":function() {
-					GameStats._max_energy += 400;
+					GameStats._max_energy += 200;
 				},
 				"linkto":["energy_2","health_2"]
 			},
 			"sword_size_1": {
-				"price":100,
-				"name":"Sword Size+",
-				"desc":"Bigger Sword. More Knockback",
+				"price":50,
+				"name":"Sword+",
+				"desc":"Increase Sword Power.",
 				"func":function() {
 					GameStats._sword_scale = Math.max(GameStats._sword_scale, 1.5);
-					GameStats._sword_knockback += 5;
 				},
 				"linkto":["health_2","sword_recharge_1"]
 			},
 			
 			//row 3
 			"bow_damage_2": {
-				"price":100,
+				"price":50,
 				"name":"Bow Damage++",
 				"desc":"Increase Bow Damage",
 				"func":function() {
-					GameStats._bow_damage += 2;
+					GameStats._bow_damage += 6;
 					GameStats._bow_knockback += 4;
 					GameStats._bow_stun += 5;
 				},
 				"linkto":["more_arrows_1","bow_accuracy_2"]
 			},
 			"energy_2": {
-				"price":100,
+				"price":50,
 				"name":"Energy++",
 				"desc":"Increase Energy.",
 				"func":function() {
-					GameStats._max_energy += 1000;
+					GameStats._energy += 400;
 				},
 				"linkto":["bow_accuracy_2","health_3"]
 			},
 			"health_2": {
-				"price":100,
+				"price":50,
 				"name":"Health++",
 				"desc":"Increase Health",
 				"func":function() {
@@ -112,7 +112,7 @@ package  {
 				"linkto":["health_3","sword_recharge_2"]
 			},
 			"sword_recharge_1": {
-				"price":100,
+				"price":50,
 				"name":"Sword Recharge+",
 				"desc":"Increase Sword Recharge.",
 				"func":function() {
@@ -132,9 +132,9 @@ package  {
 				"linkto":["more_arrows_2"]
 			},
 			"bow_accuracy_2": {
-				"price":100,
-				"name":"Arrows+",
-				"desc":"More Arrows.",
+				"price":50,
+				"name":"Bow Accuracy+",
+				"desc":"Increase Bow Accuracy.",
 				"func":function() {
 					GameStats._bow_focus_factor -= 0.02;
 					GameStats._just_used_energy_ct -= 3;
@@ -143,7 +143,7 @@ package  {
 				"linkto":["more_arrows_2","hp_regen"]
 			},
 			"health_3": {
-				"price":100,
+				"price":50,
 				"name":"Health+++",
 				"desc":"More Health.",
 				"func":function() {
@@ -152,7 +152,7 @@ package  {
 				"linkto":["hp_regen","armor"]
 			},
 			"sword_recharge_2": {
-				"price":100,
+				"price":50,
 				"name":"Sword Recharge++",
 				"desc":"Increase Sword Recharge.",
 				"func":function() {
@@ -161,18 +161,19 @@ package  {
 				"linkto":["armor","sword_size_2"]
 			},
 			"sword_damage_2": {
-				"price":100,
+				"price":50,
 				"name":"Sword Damage++",
 				"desc":"Increase Sword Damage.",
 				"func":function() {
 					GameStats._sword_damage += 8;
+					GameStats._sword_knockback += 8;	
 				},
 				"linkto":["sword_size_2"]
 			},
 			
 			//row 5
 			"more_arrows_2": {
-				"price":100,
+				"price":200,
 				"name":"Arrows++",
 				"desc":"More Arrows.",
 				"func":function() {
@@ -198,10 +199,9 @@ package  {
 			"sword_size_2": {
 				"price":100,
 				"name":"Sword Size++",
-				"desc":"Bigger Sword. More Knockback",
+				"desc":"Bigger Sword",
 				"func":function() {
 					GameStats._sword_scale = Math.max(GameStats._sword_scale, 2);	
-					GameStats._sword_knockback += 8;	
 				}
 			}
 		};
