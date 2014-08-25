@@ -42,7 +42,7 @@ package enemy {
 			g._bottom_game_ui.track_boss(this);
 			g._hitboxes.add(_hitbox);
 			this._max_health = 60;
-			this._health = 5;
+			this._health = this._max_health;
 			return this;
 		}
 		
@@ -189,6 +189,11 @@ package enemy {
 			for (var j:int = 0; j < 150; j++) {
 				SmallFollowPickup.cons(g._pickups).init(Util.float_random(0,Util.WID),this.y+40+Util.float_random(-100,100),3);
 			}
+			for each (var enem:BaseEnemy in g._enemies.members) {
+				if (enem.alive) enem._health = 0;
+			}
+			FlxG.shake(0.1, 3);
+			BottomGame._freeze_frame = 10;
 			this.kill();
 			this._kill(g);
 			
