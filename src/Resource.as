@@ -62,6 +62,10 @@ package {
 		[Embed(source = "../resc/top_bg/bully_right.png")] public static var TOP_BULLY_RIGHT:Class;
 		[Embed(source = "../resc/top_bg/player.png")] public static var TOP_PLAYER:Class;
 		[Embed(source = "../resc/top_bg/teacher.png")] public static var TOP_TEACHER:Class;
+	
+		[Embed(source = "../resc/shop/shop_icon.png")] public static var SHOP_ICON:Class;
+		[Embed(source = "../resc/shop/shop_bg.png")] public static var SHOP_BG:Class;
 	}
+	
 
 }

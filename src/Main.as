@@ -26,7 +26,8 @@ package
 	public class Main extends FlxGame {
 		
 		public function Main():void {
-			super(1000, 500, BottomGame);
+			super(1000, 500, ShopState);
+			//super(1000, 500, BottomGame);
 			//super(1000, 500, TopState);
 			
 			stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, function(e:Event):void {
