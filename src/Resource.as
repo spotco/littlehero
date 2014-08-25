@@ -19,6 +19,7 @@ package {
 		[Embed(source = "../resc/bottom_item/arrow_hitbox.png")] public static var ARROW_HITBOX:Class;
 		[Embed(source = "../resc/bottom_item/arrow.png")] public static var ARROW:Class;
 		[Embed(source = "../resc/bottom_item/gold.png")] public static var GOLD:Class;
+		[Embed(source = "../resc/bottom_item/heart.png")] public static var HEART:Class;
 		
 		[Embed(source = "../resc/bottom_ui/hearts_empty.png")] public static var HEARTS_EMPTY:Class;
 		[Embed(source = "../resc/bottom_ui/hearts_full.png")] public static var HEARTS_FULL:Class;

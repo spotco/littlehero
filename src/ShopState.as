@@ -288,7 +288,8 @@ import flash.ui.MouseCursor;
 			for each(var b:ShopButton in _buttons) this.add(b);
 			this.add(_continue);
 			
-			this.add(Util.cons_text(25, 10, "Upgrades", 0xFFFFFF, 42));
+			this.add(Util.cons_text(25, 10, "Equip Thyself!", 0xFFFFFF, 30));
+			this.add(new FlxSprite(Util.WID*0.65,Util.HEI*0.4,Resource.TOP_KNIGHT));
 			
 			_fade_cover.makeGraphic(1000, 500, 0xFF000000);
 			this.add(_fade_cover);

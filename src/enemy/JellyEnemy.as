@@ -121,7 +121,11 @@ package enemy {
 			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random( -20, 20), this.y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(5,10));
 			RotateFadeParticle.cons(g._particles).init(this.x + Util.float_random(-20,20), this.y+ Util.float_random(-20,20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(5,10));
 			for (var i:int = 0; i < 8; i++) {
-				SmallFollowPickup.cons(g._pickups).init(this.x,this.y);
+				if (Util.float_random(0, 10) < 1) {
+					SmallFollowPickup.cons(g._pickups).init(this.x,this.y,1,1);
+				} else {
+					SmallFollowPickup.cons(g._pickups).init(this.x,this.y,1,0);
+				}
 			}
 			this.kill();
 			this._kill(g);

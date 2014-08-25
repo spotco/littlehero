@@ -2,7 +2,7 @@ package  {
 	public class GameStats {
 
 		public static var _gold:Number = 99999;
-		public static var _health:Number = 10;
+		public static var _health:Number = 5;
 		public static var _energy:Number = 0;
 		public static var _just_used_energy_ct:Number = 0;
 		

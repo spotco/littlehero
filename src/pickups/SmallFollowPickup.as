@@ -23,9 +23,20 @@ package pickups {
 		public var _vel:FlxPoint = new FlxPoint();
 		var _flash_ct:int = 0;
 		var _magneted:Boolean = false;
-		public function init(x:Number, y:Number, scf:Number = 1):SmallFollowPickup {
-			this.loadGraphic(Resource.GOLD);
+		var _type:Number = 0;
+		var _fadeout_speed:Number = 0;
+		
+		public function init(x:Number, y:Number, scf:Number = 1, type:Number = 0):SmallFollowPickup {
+			_type = type;
+			if (_type == 0) {
+				this.loadGraphic(Resource.GOLD);
+				_fadeout_speed = 0.001;
+			} else {
+				this.loadGraphic(Resource.HEART);
+				_fadeout_speed = 0.003;
+			}
 			this.reset(x, y);
+			
 			_ct = 0;
 			_vel.x = Util.float_random(-13 * scf,13* scf);
 			_vel.y = Util.float_random(-13 *scf,13* scf);
@@ -41,7 +52,11 @@ package pickups {
 			if (dist < 20) {
 				if (!_picked_up) {
 					_picked_up =  true;
-					GameStats._gold++;
+					if (_type == 0) {
+						GameStats._gold++;
+					} else {
+						GameStats._health += 0.5;
+					}
 				}
 			} else if (dist < 60) {
 				_magneted = true;
@@ -78,7 +93,7 @@ package pickups {
 				
 			}
 			
-			_ct += 0.001;
+			_ct += _fadeout_speed;
 			_flash_ct++;
 			if (_ct > 0.7) {
 				if (_flash_ct % 10 == 0) {

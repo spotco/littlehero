@@ -34,9 +34,7 @@ package  {
 			if (_ct <= 0) {
 				if (_world == 0) {
 					if (_wave == 0) {
-						random_spot_not_near_player(g);
-						BoarEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
-						_ct = 3000;
+						_ct = 50;
 						_wave++;
 					} else if (_wave == 1) {
 						for (var i:int = 0; i < 3; i++) {
