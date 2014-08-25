@@ -36,7 +36,7 @@ package  {
 					if (_wave == 0) {
 						//FireBossEnemy.cons(g._enemies).init(200, 200, g);
 						//SpiderBossEnemy.cons(g._enemies).init(200, 200, g);
-						//SnakeBossEnemy.cons(g._enemies).init(-100, -100, g);
+						SnakeBossEnemy.cons(g._enemies).init(-100, -100, g);
 						_ct = 5;
 						_wave++;
 						/*

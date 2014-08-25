@@ -45,8 +45,8 @@ package enemy {
 		
 		public override function _update(g:BottomGame):void {
 			super._update(g);
-			_hitbox.x = this.x + 80;
-			_hitbox.y = this.y + 80;
+			_hitbox.x = this.x + 95;
+			_hitbox.y = this.y + 125;
 			if (this._invuln_ct > 0) {
 				this.invuln_update();
 				this.color = 0xCC99FF;

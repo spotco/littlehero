@@ -48,7 +48,7 @@ package org.flixel.plugin.photonstorm
 		 * 
 		 * @return	Boolean True if the sprites collide, false if not
 		 */
-		public static function pixelPerfectCheck(contact:FlxSprite, target:FlxSprite, alphaTolerance:int = 255, camera:FlxCamera = null):Boolean
+		public static function pixelPerfectCheck(contact:FlxSprite, target:FlxSprite, alphaTolerance:int = 255, camera:FlxCamera = null, ignore_bounds:Boolean = false):Boolean
 		{
 			var pointA:Point = new Point;
 			var pointB:Point = new Point;
@@ -86,7 +86,7 @@ package org.flixel.plugin.photonstorm
 			intersect.width = Math.ceil(intersect.width);
 			intersect.height = Math.ceil(intersect.height);
 			
-			if (intersect.isEmpty())
+			if (intersect.isEmpty() && !ignore_bounds)
 			{
 				return false;
 			}

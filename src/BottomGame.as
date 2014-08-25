@@ -36,7 +36,11 @@ package {
 			
 			_player._sword = SwordPlayerProjectile.cons(_player_projectiles).init(_player,this);
 			CrossBowPlayerProjectile.cons(_player_projectiles).init(_player);
+
 			
+			//BoarEnemy.cons(_enemies).init(200, 200, this);
+			//BoarEnemy.cons(_enemies).init(800, 400, this);
+			//BoarEnemy.cons(_enemies).init(300, 400, this);
 			/*
 			BigSpiderEnemy.cons(_enemies).init(200, 200, this);
 			TinySpiderEnemy.cons(_enemies).init(800, 200, this);

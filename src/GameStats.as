@@ -1,6 +1,6 @@
 package  {
 	public class GameStats {
-/*
+
 		public static var _gold:Number = 0;
 		public static var _health:Number = 5;
 		public static var _energy:Number = 0;
@@ -25,9 +25,9 @@ package  {
 		public static var _sword_scale:Number = 1;
 		
 		public static var _knockback_damage:Number = 10;
-*/
-		//health regen
 
+		//health regen
+/*
 		public static var _gold:Number = 0;
 		public static var _health:Number = 5;
 		public static var _energy:Number = 0;
@@ -52,7 +52,7 @@ package  {
 		public static var _sword_scale:Number = 1.5;
 		
 		public static var _knockback_damage:Number = 10;
-
+*/
 	}
 
 }
