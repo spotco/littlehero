@@ -218,7 +218,7 @@ package  {
 		}
 		
 		public static function cons_text(x:Number, y:Number, text:String, color:uint = 0xFFFFFF, font_size:int = 20):FlxText {
-			var _score:FlxText = new FlxText(x,y , 500, text);
+			var _score:FlxText = new FlxText(x,y , 1000, text);
 			_score.color = color;
 			_score.setFormat("system", font_size);
 			return _score;

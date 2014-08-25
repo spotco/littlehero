@@ -10,6 +10,8 @@ package
 		
 		var _energy_bar:FlxSprite = new FlxSprite();
 		var _health_bar:FlxSprite = new FlxSprite();
+		var _wave_text:FlxText;
+		var _wave_ct_text:FlxText;
 		
 		var _gold_text:FlxText = Util.cons_text(2, 40, "GOLD: 0", 0xFFFFFF, 12);
 		
@@ -30,12 +32,23 @@ package
 			
 			this.add(Util.cons_text(2, 24, "ENG:",0xFFFFFF,12));
 			this.add(_gold_text);
+			
+			_wave_text = Util.cons_text(0, 0, "WAVE: 0", 0xFFFFFF, 20);
+			_wave_text.alignment = "right";
+			this.add(_wave_text);
+			
+			_wave_ct_text = Util.cons_text(0, 25, "NEXT: 0", 0xFFFFFF, 14);
+			_wave_ct_text.alignment = "right";
+			this.add(_wave_ct_text);
 		}
 		
 		public function _update(g:BottomGame):void {
 			this.energy_bar_pct(GameStats._energy / GameStats._max_energy);
 			this.health_bar_pct(GameStats._health / GameStats._max_health);
 			this._gold_text.text = "GOLD: " + GameStats._gold;
+			_wave_text.text = "WAVE: " + GameWaves._wave;
+			_wave_ct_text.text = "NEXT: " + GameWaves._ct;
+			_wave_ct_text.alpha = (GameWaves._ct < 0 ? 0:1);
 		}
 		
 		private static var ENERGY_BAR_GREEN:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_GREEN);

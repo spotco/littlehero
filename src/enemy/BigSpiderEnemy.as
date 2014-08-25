@@ -89,7 +89,7 @@ package enemy {
 				
 				_firect++;
 				if (_firect % 4 == 0) {
-					var dv:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
+					var dv:Vector3D = Util.normalized(g._player.get_center().x + Util.float_random(-50,50) - this.get_center().x, g._player.get_center().y + Util.float_random(-50,50) - this.get_center().y);
 					dv.scaleBy(2);
 					BulletEnemy.cons(g._enemies).init(this.get_center().x, this.get_center().y, dv.x, dv.y, 600, g);
 					_red_ct = 10;

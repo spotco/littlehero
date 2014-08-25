@@ -39,6 +39,11 @@ package enemy {
 			g._hitboxes.add(_hitbox);
 			this._max_health = 14;
 			this._health = 14;
+			
+			RotateFadeParticle.cons(g._particles).init(this.get_center().x + Util.float_random( -20, 20), this.get_center().y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3));
+			RotateFadeParticle.cons(g._particles).init(this.get_center().x + Util.float_random( -20, 20), this.get_center().y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(1,2));
+			RotateFadeParticle.cons(g._particles).init(this.get_center().x + Util.float_random(-20,20), this.get_center().y + Util.float_random(-20,20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(1,4));
+			
 			return this;
 		}
 		

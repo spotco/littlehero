@@ -19,6 +19,9 @@ package {
 		public var _bottom_game_ui:BottomGameUI = new BottomGameUI();
 		
 		public override function create():void {
+			
+			GameWaves.reset(0);
+			
 			this.add(new FlxSprite(0, 0, Resource.BOTTOM_BG));
 			this.add(_pickups);
 			this.add(_player);
@@ -38,7 +41,6 @@ package {
 			BigSpiderEnemy.cons(_enemies).init(200, 200, this);
 			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
 			JellyEnemy.cons(_enemies).init(200, 200, this);
-			
 			TinySpiderEnemy.cons(_enemies).init(800, 200, this);
 			TinySpiderEnemy.cons(_enemies).init(400, 400, this);
 			TinySpiderEnemy.cons(_enemies).init(600, 300, this);
@@ -74,6 +76,7 @@ package {
 				_freeze_frame--;
 				return;
 			}
+			GameWaves._update(this);
 
 			_player._update(this);
 			_bottom_game_ui._update(this);
