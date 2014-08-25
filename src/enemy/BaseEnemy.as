@@ -84,29 +84,29 @@ package enemy {
 		
 		
 		protected var _hit_wall_top:Boolean = false, _hit_wall_bottom:Boolean = false, _hit_wall_left:Boolean = false, _hit_wall_right:Boolean = false;
-		public function hit_wall():Boolean {
+		public function hit_wall(buffer:Number = 0):Boolean {
 			var rtv:Boolean = false;
 			_hit_wall_bottom = false;
 			_hit_wall_left = false;
 			_hit_wall_right = false;
 			_hit_wall_top = false;
-			if (this.get_center().x < 0) {
-				this.set_center(0, this.get_center().y);
+			if (this.get_center().x < buffer) {
+				this.set_center(buffer, this.get_center().y);
 				_hit_wall_left = true;
 				rtv = true;
 			}
-			if (this.get_center().x > Util.WID) {
-				this.set_center(Util.WID, this.get_center().y);
+			if (this.get_center().x > Util.WID - buffer) {
+				this.set_center(Util.WID-buffer, this.get_center().y);
 				_hit_wall_right = true;
 				rtv = true;
 			}
-			if (this.get_center().y < 0) {
-				this.set_center(this.get_center().x, 0);
+			if (this.get_center().y < buffer) {
+				this.set_center(this.get_center().x, buffer);
 				_hit_wall_top = true;;
 				rtv = true;
 			}
-			if (this.get_center().y > Util.HEI) {
-				this.set_center(this.get_center().x, Util.HEI);
+			if (this.get_center().y > Util.HEI - buffer) {
+				this.set_center(this.get_center().x, Util.HEI-buffer);
 				_hit_wall_bottom = true;
 				rtv = true;
 			}

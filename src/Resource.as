@@ -32,6 +32,8 @@ package {
 		[Embed(source = "../resc/bottom_ui/boss_bar_red.png")] public static var BOSS_BAR_RED:Class;
 		[Embed(source = "../resc/bottom_ui/boss_bar_empty.png")] public static var BOSS_BAR_EMPTY:Class;
 		
+		[Embed(source = "../resc/bottom_ui/red_overlay.png")] public static var RED_OVERLAY:Class;
+		
 		[Embed(source = "../resc/bottom_enemy/eyeder_ss.png")] public static var EYEDER_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/eyeder_hitbox.png")] public static var EYEDER_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/big_eyeder_ss.png")] public static var BIG_EYEDER_SS:Class;
@@ -47,7 +49,9 @@ package {
 		[Embed(source = "../resc/bottom_enemy/spider_hitbox.png")] public static var SPIDER_BOSS_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/spider_bodyhitbox.png")] public static var SPIDER_BOSS_BODY_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/fireboss_ss.png")] public static var FIREBOSS_SS:Class;
+		[Embed(source = "../resc/bottom_enemy/fireboss_hitbox.png")] public static var FIREBOSS_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/fireboss_fist.png")] public static var FIREBOSS_FIST:Class;
+		[Embed(source = "../resc/bottom_enemy/fireboss_fist_hitbox.png")] public static var FIREBOSS_FIST_HITBOX:Class;
 		
 		[Embed(source = "../resc/bottom_fx/explosion.png")] public static var EXPLOSION:Class;
 		[Embed(source = "../resc/bottom_fx/sweat_ss.png")] public static var SWEAT_SS:Class;

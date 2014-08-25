@@ -17,6 +17,8 @@ package
 		var _wave_text:FlxText;
 		var _wave_ct_text:FlxText;
 		
+		var _red_overlay:FlxSprite = new FlxSprite(0, 0, Resource.RED_OVERLAY);
+		
 		var _gold_text:FlxText = Util.cons_text(2, 40, "GOLD: 0", 0xFFFFFF, 12);
 		
 		public function BottomGameUI() {
@@ -54,6 +56,9 @@ package
 			_boss_text.alpha = 0;
 			this.add(_boss_text);
 			this.boss_bar_pct(0);
+			
+			_red_overlay.alpha = 0;
+			this.add(_red_overlay);
 		}
 		
 		var _boss_in_bar_anim:Number = 0;
@@ -64,6 +69,7 @@ package
 			_boss_in_bar_anim = 0;
 		}
 		
+		var _last_health:Number = 0;
 		public function _update(g:BottomGame):void {
 			this.energy_bar_pct(GameStats._energy / GameStats._max_energy);
 			this.health_bar_pct(GameStats._health / GameStats._max_health);
@@ -72,6 +78,12 @@ package
 			_wave_ct_text.text = "NEXT: " + GameWaves._ct;
 			_wave_ct_text.alpha = (GameWaves._ct < 0 ? 0:1);
 			
+			_red_overlay.alpha *= 0.95;
+			if (GameStats._health < _last_health) {
+				_red_overlay.alpha = 1;
+			}
+			_last_health = GameStats._health;
+			
 			if (_track_boss != null) {
 				if (_boss_in_bar_anim < 1) {
 					_boss_in_bar_anim += 0.01;
@@ -79,6 +91,8 @@ package
 				} else {
 					this.boss_bar_pct(_track_boss._health / _track_boss._max_health);
 				}
+			} else {
+				this.boss_bar_pct(0);
 			}
 		}
 		
@@ -98,6 +112,7 @@ package
 					new Rectangle(tar.width * pct, 0, tar.width - tar.width * pct, tar.height), 
 					new Point(tar.width * pct, 0)
 				);
+				_boss_bar_pct = pct;
 			}
 		}
 		
