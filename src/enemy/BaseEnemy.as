@@ -10,7 +10,7 @@ package enemy {
 		}
 		
 		public function hit_player(g:BottomGame):Boolean {
-			return g._player._invuln_ct <= 0 && !g._player._sword._sword_invuln && FlxCollision.pixelPerfectCheck(this._hitbox, g._player._body);
+			return g._player._invuln_ct <= 0 && g._player._knockback_ct <= 0 && !g._player._sword._sword_invuln && FlxCollision.pixelPerfectCheck(this._hitbox, g._player._body);
 		}
 		
 		public function _update(g:BottomGame):void {

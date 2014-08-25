@@ -58,10 +58,27 @@ package enemy {
 			}
 			this.color = 0xFFFFFF;
 			if (this.hit_player(g)) {
-				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
-				v.normalize();
-				v.scaleBy(15);
-				g._player.hit(v.x, v.y, 2);
+				if (_mode == 1) {
+					var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
+					v.normalize();
+					
+					var vn:Vector3D = v.crossProduct(Util.Z_VEC);
+					vn.normalize();
+					vn.scaleBy(0.75);
+					
+					v.setTo(v.x + vn.x, v.y + vn.y, 0);
+					v.normalize();
+					v.scaleBy(30);
+					
+					g._player.hit(v.x, v.y, 1.5, false);
+					g._player.knockback(v.x, v.y, 20);
+				} else {
+					var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
+					v.normalize();
+					v.scaleBy(15);
+					g._player.hit(v.x, v.y, 1);
+					FlxG.shake(0.01, 0.15);
+				}
 				FlxG.shake(0.01, 0.15);
 			}
 			

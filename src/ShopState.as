@@ -288,6 +288,8 @@ import flash.ui.MouseCursor;
 			for each(var b:ShopButton in _buttons) this.add(b);
 			this.add(_continue);
 			
+			this.add(Util.cons_text(25, 10, "Upgrades", 0xFFFFFF, 42));
+			
 			_fade_cover.makeGraphic(1000, 500, 0xFF000000);
 			this.add(_fade_cover);
 		}

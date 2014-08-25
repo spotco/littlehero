@@ -144,8 +144,10 @@ package  {
 		}
 		
 		public var _invuln_ct:Number = 0;
-		public function hit(dx:Number, dy:Number, damage:Number):void {
-			_invuln_ct = 30;
+		public function hit(dx:Number, dy:Number, damage:Number, invuln_knockback:Boolean = true):void {
+			if (invuln_knockback) {
+				_invuln_ct = 30;
+			}
 			GameStats._health -= damage * GameStats._armor_mult;
 			_vx = dx;
 			_vy = dy;
