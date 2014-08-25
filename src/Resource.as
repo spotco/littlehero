@@ -43,6 +43,9 @@ package {
 		[Embed(source = "../resc/bottom_enemy/boar_hitbox.png")] public static var BOAR_HITBOX:Class;
 		[Embed(source = "../resc/bottom_enemy/snake_boss_ss.png")] public static var SNAKE_BOSS_SS:Class;
 		[Embed(source = "../resc/bottom_enemy/snake_boss_hitbox.png")] public static var SNAKE_BOSS_HITBOX:Class;
+		[Embed(source = "../resc/bottom_enemy/spider_ss.png")] public static var SPIDER_BOSS_SS:Class;
+		[Embed(source = "../resc/bottom_enemy/spider_hitbox.png")] public static var SPIDER_BOSS_HITBOX:Class;
+		[Embed(source = "../resc/bottom_enemy/spider_bodyhitbox.png")] public static var SPIDER_BOSS_BODY_HITBOX:Class;
 		
 		[Embed(source = "../resc/bottom_fx/explosion.png")] public static var EXPLOSION:Class;
 		[Embed(source = "../resc/bottom_fx/sweat_ss.png")] public static var SWEAT_SS:Class;

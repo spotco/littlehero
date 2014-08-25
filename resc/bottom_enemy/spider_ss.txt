@@ -1,0 +1,1 @@
+[2]spiderboss_1.png[1]spiderboss_2.png[0]spiderboss_idle.pngwidth:369 px, height:313 px

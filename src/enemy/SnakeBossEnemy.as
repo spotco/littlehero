@@ -41,7 +41,7 @@ package enemy {
 			}
 			g._bottom_game_ui.track_boss(this);
 			g._hitboxes.add(_hitbox);
-			this._max_health = 60;
+			this._max_health = 50;
 			this._health = this._max_health;
 			return this;
 		}
@@ -210,7 +210,7 @@ package enemy {
 		}
 		
 		public override function _arrow_damage_mult():Number { return (_stun_ct > 0)?0.4:0.025; }
-		public override function _sword_damage_mult():Number { return (_stun_ct > 0)?1.2:0; }
+		public override function _sword_damage_mult():Number { return (_stun_ct > 0)?1.5:0; }
 		
 	}
 

@@ -17,10 +17,10 @@ package enemy {
 		
 		public function BoarEnemy() {
 			super();
-			this.loadGraphic(Resource.BOAR, true, false, 250, 258);
-			this.addAnimation("stand", [0]);
-			this.addAnimation("ready", [1]);
-			this.addAnimation("charge", [2]);
+			this.loadGraphic(Resource.BOAR, true, false, 300, 342);
+			this.addAnimation("stand", [2,3], 10);
+			this.addAnimation("ready", [0,1], 10);
+			this.addAnimation("charge", [4,5,6], 10);
 			_hitbox.loadGraphic(Resource.BOAR_HITBOX);
 			
 		}

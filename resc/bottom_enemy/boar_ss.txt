@@ -1,1 +1,1 @@
-[2]boar flame.png[1]boar start animation.png[0]boar idle.pngwidth:250 px, height:285 px
+[6]boar-flame01.png[5]boar-flame02.png[4]boar-flame03.png[3]boar-idle01.png[2]boar-idle02.png[1]boar-ready01.png[0]boar-ready02.pngwidth:300 px, height:342 px

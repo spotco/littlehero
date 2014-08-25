@@ -34,9 +34,14 @@ package  {
 			if (_ct <= 0) {
 				if (_world == 0) {
 					if (_wave == 0) {
-						SnakeBossEnemy.cons(g._enemies).init(900, 100, g);
+						SpiderBossEnemy.cons(g._enemies).init(200, 200, g);
 						_ct = 5;
 						_wave++;
+						/*
+						SnakeBossEnemy.cons(g._enemies).init(-100, -100, g);
+						BoarEnemy.cons(g._enemies).init(200, 200, g);
+						*/
+						
 					}
 					/*if (_wave == 0) {						
 						_ct = 50;
