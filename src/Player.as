@@ -151,6 +151,7 @@ package  {
 			GameStats._health -= damage * GameStats._armor_mult;
 			_vx = dx;
 			_vy = dy;
+			FlxG.play(Resource.SFX_HIT);
 		}
 		
 		public var _knockback_ct:Number = 0;

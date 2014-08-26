@@ -126,6 +126,7 @@ package enemy {
 					SmallFollowPickup.cons(g._pickups).init(this.x,this.y,1,0);
 				}
 			}
+			FlxG.play(Resource.SFX_EXPLOSION);
 			
 			this.kill();
 			this._kill(g);

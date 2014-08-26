@@ -87,14 +87,19 @@ package {
 		[Embed( source = "../resc/sound/bgm_menu.mp3" )] private static var IMPORT_BGM_MENU:Class;
 		public static var BGM_MENU:Sound = new IMPORT_BGM_MENU as Sound;
 
-		/*
+		
 		[Embed( source = "../resc/sound/gameover.mp3" )] public static var SFX_GAMEOVER:Class; 
-		[Embed( source = "../resc/sound/powerup.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
-		[Embed( source = "../resc/sound/sfx_bone_1.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
-		[Embed( source = "../resc/sound/sfx_explosion.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
-		[Embed( source = "../resc/sound/gameover.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
-		[Embed( source = "../resc/sound/gameover.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
-		*/
+		[Embed( source = "../resc/sound/powerup.mp3" )] public static var SFX_POWERUP:Class; 
+		[Embed( source = "../resc/sound/sfx_bone_1.mp3" )] public static var SFX_COLLECT_1:Class; 
+		[Embed( source = "../resc/sound/sfx_explosion.mp3" )] public static var SFX_EXPLOSION:Class; 
+		[Embed( source = "../resc/sound/sfx_goal.mp3" )] public static var SFX_GOAL:Class; 
+		[Embed( source = "../resc/sound/sfx_hit.mp3" )] public static var SFX_HIT:Class;
+		[Embed( source = "../resc/sound/sfx_rockbreak.mp3" )] public static var SFX_ROCKBREAK:Class; 
+		[Embed( source = "../resc/sound/sfx_spin.mp3" )] public static var SFX_SPIN:Class; 
+		[Embed( source = "../resc/sound/shoot_orca.mp3" )] public static var SFX_BULLET2:Class;
+		[Embed( source = "../resc/sound/shoot1.mp3" )] public static var SFX_BULLET3:Class;
+		[Embed( source = "../resc/sound/shoot2.mp3" )] public static var SFX_BULLET4:Class;
+		
 		
 	}
 }

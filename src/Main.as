@@ -12,12 +12,12 @@ package
 	
 	public class Main extends FlxGame {
 		
-		public static var BOSS_1_HEALTH:Boolean = true;
+		public static var BOSS_1_HEALTH:Boolean = false;
 		
 		public function Main():void {
 			//super(1000, 500, ShopState);
-			//super(1000, 500, BottomGame);
-			super(1000, 500, TopState);
+			super(1000, 500, BottomGame);
+			//super(1000, 500, TopState);
 			//super(1000, 500, GameEndState);
 			
 			stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, function(e:Event):void {

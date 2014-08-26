@@ -54,6 +54,7 @@ package player_projectiles {
 					RotateFadeParticle.cons(g._particles).init(this.x + _vx*1.5, this.y + _vy*1.5).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1, 1.3));
 					FlxG.shake(0.005, 0.035);
 					BottomGame._freeze_frame = 3;
+					FlxG.play(Resource.SFX_HIT);
 				}
 			}
 			this._ct--;

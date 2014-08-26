@@ -356,6 +356,7 @@ import flash.ui.MouseCursor;
 		
 		public function click_info(info):void {
 			if (!info.owned && GameStats._gold >= info.price) {
+				FlxG.play(Resource.SFX_POWERUP);
 				GameStats._gold -= info.price;
 				info.owned = true;
 				info.func();

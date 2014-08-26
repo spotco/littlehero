@@ -69,6 +69,7 @@ package enemy {
 				this.alpha = 1;
 				FlxG.shake(0.01, 0.15);
 				BottomGame._freeze_frame = 6;
+				FlxG.play(Resource.SFX_ROCKBREAK);
 				
 			} else {
 				_vx *= 0.96;

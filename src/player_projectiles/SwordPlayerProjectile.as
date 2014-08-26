@@ -47,9 +47,12 @@ package player_projectiles {
 			return this;
 		}
 		
+		var _last_sword_sfx:Number = 0;
+		
 		public var _sword_invuln:Boolean = false;
 		var _last_mouse_x:Number, _last_mouse_y:Number, _hold_sword_ct:Number = 0;
 		public override function _update(g:BottomGame):void {
+			_last_sword_sfx--;
 			var sword_speed:Number = Util.point_dist(_last_mouse_x, _last_mouse_y, FlxG.mouse.x, FlxG.mouse.y);
 			/*
 			_hitbox.x = this.x;
@@ -70,7 +73,11 @@ package player_projectiles {
 			_hitbox.x = this._follow._x - _hitbox.frameWidth / 2 + g._player._body.frameWidth / 2 + v.x + offset_right.x;
 			_hitbox.y = this._follow._y - _hitbox.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_right.y;
 			
-			if (sword_speed > 40 && !FlxG.mouse.pressed() && GameStats._energy/GameStats._max_energy > 0.2) {
+			if (sword_speed > 40 && !FlxG.mouse.pressed() && GameStats._energy / GameStats._max_energy > 0.2) {
+				if (_last_sword_sfx <= 0) {
+					FlxG.play(Resource.SFX_SPIN);
+					_last_sword_sfx = 15;
+				}
 				GameStats._energy -= 10;
 				GameStats._just_used_energy_ct = GameStats._sword_just_used_energy_ct;
 				this.alpha = 1;
@@ -103,7 +110,8 @@ package player_projectiles {
 					enem._hit(g);
 					enem._health -= GameStats._sword_damage * enem._sword_damage_mult();
 					FlxG.shake(0.01, 0.075);
-					BottomGame._freeze_frame = Math.max(6,BottomGame._freeze_frame);
+					BottomGame._freeze_frame = Math.max(6, BottomGame._freeze_frame);
+					FlxG.play(Resource.SFX_HIT);
 				}
 			}
 			

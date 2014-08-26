@@ -94,6 +94,7 @@ package enemy {
 					BulletEnemy.cons(g._enemies).init(this.get_center().x, this.get_center().y, dv.x, dv.y, 600, g);
 					_red_ct = 10;
 					this.color = 0xFF0000;
+					FlxG.play(Resource.SFX_BULLET4);
 				}
 				
 				_state = 2;
@@ -131,6 +132,7 @@ package enemy {
 					SmallFollowPickup.cons(g._pickups).init(this.x,this.y,1,0);
 				}
 			}
+			FlxG.play(Resource.SFX_EXPLOSION);
 			this.kill();
 			this._kill(g);
 			

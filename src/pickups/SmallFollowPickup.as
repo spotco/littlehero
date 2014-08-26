@@ -57,8 +57,10 @@ package pickups {
 					_picked_up =  true;
 					if (_type == 0) {
 						GameStats._gold++;
+						FlxG.play(Resource.SFX_COLLECT_1);
 					} else {
-						GameStats._health = Math.min(GameStats._health+0.5,GameStats._max_health);
+						GameStats._health = Math.min(GameStats._health + 0.5, GameStats._max_health);
+						FlxG.play(Resource.SFX_POWERUP);
 					}
 				}
 			} else if (dist < 60) {

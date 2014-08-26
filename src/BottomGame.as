@@ -121,6 +121,7 @@ package {
 			
 			GameWaves._update(this);
 			if (GameStats._health <= 0) {
+				FlxG.play(Resource.SFX_GAMEOVER);
 				_spin_out_ct = 50;
 				_fadeout = true;
 				_fadeout_to = new ShopState();
