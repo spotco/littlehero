@@ -99,7 +99,7 @@ package {
 		[Embed( source = "../resc/sound/shoot_orca.mp3" )] public static var SFX_BULLET2:Class;
 		[Embed( source = "../resc/sound/shoot1.mp3" )] public static var SFX_BULLET3:Class;
 		[Embed( source = "../resc/sound/shoot2.mp3" )] public static var SFX_BULLET4:Class;
-		
+		[Embed( source = "../resc/sound/sfx_boss_enter.mp3" )] public static var SFX_BOSS_ENTER:Class;
 		
 	}
 }

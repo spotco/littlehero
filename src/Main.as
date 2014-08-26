@@ -16,8 +16,8 @@ package
 		
 		public function Main():void {
 			//super(1000, 500, ShopState);
-			super(1000, 500, BottomGame);
-			//super(1000, 500, TopState);
+			//super(1000, 500, BottomGame);
+			super(1000, 500, TopState);
 			//super(1000, 500, GameEndState);
 			
 			stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, function(e:Event):void {
