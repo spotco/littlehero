@@ -25,7 +25,9 @@ package enemy {
 			this.addAnimation("walk_right_slow", [4,3,2,1,0], 2);
 			this.setOriginToCorner();
 			_hitbox.loadGraphic(Resource.SNAKE_BOSS_HITBOX);
-			
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
 		}
 		
 		var _side:Number = 0; //0-right_to_left, 1-left_to_right
@@ -58,6 +60,9 @@ package enemy {
 			this.y = (Util.float_random(0,2)<1)?Util.float_random(100,200):Util.float_random(300,400);
 			_arrows_to_stun = 5;
 			_pass_stunned = false;
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
 		}
 		
 		private function start_left_to_right():void {
@@ -67,6 +72,9 @@ package enemy {
 			this.y = (Util.float_random(0,2)<1)?Util.float_random(100,200):Util.float_random(300,400);
 			_arrows_to_stun = 5;
 			_pass_stunned = false;
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
 		}
 		
 		private function walk_anim():void {
@@ -158,6 +166,7 @@ package enemy {
 					BulletEnemy.cons(g._enemies).init(pos.x,pos.y, dv.x, dv.y,600,g);
 					i += Util.float_random(0.8,1.2);
 				}
+				FlxG.play(Resource.SFX_BULLET4);
 			}
 			
 			if (Util.float_random(0, 200) < 1 && Util.alive_ct(g)<4) {

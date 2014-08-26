@@ -43,6 +43,9 @@ package enemy {
 			g._bottom_game_ui.track_boss(this);
 			_side = Util.float_random(0, 2) < 1?1:0;
 			this.pick_side();
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
 			return this;
 		}
 		
@@ -55,6 +58,9 @@ package enemy {
 		private function pick_side():void {
 			FlxG.shake(0.01, 0.15);
 			_spawned_count = 0;
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
+			FlxG.play(Resource.SFX_BOSS_ENTER);
 			if (_side == 0) { //right
 				_side = 1;
 				_tar_x = Util.WID-100;
@@ -179,6 +185,7 @@ package enemy {
 						BulletEnemy.cons(g._enemies).init(pos.x,pos.y, dv.x, dv.y,600,g);
 						i += Util.float_random(0.3,0.7);
 					}
+					FlxG.play(Resource.SFX_BULLET4);
 					this.color = 0xFF0000;
 					_red_ct = 10;
 				}
@@ -252,6 +259,7 @@ package enemy {
 			for each (var enem:BaseEnemy in g._enemies.members) {
 				if (enem.alive) enem._health = 0;
 			}
+			FlxG.play(Resource.SFX_EXPLOSION);
 			FlxG.shake(0.1, 3);
 			BottomGame._freeze_frame = 10;
 			this.kill();

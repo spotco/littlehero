@@ -147,21 +147,19 @@ package org.flixel.system
 			}
             graphics.clear();
 			var time:uint = getTimer();
-            if((framesLoaded >= totalFrames) /*&& (time > _min)*/)
+            if((framesLoaded >= totalFrames) && (time > _min))
             {
-				update(1);
-				done_loading();
-				if (can_cont) {
-					removeEventListener(Event.ENTER_FRAME, onEnterFrame);
-					nextFrame();
-					var mainClass:Class = Class(getDefinitionByName(className));
-					if(mainClass)
-					{
-						var app:Object = new mainClass();
-						addChild(app as DisplayObject);
-					}
-					destroy();
+				//update(1);
+				removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+				nextFrame();
+				var mainClass:Class = Class(getDefinitionByName(className));
+				if(mainClass)
+				{
+					var app:Object = new mainClass();
+					addChild(app as DisplayObject);
 				}
+				destroy();
+				
             }
             else
 			{
@@ -173,8 +171,6 @@ package org.flixel.system
         }
 		
 		public function done_loading():void {}
-		
-		[Embed(source = "../../../../resc/clicktoplay.png")] public static var IMPORT_CLICKTOPLAY:Class;
 		
 		/**
 		 * Override this to create your own preloader objects.
@@ -240,13 +236,6 @@ package org.flixel.system
 			bitmap.blendMode = "overlay";
 			bitmap.alpha = 0.25;
 			_buffer.addChild(bitmap);
-		}
-		
-		public var can_cont:Boolean = false;
-		
-		public function cont():void {
-			can_cont = true;
-			//onEnterFrame(null);
 		}
 		
 		protected function destroy():void

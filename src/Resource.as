@@ -57,6 +57,7 @@ package {
 		[Embed(source = "../resc/bottom_fx/explosion.png")] public static var EXPLOSION:Class;
 		[Embed(source = "../resc/bottom_fx/sweat_ss.png")] public static var SWEAT_SS:Class;
 		
+		[Embed(source = "../resc/top_bg/logo.png")] public static var TOP_LOGO:Class;
 		[Embed(source = "../resc/top_bg/bg.png")] public static var TOP_BG:Class;
 		[Embed(source = "../resc/top_bg/bully_center.png")] public static var TOP_BULLY_CENTER:Class;
 		[Embed(source = "../resc/top_bg/bully_left.png")] public static var TOP_BULLY_LEFT:Class;

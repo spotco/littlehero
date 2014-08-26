@@ -17,6 +17,7 @@ package  {
 		var _click_to_continue:FlxText;
 		
 		public override function create():void {
+			Util.play_bgm(Resource.BGM_MAIN);
 			this.add(_bg);
 			this.add(_teacher);
 			this.add(_player);
@@ -84,6 +85,9 @@ package  {
 					for (i = 0; i < 20; i++)  RotateFadeParticle.cons(_particles).init(_teacher.x + _teacher.frameWidth / 2 + Util.float_random( -60, 60), _teacher.y + _teacher.frameHeight / 2 + Util.float_random( -120, 120)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(3, 6)).p_set_delay(Util.float_random(0, 25));
 					_mode = 1;
 					_ct = 50;
+					FlxG.play(Resource.SFX_EXPLOSION);
+					FlxG.play(Resource.SFX_EXPLOSION);
+					FlxG.play(Resource.SFX_EXPLOSION);
 				}
 				
 			} else if (_mode == 1) {

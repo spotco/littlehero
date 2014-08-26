@@ -41,7 +41,7 @@ package enemy {
 			} else {
 				this._health = this._max_health;
 			}
-			
+			FlxG.play(Resource.SFX_BOSS_ENTER);
 			RotateFadeParticle.cons(g._particles).init(this.get_center().x + Util.float_random( -20, 20), this.get_center().y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3));
 			RotateFadeParticle.cons(g._particles).init(this.get_center().x + Util.float_random( -20, 20), this.get_center().y + Util.float_random( -20, 20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(1,2));
 			RotateFadeParticle.cons(g._particles).init(this.get_center().x + Util.float_random(-20,20), this.get_center().y + Util.float_random(-20,20)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1.5, 3)).p_set_delay(Util.float_random(1,4));
@@ -122,6 +122,7 @@ package enemy {
 						BulletEnemy.cons(g._enemies).init(pos.x,pos.y, dv.x, dv.y,600,g);
 						i += Util.float_random(0.3,0.7);
 					}
+					FlxG.play(Resource.SFX_BULLET4);
 				}
 				this.angle = 0;
 				this.play("fire");
@@ -152,6 +153,9 @@ package enemy {
 				if (this.alive_ct() == 0) {
 					_mode = 1;
 					_ct = 500;
+					FlxG.play(Resource.SFX_BOSS_ENTER);
+					FlxG.play(Resource.SFX_BOSS_ENTER);
+					FlxG.play(Resource.SFX_BOSS_ENTER);
 				}
 			} else if (_mode==1) {
 				_ct--;
@@ -164,6 +168,7 @@ package enemy {
 					if (this._hit_wall_left || this._hit_wall_right) {
 						_vx *= -1;
 					}
+					FlxG.play(Resource.SFX_ROCKBREAK);
 					FlxG.shake(0.01, 0.15);
 				}
 				_vx *= 0.995;
@@ -180,6 +185,12 @@ package enemy {
 					BottomGame._freeze_frame = 15;
 					_mode = 3;
 					this._health--;
+					FlxG.play(Resource.SFX_ROCKBREAK);
+					FlxG.play(Resource.SFX_ROCKBREAK);
+					FlxG.play(Resource.SFX_ROCKBREAK);
+					FlxG.play(Resource.SFX_BOSS_ENTER);
+					FlxG.play(Resource.SFX_BOSS_ENTER);
+					FlxG.play(Resource.SFX_BOSS_ENTER);
 				}
 				
 			} else if (_mode == 3) {
@@ -254,6 +265,7 @@ package enemy {
 		}
 		public override function _do_kill(g:BottomGame):void {
 			this._health = 0;
+			FlxG.play(Resource.SFX_EXPLOSION);
 			for (var ii:Number = 0; ii < this.frameWidth; ii+=Util.float_random(5,20)) {
 				RotateFadeParticle.cons(g._particles).init(
 					this.x + Util.float_random( -20, 20) + ii, 

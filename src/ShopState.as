@@ -329,6 +329,7 @@ import flash.ui.MouseCursor;
 				if (FlxG.mouse.justPressed()) {
 					_fadeout = true;
 					_fade_cover.alpha = 0;
+					FlxG.play(Resource.SFX_POWERUP);
 				}
 			} else {
 				_continue.set_scale(1);

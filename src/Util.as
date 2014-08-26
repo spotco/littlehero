@@ -4,6 +4,7 @@ package  {
 	import flash.display.Sprite;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
+	import flash.media.SoundTransform;
 	import org.flixel.*;
 	import flash.geom.*;
 	import flash.display.*;
@@ -173,7 +174,7 @@ package  {
 			if (o != _cur_song) {
 				_cur_song = o;
 				if (_cur_song != null && _cur_play != null ) _cur_play.stop();
-				_cur_play = _cur_song.play(0, int.MAX_VALUE);
+				_cur_play = _cur_song.play(0, int.MAX_VALUE, new SoundTransform(0.5));
 			}
 		}
 		

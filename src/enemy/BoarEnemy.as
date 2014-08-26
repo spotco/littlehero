@@ -93,6 +93,7 @@ package enemy {
 				if (_ct <= 0) {
 					_mode = 1;
 					FlxG.shake(0.01, 0.1);
+					FlxG.play(Resource.SFX_BOSS_ENTER);
 				}
 			} else if (_mode == 1) { //charge
 				_ct++;
@@ -113,6 +114,8 @@ package enemy {
 					if (this._hit_wall_left || this._hit_wall_right) {
 						_vx *= -1;
 					}
+					FlxG.play(Resource.SFX_ROCKBREAK);
+					FlxG.play(Resource.SFX_ROCKBREAK);
 					_mode = 2;
 					_ct = 30;
 				}
@@ -145,6 +148,9 @@ package enemy {
 					SmallFollowPickup.cons(g._pickups).init(this.x,this.y,1,0);
 				}
 			}
+			FlxG.play(Resource.SFX_EXPLOSION);
+			FlxG.play(Resource.SFX_EXPLOSION);
+			FlxG.play(Resource.SFX_EXPLOSION);
 			this.kill();
 			this._kill(g);
 			

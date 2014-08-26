@@ -231,6 +231,7 @@ package  {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
+				//BoarEnemy.cons(g._enemies).init(0, 0, g);
 				_ct = 5000;
 				_wave++;
 			} else if (_wave == 2) {

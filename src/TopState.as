@@ -20,19 +20,22 @@ package  {
 		
 		var _player:FlxSprite = new FlxSprite(0, 0, Resource.TOP_PLAYER);
 		var _teacher:FlxSprite = new FlxSprite(0, 0, Resource.TOP_TEACHER);
-		
+		var _logo:FlxSprite = new FlxSprite(Util.WID * 0.3, Util.HEI * 0.18, Resource.TOP_LOGO);
 		var _maintext:ScrollText;
 		
 		var _click_to_continue:FlxText;
 		
 		public override function create():void {
 			this.add(_bg);
+			_logo.set_scale(0.8);
+			this.add(_logo);
 			this.add(_player);
 			this.add(_teacher);
 			this.add(_bully_left);
 			this.add(_bully_center);
 			this.add(_bully_right);
 			this.add(_cage);
+			
 			Util.play_bgm(Resource.BGM_MAIN);
 			
 			if (GameStats._story >= 1) {
@@ -46,7 +49,7 @@ package  {
 			}
 			
 			_click_to_continue = Util.cons_text(Util.WID/2+20, Util.HEI/2-155, "Click to continue.", 0xFFFFFF, 15);
-			this.add(_click_to_continue);
+			//this.add(_click_to_continue);
 			
 			var maintext:FlxText = Util.cons_text(Util.WID * 0.5, Util.HEI * 0.15, "", 0xFFFFFF, 24, 400);
 			this.add(maintext);
@@ -177,12 +180,16 @@ package  {
 				if (_bully_left.alpha > 0) _bully_left.alpha -= 0.01;
 				if (_bully_right.alpha > 0) _bully_right.alpha -= 0.01;
 				if (_bg.alpha > 0) _bg.alpha -= 0.01;
+				if (_logo.alpha > 0) _logo.alpha -= 0.01;
 				_ct++;
 				if (_ct >= 100) {
 					_state = 2;
 					var i:int = 0;
 					for (i = 0; i < 20; i++)  RotateFadeParticle.cons(_particles).init(_player.x + _player.frameWidth / 2 + Util.float_random( -60, 60), _player.y + _player.frameHeight / 2 + Util.float_random( -120, 190)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(3, 6)).p_set_delay(Util.float_random(0, 25));
 					for (i = 0; i < 20; i++)  RotateFadeParticle.cons(_particles).init(_teacher.x + _teacher.frameWidth / 2 + Util.float_random( -60, 60), _teacher.y + _teacher.frameHeight / 2 + Util.float_random( -120, 120)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(3, 6)).p_set_delay(Util.float_random(0, 25));
+					FlxG.play(Resource.SFX_EXPLOSION);
+					FlxG.play(Resource.SFX_EXPLOSION);
+					FlxG.play(Resource.SFX_EXPLOSION);
 					_player.loadGraphic(Resource.TOP_KNIGHT);
 					_teacher.loadGraphic(Resource.TOP_PRINCESS);
 				}
