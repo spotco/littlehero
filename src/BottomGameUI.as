@@ -70,6 +70,7 @@ package
 				GameStats._story == 1?ChatManager.m_boss_1:
 				ChatManager.m_boss_2
 			);
+			Util.play_bgm(Resource.BGM_MENU);
 		}
 		
 		var _last_health:Number = 0;

@@ -241,6 +241,7 @@ import flash.ui.MouseCursor;
 			for (var i in items) {
 				items[i].id = i;
 			}
+			Util.play_bgm(Resource.BGM_MAIN);
 			
 			this.add(new FlxSprite(0, 0, Resource.SHOP_BG));
 			

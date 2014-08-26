@@ -33,6 +33,7 @@ package  {
 			this.add(_bully_center);
 			this.add(_bully_right);
 			this.add(_cage);
+			Util.play_bgm(Resource.BGM_MAIN);
 			
 			if (GameStats._story >= 1) {
 				_bully_right.loadGraphic(Resource.TOP_BULLY_RIGHT_EMPTY);	
@@ -44,7 +45,7 @@ package  {
 				_bully_center.loadGraphic(Resource.TOP_BULLY_CENTER_EMPTY);
 			}
 			
-			_click_to_continue = Util.cons_text(5, 5, "Click to Continue", 0xFFFFFF, 24);
+			_click_to_continue = Util.cons_text(Util.WID/2+20, Util.HEI/2-155, "Click to continue.", 0xFFFFFF, 15);
 			this.add(_click_to_continue);
 			
 			var maintext:FlxText = Util.cons_text(Util.WID * 0.5, Util.HEI * 0.15, "", 0xFFFFFF, 24, 400);
@@ -196,8 +197,7 @@ package  {
 				}
 			} else if (_state == 3) {
 				_ct--;
-				this._click_to_continue.alpha = 1;
-				if (FlxG.mouse.justPressed()) {
+				if (_ct <= 0) {
 					
 					_fadeout = true;
 				}

@@ -81,7 +81,20 @@ package {
 		[Embed(source = "../resc/chat/spider_boss_human.png")] public static var CHAT_SPIDERBOSS_SS:Class;
 		[Embed(source = "../resc/chat/snake_boss_human.png")] public static var CHAT_SNAKEBOSS_SS:Class;
 		[Embed(source = "../resc/chat/fire_boss_human.png")] public static var CHAT_FIREBOSS_SS:Class;
-	}
-	
+		
+		[Embed( source = "../resc/sound/bgm_main.mp3" )] private static var IMPORT_BGM_MAIN:Class;
+		public static var BGM_MAIN:Sound = new IMPORT_BGM_MAIN as Sound;
+		[Embed( source = "../resc/sound/bgm_menu.mp3" )] private static var IMPORT_BGM_MENU:Class;
+		public static var BGM_MENU:Sound = new IMPORT_BGM_MENU as Sound;
 
+		/*
+		[Embed( source = "../resc/sound/gameover.mp3" )] public static var SFX_GAMEOVER:Class; 
+		[Embed( source = "../resc/sound/powerup.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
+		[Embed( source = "../resc/sound/sfx_bone_1.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
+		[Embed( source = "../resc/sound/sfx_explosion.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
+		[Embed( source = "../resc/sound/gameover.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
+		[Embed( source = "../resc/sound/gameover.mp3" )] public static var IMPORT_SOUND_GAME_OVER:Class; 
+		*/
+		
+	}
 }
