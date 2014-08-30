@@ -127,16 +127,16 @@ package enemy {
 				var pct:Number = 4;
 				if (this._health / this._max_health < 0.25) {
 					mod = 33;
-					pct = 5;
+					pct = 3;
 				} else if (this._health / this._max_health < 0.5) {
 					mod = 40;
-					pct = 6;
+					pct = 4;
 				} else if (this._health / this._max_health < 0.75) {
 					mod = 50;
-					pct = 7;
+					pct = 5;
 				} else {
 					mod = 50;
-					pct = 8;
+					pct = 6;
 				}
 				
 				if (_ct%mod==0&&Util.alive_ct(g)<8) {
@@ -152,6 +152,8 @@ package enemy {
 					_mode = 2;
 					_ct = 70;
 					FlxG.shake(0.01, 0.15);
+					_vuln_sword = true;
+					_firect = 0;
 				}
 				this._hitbox = _body_hitbox;
 				
@@ -176,7 +178,8 @@ package enemy {
 					this.color = 0xFF0000;
 					_red_ct = 10;
 				}
-				if (_ct == 195 || _ct == 180  || _ct == 20 || _ct == 5) {
+				if (_ct == 195 || _ct == 180 /*|| _ct == 165 || _ct == 35*/  || _ct == 20 || _ct == 5) {
+					_firect++;
 					var i:Number = 0;
 					while (i < 3.14 * 2) {
 						var pos:FlxPoint = Util.flxpt(_butt_hitbox.x+45, _butt_hitbox.y+60);
@@ -198,7 +201,22 @@ package enemy {
 						_tar_x = _tar_x + 300;
 					}
 				}
-			} else if (_mode = 4) {
+			} else if (_mode == 4) {
+				_ct++;
+				if (_ct % 25 == 0 && _firect < 4) {
+					_firect++;
+					var i:Number = 0;
+					while (i < 3.14 * 2) {
+						var pos:FlxPoint = Util.flxpt(_butt_hitbox.x+45, _butt_hitbox.y+60);
+						var dv:Vector3D = Util.normalized(Math.cos(i), Math.sin(i));
+						dv.scaleBy(2);
+						BulletEnemy.cons(g._enemies).init(pos.x,pos.y, dv.x, dv.y,600,g);
+						i += Util.float_random(0.3,0.7);
+					}
+					FlxG.play(Resource.SFX_BULLET4);
+					this.color = 0xFF0000;
+					_red_ct = 10;
+				}
 				this._hitbox = _butt_hitbox;
 				var cy:Number = this.get_center().y;
 				this.set_center(Util.drp(this.get_center().x, _tar_x, 20), cy);
@@ -208,6 +226,8 @@ package enemy {
 			}
 			
 		}
+		var _firect:Number = 0;
+		
 		public override function _hit(g:BottomGame, bow:Boolean = false):void {
 			if (!bow) {
 				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
@@ -233,8 +253,9 @@ package enemy {
 			return 0;
 		}
 		
+		var _vuln_sword:Boolean = false;
 		public override function _arrow_damage_mult():Number { return (_mode == 2 || _mode == 3 || _mode == 4)?0.15:0; }
-		public override function _sword_damage_mult():Number { return (_mode == 2 || _mode == 3 || _mode == 4)?1.4:0; }
+		public override function _sword_damage_mult():Number { if ((_mode == 2 || _mode == 3 || _mode == 4) && _vuln_sword) { _vuln_sword = false; return 1; } else { return 0; } }
 		
 		
 		

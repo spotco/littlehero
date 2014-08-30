@@ -11,7 +11,7 @@ package  {
 		var _info;
 		var _items;
 		public function ShopButton(x:Number, y:Number, info, items) {
-			this.loadGraphic(Resource.SHOP_ICON);
+			this.loadGraphic(info.icon);
 			this.x = x - this.frameWidth/2;
 			this.y = y - this.frameHeight / 2;
 			_info = info;
@@ -43,7 +43,7 @@ package  {
 				this.alpha = 1;
 				if (mouse_over()) {
 					if (FlxG.mouse.justPressed()) {
-						shop.click_info(_info);
+						shop.click_info(_info,this.x+30,this.y+30);
 					} else {
 						shop.hover_info(_info);
 					}

@@ -18,12 +18,21 @@ package {
 		
 		public var _bottom_game_ui:BottomGameUI = new BottomGameUI();
 		
-		var _bg:FlxSprite = new FlxSprite(0, 0, Resource.BOTTOM_BG);
-		var _fg:FlxSprite = new FlxSprite(0, 0, Resource.BOTTOM_FG)
+		var _bg:FlxSprite;
+		var _fg:FlxSprite;
 		
 		public override function create():void {
-			trace("world", GameStats._story);
 			GameWaves.reset(GameStats._story);
+			if (GameStats._story == 0) {
+				_bg = new FlxSprite(0, 0, Resource.BOTTOM_BG1);
+				_fg  = new FlxSprite(0, 0, Resource.BOTTOM_FG1);
+			} else if (GameStats._story == 1) {
+				_bg = new FlxSprite(0, 0, Resource.BOTTOM_BG2);
+				_fg  = new FlxSprite(0, 0, Resource.BOTTOM_FG2);
+			} else {
+				_bg = new FlxSprite(0, 0, Resource.BOTTOM_BG3);
+				_fg  = new FlxSprite(0, 0, Resource.BOTTOM_FG3);
+			}
 			
 			this.add(_bg);
 			this.add(_pickups);
@@ -53,7 +62,6 @@ package {
 		var _fadeout_can_move:Boolean = false;
 		public function boss_defeated():void {
 			_fadeout_to = new TopState();
-			GameStats._story++;
 			_fadeout = true;
 			_fadeout_can_move = true;
 		}
@@ -74,6 +82,9 @@ package {
 			_bottom_game_ui._update(this);
 			if (_spin_out_ct > 0) {
 				_spin_out_ct--;
+				if (_spin_out_ct <= 0) {
+					FlxG.switchState(new ShopState());
+				}
 				fadeout(_fg);
 				fadeout(_bg);
 				_player._body.angle += 12.5;
@@ -101,6 +112,7 @@ package {
 				if (_fade_cover.alpha >= 1) {
 					_fade_cover.alpha = 1;
 					_fadeout = false;
+					GameStats._story++;
 					FlxG.switchState(_fadeout_to);
 				}
 				if (!_fadeout_can_move) {
@@ -123,8 +135,6 @@ package {
 			if (GameStats._health <= 0) {
 				FlxG.play(Resource.SFX_GAMEOVER);
 				_spin_out_ct = 50;
-				_fadeout = true;
-				_fadeout_to = new ShopState();
 				return;
 			}
 

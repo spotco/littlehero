@@ -1,7 +1,7 @@
 package  {
 	public class GameStats {
 
-		public static var _gold:Number = 0;
+		public static var _gold:Number = 1000;
 		public static var _health:Number = 5;
 		public static var _energy:Number = 0;
 		public static var _just_used_energy_ct:Number = 0;

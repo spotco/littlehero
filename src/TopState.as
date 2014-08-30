@@ -2,6 +2,12 @@ package  {
 	import flash.geom.Vector3D;
 	import org.flixel.*;
 	import particles.*;
+	import flash.display.*;
+	import flash.events.Event;
+	import flash.geom.Rectangle;
+	import flash.ui.*;
+	import flash.events.MouseEvent;
+	
 	public class TopState extends FlxState{
 		
 		
@@ -25,7 +31,7 @@ package  {
 		
 		var _click_to_continue:FlxText;
 		
-		public override function create():void {
+		public override function create():void {			
 			this.add(_bg);
 			_logo.set_scale(0.8);
 			this.add(_logo);

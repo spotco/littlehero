@@ -185,7 +185,7 @@ package  {
 			if (_mute && _cur_play != null) {
 				_cur_play.stop();
 			} else if (!_mute && _cur_song != null) {
-				_cur_play = _cur_song.play(0, int.MAX_VALUE);
+				_cur_play = _cur_song.play(0, int.MAX_VALUE, new SoundTransform(0.5));
 			}
 			
 		}

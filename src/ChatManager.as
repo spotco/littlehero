@@ -9,18 +9,38 @@ package  {
 			{id:0, msg:"Let's do attendance. Say present when called." },
 			{id:0, msg:"Can someone read this passage for us?" },
 			{id:0, msg:"There's going to be a quiz about this." },
+			{id:0, msg:"Everyone please flip to chapter 2." },
+			{id:0, msg:"Can anyone explain to us Cosine?" },
+			{id:0, msg:"I hope you brought your textbooks today." },
+			{id:0, msg:"Who's making that noise?" },
+			
 			{id:1, msg:"lol i farted" },
 			{id:1, msg:"do you smell something?" },
 			{id:1, msg:"Zzzz....zzzz....zzz....." },
 			{id:1, msg:"pull my finger" },
-			{id:2, msg:"gotta eat big to get big" },
+			{id:1, msg:"i totally forgot to shower today" },
+			{id:1, msg:"ive got tater tots in my pocket" },
+			{id:1, msg:"hey man you got a tissue??" },
+			{id:1, msg:"doorknob cherry!!!" },
+			
+			{id:2, msg:"420 blaze it smoke weed erryday" },
 			{id:2, msg:"tupac lives" },
-			{id:2, msg:"can I go to the bathroom?" },
-			{id:2, msg:"i forgot to shower today" },
-			{id:3, msg:"u wot m8" },
+			{id:2, msg:"u can't get high off a plant its natural" },
+			{id:2, msg:"yo whaaaaaaaaaaaaaaat" },
+			{id:2, msg:"LEGALIZE IT" },
+			{id:2, msg:"hey man pass the vape" },
+			{id:2, msg:"huh wait what was kinda zoning out there" },
+			{id:2, msg:"man ne1 else really hungry right now too???" },
+			
+			{id:3, msg:"u wot m8?" },
 			{id:3, msg:"do you even lift bro" },
-			{id:3, msg:"420 blaze it smoke weed erryday" },
-			{id:3, msg:"rip lyl she did nothing wrong" }
+			{id:3, msg:"gotta eat big to get big cmon" },
+			{id:3, msg:"creatine ain't a drug" },
+			{id:3, msg:"tfw no gf" },
+			{id:3, msg:"do SS + GOMAD lel" },
+			{id:3, msg:"scooby pls go" },
+			{id:3, msg:"rip lyl she did nothing wrong" },
+			{id:3, msg:"this cardio's killin my GAINS" }
 		];
 		
 		public static var m_top_1:Array = [
@@ -28,14 +48,29 @@ package  {
 			{id:0, msg:"Let's do attendance. Say present when called." },
 			{id:0, msg:"Can someone read this passage for us?" },
 			{id:0, msg:"There's going to be a quiz about this." },
-			{id:2, msg:"gotta eat big to get big" },
+			{id:0, msg:"Everyone please flip to chapter 2." },
+			{id:0, msg:"Can anyone explain to us Cosine?" },
+			{id:0, msg:"I hope you brought your textbooks today." },
+			{id:0, msg:"Who's making that noise?" },
+			
+			{id:2, msg:"420 blaze it smoke weed erryday" },
 			{id:2, msg:"tupac lives" },
-			{id:2, msg:"can I go to the bathroom?" },
-			{id:2, msg:"i forgot to shower today" },
-			{id:3, msg:"u wot m8" },
+			{id:2, msg:"u can't get high off a plant its natural" },
+			{id:2, msg:"yo whaaaaaaaaaaaaaaat" },
+			{id:2, msg:"LEGALIZE IT" },
+			{id:2, msg:"hey man pass the vape" },
+			{id:2, msg:"huh wait what was kinda zoning out there" },
+			{id:2, msg:"man ne1 else really hungry right now too???" },
+			
+			{id:3, msg:"u wot m8?" },
+			{id:3, msg:"gotta eat big to get big cmon" },
 			{id:3, msg:"do you even lift bro" },
-			{id:3, msg:"420 blaze it smoke weed erryday" },
-			{id:3, msg:"rip lyl she did nothing wrong" }
+			{id:3, msg:"creatine ain't a drug" },
+			{id:3, msg:"tfw no gf" },
+			{id:3, msg:"do SS + GOMAD lel" },
+			{id:3, msg:"scooby pls go" },
+			{id:3, msg:"rip lyl she did nothing wrong" },
+			{id:3, msg:"this cardio's killin my GAINS" }
 		];
 		
 		public static var m_top_2:Array = [
@@ -43,31 +78,57 @@ package  {
 			{id:0, msg:"Let's do attendance. Say present when called." },
 			{id:0, msg:"Can someone read this passage for us?" },
 			{id:0, msg:"There's going to be a quiz about this." },
-			{id:3, msg:"u wot m8" },
+			{id:0, msg:"Everyone please flip to chapter 2." },
+			{id:0, msg:"Can anyone explain to us Cosine?" },
+			{id:0, msg:"I hope you brought your textbooks today." },
+			{id:0, msg:"Who's making that noise?" },
+			
+			{id:3, msg:"u wot m8?" },
+			{id:3, msg:"gotta eat big to get big cmon" },
 			{id:3, msg:"do you even lift bro" },
-			{id:3, msg:"420 blaze it smoke weed erryday" },
-			{id:3, msg:"rip lyl she did nothing wrong" }
+			{id:3, msg:"creatine ain't a drug" },
+			{id:3, msg:"tfw no gf" },
+			{id:3, msg:"do SS + GOMAD lel" },
+			{id:3, msg:"scooby pls go" },
+			{id:3, msg:"rip lyl she did nothing wrong" },
+			{id:3, msg:"this cardio's killin my GAINS" }
 		];
 		
 		public static var m_boss_0:Array = [
+			{id:1, msg:"oh man i really gotta go to the bathroom" },
 			{id:1, msg:"lol i farted" },
 			{id:1, msg:"do you smell something?" },
 			{id:1, msg:"Zzzz....zzzz....zzz....." },
-			{id:1, msg:"pull my finger" }
+			{id:1, msg:"pull my finger" },
+			{id:1, msg:"i totally forgot to shower today" },
+			{id:1, msg:"ive got tater tots in my pocket" },
+			{id:1, msg:"hey man you got a tissue??" },
+			{id:1, msg:"doorknob cherry!!!" }
 		];
 		
 		public static var m_boss_1:Array = [
-			{id:2, msg:"gotta eat big to get big" },
+			{id:2, msg:"hey mang hapy 420 jus b urself" },
+			{id:2, msg:"420 blaze it smoke weed erryday" },
 			{id:2, msg:"tupac lives" },
-			{id:2, msg:"can I go to the bathroom?" },
-			{id:2, msg:"i forgot to shower today" }
+			{id:2, msg:"u can't get high off a plant its nature" },
+			{id:2, msg:"yo whaaaaaaaaaaaaaaat" },
+			{id:2, msg:"LEGALIZE IT" },
+			{id:2, msg:"hey man pass the vape" },
+			{id:2, msg:"huh wait what was kinda zoning out there" },
+			{id:2, msg:"man ne1 else really hungry right now too???" }
 		];
 		
 		public static var m_boss_2:Array = [
-			{id:3, msg:"u wot m8" },
+			{id:3, msg:"u preparing 4 a trip to snap city LEL CROSSFIT" },
+			{id:3, msg:"gotta eat big to get big cmon" },
+			{id:3, msg:"u wot m8?" },
 			{id:3, msg:"do you even lift bro" },
-			{id:3, msg:"420 blaze it smoke weed erryday" },
-			{id:3, msg:"rip lyl she did nothing wrong" }
+			{id:3, msg:"creatine ain't a drug" },
+			{id:3, msg:"tfw no gf" },
+			{id:3, msg:"do SS + GOMAD lel" },
+			{id:3, msg:"scooby pls go" },
+			{id:3, msg:"rip lyl she did nothing wrong" },
+			{id:3, msg:"this cardio's killin my GAINS" }
 		];
 		
 		public static var _inst:ChatManager = new ChatManager();

@@ -4,8 +4,12 @@ package {
 	import flash.media.Sound;
 	public class Resource {
 		
-		[Embed(source = "../resc/bottom_bg/bg.png")] public static var BOTTOM_BG:Class;
-		[Embed(source = "../resc/bottom_bg/fg.png")] public static var BOTTOM_FG:Class;
+		[Embed(source = "../resc/bottom_bg/bg1.png")] public static var BOTTOM_BG1:Class;
+		[Embed(source = "../resc/bottom_bg/fg1.png")] public static var BOTTOM_FG1:Class;
+		[Embed(source = "../resc/bottom_bg/bg2.png")] public static var BOTTOM_BG2:Class;
+		[Embed(source = "../resc/bottom_bg/fg2.png")] public static var BOTTOM_FG2:Class;
+		[Embed(source = "../resc/bottom_bg/bg3.png")] public static var BOTTOM_BG3:Class;
+		[Embed(source = "../resc/bottom_bg/fg3.png")] public static var BOTTOM_FG3:Class;
 		
 		[Embed(source = "../resc/bottom_player/player_ss.png")] public static var PLAYER_SS:Class;
 		
@@ -72,7 +76,20 @@ package {
 		[Embed(source = "../resc/top_bg/knight.png")] public static var TOP_KNIGHT:Class;
 		[Embed(source = "../resc/top_bg/cage.png")] public static var TOP_CAGE:Class;
 	
-		[Embed(source = "../resc/shop/shop_icon.png")] public static var SHOP_ICON:Class;
+		//[Embed(source = "../resc/shop/shop_icon.png")] public static var SHOP_ICON:Class;
+		
+		[Embed(source = "../resc/shop/icon_2arrow.png")] public static var SHOP_ICON_2ARROW:Class;
+		[Embed(source = "../resc/shop/icon_3arrow.png")] public static var SHOP_ICON_3ARROW:Class;
+		[Embed(source = "../resc/shop/icon_armor.png")] public static var SHOP_ICON_ARMOR:Class;
+		[Embed(source = "../resc/shop/icon_bow_accuracy.png")] public static var SHOP_ICON_BOW_ACCURACY:Class;
+		[Embed(source = "../resc/shop/icon_bow_damage.png")] public static var SHOP_ICON_BOW_DAMAGE:Class;
+		[Embed(source = "../resc/shop/icon_energy.png")] public static var SHOP_ICON_ENERGY:Class;
+		[Embed(source = "../resc/shop/icon_health_regen.png")] public static var SHOP_ICON_HEALTH_REGEN:Class;
+		[Embed(source = "../resc/shop/icon_health.png")] public static var SHOP_ICON_HEALTH:Class;
+		[Embed(source = "../resc/shop/icon_sword_damage.png")] public static var SHOP_ICON_SWORD_DAMAGE:Class;
+		[Embed(source = "../resc/shop/icon_sword_recharge.png")] public static var SHOP_ICON_SWORD_RECHARGE:Class;
+		[Embed(source = "../resc/shop/icon_sword_size.png")] public static var SHOP_ICON_SWORD_SIZE:Class;
+		
 		[Embed(source = "../resc/shop/shop_bg.png")] public static var SHOP_BG:Class;
 		[Embed(source = "../resc/shop/continue.png")] public static var SHOP_CONTINUE:Class;
 		[Embed(source = "../resc/shop/shop_text_back.png")] public static var SHOP_TEXT_BACK:Class;

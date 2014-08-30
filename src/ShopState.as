@@ -6,6 +6,9 @@ package  {
 	import enemy.*;
 	import particles.*;
 	import pickups.*;
+	import flash.ui.Mouse;
+	import flash.ui.MouseCursor;
+	
 	public class ShopState extends FlxState {
 		
 		static var items = {
@@ -21,6 +24,7 @@ package  {
 			//row 1
 			"bow_damage_1": {
 				"price":25,
+				"icon":Resource.SHOP_ICON_BOW_DAMAGE,
 				"name":"Bow Damage+",
 				"desc":"Increase Bow Damage.",
 				"func":function() {
@@ -32,6 +36,7 @@ package  {
 			},
 			"hp_1": {
 				"price":25,
+				"icon":Resource.SHOP_ICON_HEALTH,
 				"name":"HP+",
 				"desc":"Increase HP.",
 				"func":function() {
@@ -41,8 +46,9 @@ package  {
 			},
 			"sword_damage_1": {
 				"price":25,
+				"icon":Resource.SHOP_ICON_SWORD_DAMAGE,
 				"name":"Sword Damage+",
-				"desc":"Increase Sword Damage",
+				"desc":"Increase Sword Damage.",
 				"func":function() {
 					GameStats._sword_damage += 4;
 					GameStats._sword_knockback += 5;
@@ -53,6 +59,7 @@ package  {
 			//row 2
 			"bow_accuracy_1": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_BOW_ACCURACY,
 				"name":"Bow Accuracy+",
 				"desc":"Increase Bow Accuracy.",
 				"func":function() {
@@ -64,8 +71,9 @@ package  {
 			},
 			"energy_1": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_ENERGY,
 				"name":"Energy+",
-				"desc":"Increase Energy",
+				"desc":"Increase Energy.",
 				"func":function() {
 					GameStats._max_energy += 200;
 				},
@@ -73,8 +81,9 @@ package  {
 			},
 			"sword_size_1": {
 				"price":50,
-				"name":"Sword+",
-				"desc":"Increase Sword Power.",
+				"icon":Resource.SHOP_ICON_SWORD_SIZE,
+				"name":"Sword Size+",
+				"desc":"Increase sword size and power.",
 				"func":function() {
 					GameStats._sword_scale = Math.max(GameStats._sword_scale, 1.5);
 				},
@@ -84,8 +93,9 @@ package  {
 			//row 3
 			"bow_damage_2": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_BOW_DAMAGE,
 				"name":"Bow Damage++",
-				"desc":"Increase Bow Damage",
+				"desc":"Increase Bow Damage.",
 				"func":function() {
 					GameStats._bow_damage += 6;
 					GameStats._bow_knockback += 4;
@@ -95,6 +105,7 @@ package  {
 			},
 			"energy_2": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_ENERGY,
 				"name":"Energy++",
 				"desc":"Increase Energy.",
 				"func":function() {
@@ -104,8 +115,9 @@ package  {
 			},
 			"health_2": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_HEALTH,
 				"name":"Health++",
-				"desc":"Increase Health",
+				"desc":"Increase Health.",
 				"func":function() {
 					GameStats._max_health += 14;	
 				},
@@ -113,6 +125,7 @@ package  {
 			},
 			"sword_recharge_1": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_SWORD_RECHARGE,
 				"name":"Sword Recharge+",
 				"desc":"Increase Sword Recharge.",
 				"func":function() {
@@ -124,6 +137,7 @@ package  {
 			//row_4
 			"more_arrows_1": {
 				"price":100,
+				"icon":Resource.SHOP_ICON_2ARROW,
 				"name":"Arrows+",
 				"desc":"More Arrows.",
 				"func":function() {
@@ -133,6 +147,7 @@ package  {
 			},
 			"bow_accuracy_2": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_BOW_ACCURACY,
 				"name":"Bow Accuracy+",
 				"desc":"Increase Bow Accuracy.",
 				"func":function() {
@@ -144,6 +159,7 @@ package  {
 			},
 			"health_3": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_HEALTH,
 				"name":"Health+++",
 				"desc":"More Health.",
 				"func":function() {
@@ -153,6 +169,7 @@ package  {
 			},
 			"sword_recharge_2": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_SWORD_RECHARGE,
 				"name":"Sword Recharge++",
 				"desc":"Increase Sword Recharge.",
 				"func":function() {
@@ -162,6 +179,7 @@ package  {
 			},
 			"sword_damage_2": {
 				"price":50,
+				"icon":Resource.SHOP_ICON_SWORD_DAMAGE,
 				"name":"Sword Damage++",
 				"desc":"Increase Sword Damage.",
 				"func":function() {
@@ -174,6 +192,7 @@ package  {
 			//row 5
 			"more_arrows_2": {
 				"price":200,
+				"icon":Resource.SHOP_ICON_3ARROW,
 				"name":"Arrows++",
 				"desc":"More Arrows.",
 				"func":function() {
@@ -182,6 +201,7 @@ package  {
 			},
 			"hp_regen": {
 				"price":100,
+				"icon":Resource.SHOP_ICON_HEALTH_REGEN,
 				"name":"HP Regen",
 				"desc":"Regenerate Health.",
 				"func":function() {
@@ -190,23 +210,23 @@ package  {
 			},
 			"armor": {
 				"price":100,
+				"icon":Resource.SHOP_ICON_ARMOR,
 				"name":"Armor",
-				"desc":"Take Less Damage",
+				"desc":"Take Less Damage.",
 				"func":function() {
 					GameStats._armor_mult = 0.75;
 				}
 			},
 			"sword_size_2": {
 				"price":100,
+				"icon":Resource.SHOP_ICON_SWORD_SIZE,
 				"name":"Sword Size++",
-				"desc":"Bigger Sword",
+				"desc":"Increase sword size and power.",
 				"func":function() {
 					GameStats._sword_scale = Math.max(GameStats._sword_scale, 2);	
 				}
 			}
 		};
-import flash.ui.Mouse;
-import flash.ui.MouseCursor;
 		
 		public function owned_items():Array {
 			var rtv:Array = [];
@@ -236,8 +256,10 @@ import flash.ui.MouseCursor;
 		public var _text_desc:FlxText;
 		public var _price_disp:FlxText;
 		public var _gold_disp:FlxText;
+		var _particles:FlxGroup = new FlxGroup();
 		
 		public override function create():void {
+			
 			for (var i in items) {
 				items[i].id = i;
 			}
@@ -259,7 +281,7 @@ import flash.ui.MouseCursor;
 			_price_disp = Util.cons_text(25 + 5, 360, "Price: 0", 0xFFFFFF, 16, 320 - 10);
 			this.add(_price_disp);
 			
-			_gold_disp = Util.cons_text(25 + 5, 360+24, "Gold: 0", 0xFFFFFF, 16, 320 - 10);
+			_gold_disp = Util.cons_text(25 + 5, 360+24, "Gold: 0", 0xFFFFFF, 25, 320 - 10);
 			this.add(_gold_disp);
 			
 			_buttons.push(new ShopButton(430, 283, items["bow_damage_1"],items));//bow damage
@@ -292,6 +314,8 @@ import flash.ui.MouseCursor;
 			this.add(Util.cons_text(25, 10, "Equip Thyself!", 0xFFFFFF, 30));
 			this.add(new FlxSprite(Util.WID*0.65,Util.HEI*0.4,Resource.TOP_KNIGHT));
 			
+			this.add(_particles);
+			
 			_fade_cover.makeGraphic(1000, 500, 0xFF000000);
 			this.add(_fade_cover);
 		}
@@ -318,6 +342,14 @@ import flash.ui.MouseCursor;
 				return;
 			}
 			
+			for each (var part:BaseParticle in _particles.members) {
+				if (part.alive) {
+					part._update(null);
+					if (part._should_remove()) {
+						part._do_remove();
+					}
+				}
+			}
 			
 			var cursor:Boolean = false;
 			for each(var b:ShopButton in _buttons) cursor ||=  b._update(this);
@@ -347,20 +379,30 @@ import flash.ui.MouseCursor;
 			_text_desc.text = info.desc;
 			if (own_item(info)) {
 				_price_disp.text = "Owned";
+				_gold_disp.color = 0xFFCC00;
+				
 			} else if (item_available(info)) {
 				_price_disp.text = "Price: " + info.price;
+				if (info.price > GameStats._gold) {
+					_gold_disp.color = 0xFF0000;
+				} else {
+					_gold_disp.color = 0x00FF00;
+				}
 				
 			} else {
 				_price_disp.text = "Locked";
+				_gold_disp.color = 0x999999;
 			}
 		}
 		
-		public function click_info(info):void {
+		public function click_info(info,bx:Number = 0,by:Number = 0):void {
 			if (!info.owned && GameStats._gold >= info.price) {
 				FlxG.play(Resource.SFX_POWERUP);
 				GameStats._gold -= info.price;
 				info.owned = true;
 				info.func();
+				for (var i:int = 0; i < 8; i++)  RotateFadeParticle.cons(_particles).init(bx + Util.float_random( -30, 30), by + Util.float_random( -30, 30)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(1, 2)).p_set_delay(Util.float_random(0, 6));
+				for each(var b:ShopButton in _buttons) b._update(this);
 			}
 		}
 		

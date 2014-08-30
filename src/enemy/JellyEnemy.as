@@ -34,7 +34,7 @@ package enemy {
 		var _red_ct:Number = 0;
 		public function init(x:Number,y:Number, g:BottomGame):JellyEnemy {
 			this.reset(x, y);
-			this.set_tar();
+			this.set_tar(g);
 			this.play("walk");
 			g._hitboxes.add(_hitbox);
 			this._max_health = 36;
@@ -47,12 +47,12 @@ package enemy {
 			_hitbox.x = this.x + 25;
 			_hitbox.y = this.y + 25;
 			if (this._invuln_ct > 0) {
-				this.set_tar();
+				this.set_tar(g);
 				this.invuln_update();
 				this.color = 0xCC99FF;
 				return;
 			} else if (this._stun_ct > 0) {
-				this.set_tar();
+				this.set_tar(g);
 				this.stun_update();
 				this.color = 0xCC99FF;
 				return;
@@ -71,7 +71,7 @@ package enemy {
 				_delay--;
 				
 				if (_delay <= 0) {
-					this.set_tar();
+					this.set_tar(g);
 					
 					if (Util.pt_dist(this.get_center().x, this.get_center().y, g._player._x, g._player._y) > 40) {
 						var i:Number = 0.0;
@@ -99,12 +99,17 @@ package enemy {
 			}
 		}
 		
-		private function set_tar():Boolean {
+		private function set_tar(g:BottomGame):Boolean {
 			var brk:Number = 0;
 			while (brk < 10) {
 				brk++;
-				var v:Vector3D = Util.normalized(Util.float_random(60, 120) * Util.sig_n(Util.float_random(-1,1)), Util.float_random( -100, 100));
-				v.scaleBy(50);
+				var v:Vector3D = Util.normalized(g._player.get_center().x-this.get_center().x,g._player.get_center().y-this.get_center().y);
+				v.normalize();
+				v.x += Util.float_random( -1.5, 1.5);
+				v.y += Util.float_random( -1.5, 1.5);
+				v.normalize();
+				
+				v.scaleBy(Util.float_random(40,60));
 				_tar.x = this.get_center().x + v.x;
 				_tar.y = this.get_center().y + v.y;
 				if (_tar.x > 0 && _tar.x < Util.WID && _tar.y > 0 && _tar.y < Util.HEI) {
