@@ -127,9 +127,9 @@ package enemy {
 			
 			for (var i:int = 0; i < 4; i++) {
 				if (Util.float_random(0, SmallFollowPickup._HEALTH_SPAWN) < 1) {
-					SmallFollowPickup.cons(g._pickups).init(this.x,this.y,1,1);
+					SmallFollowPickup.cons(g._pickups).init(this.get_center().x,this.get_center().y,1,1);
 				} else {
-					SmallFollowPickup.cons(g._pickups).init(this.x,this.y,1,0);
+					SmallFollowPickup.cons(g._pickups).init(this.get_center().x,this.get_center().y,1,0);
 				}
 			}
 			FlxG.play(Resource.SFX_EXPLOSION);
