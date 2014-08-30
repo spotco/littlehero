@@ -28,6 +28,7 @@ package  {
 		var _teacher:FlxSprite = new FlxSprite(0, 0, Resource.TOP_TEACHER);
 		var _logo:FlxSprite = new FlxSprite(Util.WID * 0.3, Util.HEI * 0.18, Resource.TOP_LOGO);
 		var _maintext:ScrollText;
+		var _misctext:FlxGroup = new FlxGroup();
 		
 		var _click_to_continue:FlxText;
 		
@@ -41,6 +42,10 @@ package  {
 			this.add(_bully_center);
 			this.add(_bully_right);
 			this.add(_cage);
+			this.add(_misctext);
+			
+			_misctext.add(Util.cons_text(0, 0, "F1 to Fullscreen (Recommended)", 0xFFFFFF, 14));
+			_misctext.add(Util.cons_text(0, 16, "M to mute/unmute", 0xFFFFFF, 9));
 			
 			Util.play_bgm(Resource.BGM_MAIN);
 			
@@ -178,6 +183,7 @@ package  {
 					_state = 1;
 					_ct = 0;
 					this.remove(ChatManager._inst);
+					this.remove(_misctext);
 				}
 				
 			} else if (_state == 1) {

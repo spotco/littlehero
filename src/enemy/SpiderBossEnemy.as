@@ -34,7 +34,7 @@ package enemy {
 			this.reset(x, y);
 			g._hitboxes.add(_butt_hitbox);
 			this.play("stand");
-			this._max_health = 60;
+			this._max_health = 80;
 			if (Main.BOSS_1_HEALTH) {
 				this._health = 1;
 			} else {

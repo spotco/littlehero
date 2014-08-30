@@ -55,7 +55,14 @@ package
 			
 			_red_overlay.alpha = 0;
 			this.add(_red_overlay);
+			
+			_tut_text = Util.cons_text(0, 150, "", 0xFFFFFF, 20,1000);
+			_tut_text.alignment = "center";
+			_tut_text.alpha = 0;
+			this.add(_tut_text);
 		}
+		
+		
 		
 		var _boss_in_bar_anim:Number = 0;
 		var _track_boss:BaseEnemy = null;
@@ -73,12 +80,29 @@ package
 			Util.play_bgm(Resource.BGM_MENU);
 		}
 		
+		var _tut_text:FlxText;
+		var _tut_text_ct:Number = 0;
+		public function tutorial_text_for(text:String, ct:Number = 200):void {
+			_tut_text_ct = ct;
+			_tut_text.text = text;
+		}
+		
 		var _last_health:Number = 0;
 		public function _update(g:BottomGame):void {
 			if (_track_boss != null) {
 				ChatManager._inst._update();
 				if (_track_boss._health <= 0) {
 					this.remove(ChatManager._inst);
+				}
+			}
+			_tut_text_ct--;
+			if (_tut_text_ct <= 0) {
+				if (_tut_text.alpha > 0) {
+					_tut_text.alpha -= 0.01;
+				}
+			} else {
+				if (_tut_text.alpha < 1) {
+					_tut_text.alpha += 0.01;
 				}
 			}
 			

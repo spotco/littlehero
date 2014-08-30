@@ -231,7 +231,8 @@ package  {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-				SpiderBossEnemy.cons(g._enemies).init(200, 200, g);
+				g._bottom_game_ui.tutorial_text_for("WASD to move, and swing your mouse to swing your sword.");
+				//SpiderBossEnemy.cons(g._enemies).init(200, 200, g);
 				//BoarEnemy.cons(g._enemies).init(0, 0, g);
 				_ct = 5000;
 				_wave++;
@@ -240,6 +241,7 @@ package  {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
+				g._bottom_game_ui.tutorial_text_for("Click and release to fire your crossbow.");
 				_ct = 5000;
 				_wave++;
 			} else if (_wave == 3) {
@@ -247,7 +249,7 @@ package  {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-				
+				g._bottom_game_ui.tutorial_text_for("Pick up gold and spend on upgrades.");
 				_ct = 5000;
 				_wave ++;
 			} else if (_wave == 4) {
@@ -259,7 +261,7 @@ package  {
 					random_spot_not_near_player(g);
 					BigSpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-				
+				g._bottom_game_ui.tutorial_text_for("Watch your health and energy (top left).");
 				_ct = 5000;
 				_wave++;
 			} else if (_wave == 5) {
