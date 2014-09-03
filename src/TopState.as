@@ -44,6 +44,9 @@ package  {
 			this.add(_cage);
 			this.add(_misctext);
 			
+			Mouse.hide();
+			FlxG.mouse.show(Resource.MOUSE_SWORD);
+			
 			_misctext.add(Util.cons_text(0, 0, "F1 to Fullscreen (Recommended)", 0xFFFFFF, 14));
 			_misctext.add(Util.cons_text(0, 16, "M to mute/unmute", 0xFFFFFF, 9));
 			

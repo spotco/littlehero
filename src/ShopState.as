@@ -92,7 +92,7 @@ package  {
 			
 			//row 3
 			"bow_damage_2": {
-				"price":50,
+				"price":75,
 				"icon":Resource.SHOP_ICON_BOW_DAMAGE,
 				"name":"Bow Damage++",
 				"desc":"Increase Bow Damage.",
@@ -104,17 +104,17 @@ package  {
 				"linkto":["more_arrows_1","bow_accuracy_2"]
 			},
 			"energy_2": {
-				"price":50,
+				"price":75,
 				"icon":Resource.SHOP_ICON_ENERGY,
 				"name":"Energy++",
 				"desc":"Increase Energy.",
 				"func":function() {
-					GameStats._energy += 400;
+					GameStats._max_energy += 250;
 				},
 				"linkto":["bow_accuracy_2","health_3"]
 			},
 			"health_2": {
-				"price":50,
+				"price":75,
 				"icon":Resource.SHOP_ICON_HEALTH,
 				"name":"Health++",
 				"desc":"Increase Health.",
@@ -124,7 +124,7 @@ package  {
 				"linkto":["health_3","sword_recharge_2"]
 			},
 			"sword_recharge_1": {
-				"price":50,
+				"price":75,
 				"icon":Resource.SHOP_ICON_SWORD_RECHARGE,
 				"name":"Sword Recharge+",
 				"desc":"Increase Sword Recharge.",
@@ -136,17 +136,17 @@ package  {
 			
 			//row_4
 			"more_arrows_1": {
-				"price":100,
+				"price":150,
 				"icon":Resource.SHOP_ICON_2ARROW,
 				"name":"Arrows+",
 				"desc":"More Arrows.",
 				"func":function() {
 					GameStats._bow_num_arrows += 1;
 				},
-				"linkto":["more_arrows_2"]
+				"linkto":[]
 			},
 			"bow_accuracy_2": {
-				"price":50,
+				"price":100,
 				"icon":Resource.SHOP_ICON_BOW_ACCURACY,
 				"name":"Bow Accuracy+",
 				"desc":"Increase Bow Accuracy.",
@@ -158,7 +158,7 @@ package  {
 				"linkto":["more_arrows_2","hp_regen"]
 			},
 			"health_3": {
-				"price":50,
+				"price":100,
 				"icon":Resource.SHOP_ICON_HEALTH,
 				"name":"Health+++",
 				"desc":"More Health.",
@@ -168,7 +168,7 @@ package  {
 				"linkto":["hp_regen","armor"]
 			},
 			"sword_recharge_2": {
-				"price":50,
+				"price":100,
 				"icon":Resource.SHOP_ICON_SWORD_RECHARGE,
 				"name":"Sword Recharge++",
 				"desc":"Increase Sword Recharge.",
@@ -178,7 +178,7 @@ package  {
 				"linkto":["armor","sword_size_2"]
 			},
 			"sword_damage_2": {
-				"price":50,
+				"price":100,
 				"icon":Resource.SHOP_ICON_SWORD_DAMAGE,
 				"name":"Sword Damage++",
 				"desc":"Increase Sword Damage.",
@@ -186,7 +186,7 @@ package  {
 					GameStats._sword_damage += 8;
 					GameStats._sword_knockback += 8;	
 				},
-				"linkto":["sword_size_2"]
+				"linkto":[]
 			},
 			
 			//row 5
@@ -200,7 +200,7 @@ package  {
 				}
 			},
 			"hp_regen": {
-				"price":100,
+				"price":150,
 				"icon":Resource.SHOP_ICON_HEALTH_REGEN,
 				"name":"HP Regen",
 				"desc":"Regenerate Health.",
@@ -209,7 +209,7 @@ package  {
 				}
 			},
 			"armor": {
-				"price":100,
+				"price":150,
 				"icon":Resource.SHOP_ICON_ARMOR,
 				"name":"Armor",
 				"desc":"Take Less Damage.",
@@ -218,7 +218,7 @@ package  {
 				}
 			},
 			"sword_size_2": {
-				"price":100,
+				"price":150,
 				"icon":Resource.SHOP_ICON_SWORD_SIZE,
 				"name":"Sword Size++",
 				"desc":"Increase sword size and power.",
@@ -250,7 +250,7 @@ package  {
 		}
 		
 		var _buttons:Array = [];
-		var _continue:FlxSprite = new FlxSprite(880, 336, Resource.SHOP_CONTINUE);
+		var _continue:FlxSprite = new FlxSprite(880, 300, Resource.SHOP_CONTINUE);
 		
 		public var _text_title:FlxText;
 		public var _text_desc:FlxText;
@@ -259,7 +259,7 @@ package  {
 		var _particles:FlxGroup = new FlxGroup();
 		
 		public override function create():void {
-			
+			Mouse.hide();
 			for (var i in items) {
 				items[i].id = i;
 			}
@@ -284,29 +284,29 @@ package  {
 			_gold_disp = Util.cons_text(25 + 5, 360+24, "Gold: 0", 0xFFFFFF, 25, 320 - 10);
 			this.add(_gold_disp);
 			
-			_buttons.push(new ShopButton(430, 283, items["bow_damage_1"],items));//bow damage
-			_buttons.push(new ShopButton(485, 283, items["hp_1"],items));//hp
-			_buttons.push(new ShopButton(545, 283, items["sword_damage_1"],items));//sword damage
+			_buttons.push(new ShopButton(450, 283, items["bow_damage_1"],items));//bow damage
+			_buttons.push(new ShopButton(505, 283, items["hp_1"],items));//hp
+			_buttons.push(new ShopButton(565, 283, items["sword_damage_1"],items));//sword damage
 			
-			_buttons.push(new ShopButton(410, 214, items["bow_accuracy_1"],items));//bow acc
-			_buttons.push(new ShopButton(490, 214, items["energy_1"],items));//energy
-			_buttons.push(new ShopButton(580, 214, items["sword_size_1"],items));//sword size
+			_buttons.push(new ShopButton(415, 214, items["bow_accuracy_1"],items));//bow acc
+			_buttons.push(new ShopButton(502, 214, items["energy_1"],items));//energy
+			_buttons.push(new ShopButton(593, 214, items["sword_size_1"],items));//sword size
 			
 			_buttons.push(new ShopButton(358, 161, items["bow_damage_2"],items));//bow damage
-			_buttons.push(new ShopButton(445, 161, items["energy_2"],items));//energy
-			_buttons.push(new ShopButton(525, 161, items["health_2"],items));//health
-			_buttons.push(new ShopButton(621, 161, items["sword_recharge_1"],items));//sword recharge
+			_buttons.push(new ShopButton(460, 161, items["energy_2"],items));//energy
+			_buttons.push(new ShopButton(545, 161, items["health_2"],items));//health
+			_buttons.push(new ShopButton(641, 161, items["sword_recharge_1"],items));//sword recharge
 			
-			_buttons.push(new ShopButton(288, 120, items["more_arrows_1"],items));//2 arrows
-			_buttons.push(new ShopButton(396, 107, items["bow_accuracy_2"],items));//bow accuracy
-			_buttons.push(new ShopButton(481, 107, items["health_3"],items));//health
-			_buttons.push(new ShopButton(569, 107, items["sword_recharge_2"],items));//sword recharge
-			_buttons.push(new ShopButton(691, 120, items["sword_damage_2"],items));//sword damage
+			_buttons.push(new ShopButton(293, 120, items["more_arrows_1"],items));//2 arrows
+			_buttons.push(new ShopButton(406, 107, items["bow_accuracy_2"],items));//bow accuracy
+			_buttons.push(new ShopButton(499, 107, items["health_3"],items));//health
+			_buttons.push(new ShopButton(594, 112, items["sword_recharge_2"],items));//sword recharge
+			_buttons.push(new ShopButton(700, 120, items["sword_damage_2"],items));//sword damage
 			
-			_buttons.push(new ShopButton(320, 58, items["more_arrows_2"],items));//3 arrows
-			_buttons.push(new ShopButton(430, 58, items["hp_regen"],items));//hp regen
-			_buttons.push(new ShopButton(520, 58, items["armor"],items));//armor
-			_buttons.push(new ShopButton(640, 58, items["sword_size_2"],items));//sword size
+			_buttons.push(new ShopButton(350, 58, items["more_arrows_2"],items));//3 arrows
+			_buttons.push(new ShopButton(452, 58, items["hp_regen"],items));//hp regen
+			_buttons.push(new ShopButton(550, 58, items["armor"],items));//armor
+			_buttons.push(new ShopButton(660, 58, items["sword_size_2"],items));//sword size
 			
 			for each(var b:ShopButton in _buttons) this.add(b);
 			this.add(_continue);
@@ -318,6 +318,7 @@ package  {
 			
 			_fade_cover.makeGraphic(1000, 500, 0xFF000000);
 			this.add(_fade_cover);
+			FlxG.mouse.show(Resource.MOUSE_SWORD);
 		}
 		
 		var _fade_cover:FlxSprite = new FlxSprite();
@@ -355,7 +356,7 @@ package  {
 			for each(var b:ShopButton in _buttons) cursor ||=  b._update(this);
 			_gold_disp.text = "Gold: " + GameStats._gold;
 			
-			if (Util.pt_dist(FlxG.mouse.x,FlxG.mouse.y,_continue.x+40,_continue.y+80) < 60) {
+			if (Util.pt_dist(FlxG.mouse.x,FlxG.mouse.y,_continue.x+40,_continue.y+95) < 80) {
 				_continue.set_scale(1.3);
 				cursor = true;
 				if (FlxG.mouse.justPressed()) {

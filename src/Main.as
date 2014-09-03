@@ -10,6 +10,9 @@ package
 	[SWF(frameRate = "60", width = "1000", height = "500", backgroundColor="#000000")]
 	[Frame(factoryClass = "Preloader")]
 	/*
+	 * boss3 bounce multiple times
+	 * top princess cage
+	 * hard mode
 	 */
 	
 	public class Main extends FlxGame{

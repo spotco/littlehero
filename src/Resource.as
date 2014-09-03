@@ -25,6 +25,10 @@ package {
 		[Embed(source = "../resc/bottom_item/gold.png")] public static var GOLD:Class;
 		[Embed(source = "../resc/bottom_item/heart.png")] public static var HEART:Class;
 		
+		
+		[Embed(source = "../resc/bottom_ui/mouse_sword.png")] public static var MOUSE_SWORD:Class;
+		[Embed(source = "../resc/bottom_ui/mouse_crossbow.png")] public static var MOUSE_CROSSBOW:Class;
+		
 		[Embed(source = "../resc/bottom_ui/hearts_empty.png")] public static var HEARTS_EMPTY:Class;
 		[Embed(source = "../resc/bottom_ui/hearts_full.png")] public static var HEARTS_FULL:Class;
 		
@@ -75,8 +79,8 @@ package {
 		[Embed(source = "../resc/top_bg/princess.png")] public static var TOP_PRINCESS:Class;
 		[Embed(source = "../resc/top_bg/knight.png")] public static var TOP_KNIGHT:Class;
 		[Embed(source = "../resc/top_bg/cage.png")] public static var TOP_CAGE:Class;
-	
-		//[Embed(source = "../resc/shop/shop_icon.png")] public static var SHOP_ICON:Class;
+		
+		[Embed(source = "../resc/top_bg/princess_silouhette.png")] public static var TOP_PRINCESS_SILOUHETTE:Class;
 		
 		[Embed(source = "../resc/shop/icon_2arrow.png")] public static var SHOP_ICON_2ARROW:Class;
 		[Embed(source = "../resc/shop/icon_3arrow.png")] public static var SHOP_ICON_3ARROW:Class;

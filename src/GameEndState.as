@@ -80,7 +80,7 @@ package  {
 			if (_mode == 0) { 
 				_ct--;
 				if (_ct <= 0) {
-					_teacher.loadGraphic(Resource.TOP_PRINCESS);
+					_teacher.loadGraphic(Resource.TOP_PRINCESS_SILOUHETTE);
 					var i:int = 0;
 					for (i = 0; i < 20; i++)  RotateFadeParticle.cons(_particles).init(_teacher.x + _teacher.frameWidth / 2 + Util.float_random( -60, 60), _teacher.y + _teacher.frameHeight / 2 + Util.float_random( -120, 120)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(3, 6)).p_set_delay(Util.float_random(0, 25));
 					_mode = 1;

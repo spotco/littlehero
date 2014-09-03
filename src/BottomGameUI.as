@@ -1,11 +1,11 @@
 package  
 {
 	import enemy.BaseEnemy;
-	import org.flixel.FlxGroup;
-	import org.flixel.FlxSprite;
+	import org.flixel.*;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import org.flixel.FlxText;
+	import flash.ui.Mouse;
 	
 	public class BottomGameUI extends FlxGroup{
 		
@@ -21,14 +21,15 @@ package
 		var _gold_text:FlxText = Util.cons_text(2, 40, "GOLD: 0", 0xFFFFFF, 12);
 		
 		public function BottomGameUI() {
-			_health_bar.loadGraphic(Resource.HEARTS_FULL);
+			Mouse.hide();
+			_health_bar.loadGraphic(Resource.HEARTS_EMPTY);
 			_health_bar.x = -55;
 			_health_bar.y = 0;
 			_health_bar.set_scale(0.75);
 			this.health_bar_pct(1);
 			this.add(_health_bar);//16
 			
-			_energy_bar.loadGraphic(Resource.ENERGY_BAR_GREEN);
+			_energy_bar.loadGraphic(Resource.ENERGY_BAR_EMPTY);
 			_energy_bar.set_scale(0.75);
 			_energy_bar.x = -8 * 0.75;
 			_energy_bar.y = 30 * 0.75;
@@ -129,7 +130,20 @@ package
 			} else {
 				this.boss_bar_pct(0);
 			}
+			
+			if (FlxG.mouse.pressed()) {
+				if (_cur_mouse != Resource.MOUSE_CROSSBOW) {
+					FlxG.mouse.show(Resource.MOUSE_CROSSBOW);
+					_cur_mouse = Resource.MOUSE_CROSSBOW;
+				}
+			} else {
+				if (_cur_mouse != Resource.MOUSE_SWORD) {
+					FlxG.mouse.show(Resource.MOUSE_SWORD);
+					_cur_mouse = Resource.MOUSE_SWORD;
+				}
+			}
 		}
+		var _cur_mouse = Resource.MOUSE_SWORD;
 		
 		private static var BOSS_BAR_RED:FlxSprite = new FlxSprite(0, 0, Resource.BOSS_BAR_RED);
 		private static var BOSS_BAR_EMPTY:FlxSprite = new FlxSprite(0, 0, Resource.BOSS_BAR_EMPTY);
@@ -155,7 +169,7 @@ package
 		private static var ENERGY_BAR_YELLOW:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_YELLOW);
 		private static var ENERGY_BAR_RED:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_RED);
 		private static var ENERGY_BAR_EMPTY:FlxSprite = new FlxSprite(0, 0, Resource.ENERGY_BAR_EMPTY);
-		var _energy_bar_pct:Number = 1;
+		var _energy_bar_pct:Number = -1;
 		private function energy_bar_pct(pct:Number):void {
 			if (pct != _energy_bar_pct) {
 				var tar:FlxSprite;
@@ -166,15 +180,23 @@ package
 				} else {
 					tar = ENERGY_BAR_GREEN;
 				}
+				
+				var tar_width:Number = tar.width;
+				if (GameStats._max_energy <= 101) {
+					tar_width *= 0.4;
+				} else if (GameStats._max_energy <= 301) {
+					tar_width *= 0.75;
+				}
+				
 				_energy_bar.framePixels.copyPixels(
 					tar.framePixels,
-					new Rectangle(0, 0, tar.width-1, tar.height),
+					new Rectangle(0, 0, tar_width-3, tar.height),
 					new Point(0, 0)
 				);
 				_energy_bar.framePixels.copyPixels(
 					ENERGY_BAR_EMPTY.framePixels, 
-					new Rectangle(tar.width * pct, 0, tar.width - tar.width * pct, tar.height), 
-					new Point(tar.width * pct, 0)
+					new Rectangle(tar_width * pct, 0, tar_width - tar_width * pct, tar.height), 
+					new Point(tar_width * pct, 0)
 				);
 				_energy_bar_pct = pct;
 			}
@@ -183,20 +205,27 @@ package
 		
 		private static var HEALTH_BAR_EMPTY:FlxSprite = new FlxSprite(0, 0, Resource.HEARTS_EMPTY);
 		private static var HEALTH_BAR_FULL:FlxSprite = new FlxSprite(0, 0, Resource.HEARTS_FULL);
-		var _health_bar_pct:Number = 1;
+		var _health_bar_pct:Number = -1;
 		private function health_bar_pct(pct:Number) {
 			if (pct != _health_bar_pct) {
 				var tar:FlxSprite = HEALTH_BAR_FULL;
+				var tar_width:Number = tar.width;
+				if (GameStats._max_health <= 6) {
+					tar_width *= (5 / 16);
+				} else if (GameStats._max_health <= 13) {
+					tar_width *= (12 / 16);
+				}
+				
 				_health_bar.framePixels.copyPixels(
 					tar.framePixels,
-					new Rectangle(0, 0, tar.width, tar.height),
+					new Rectangle(0, 0, tar_width, tar.height),
 					new Point(0, 0)
 				);
 				tar = HEALTH_BAR_EMPTY;
 				_health_bar.framePixels.copyPixels(
 					tar.framePixels,
-					new Rectangle(tar.width * pct, 0, tar.width - tar.width * pct, tar.height),
-					new Point(tar.width*pct,0)
+					new Rectangle(tar_width * pct, 0, tar_width - tar_width * pct, tar.height),
+					new Point(tar_width*pct,0)
 				);
 				_health_bar_pct = pct;
 			}
