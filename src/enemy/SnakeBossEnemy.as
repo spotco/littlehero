@@ -98,6 +98,8 @@ package enemy {
 			_hitbox.x = this.x;
 			_hitbox.y = this.y + 25;
 			
+			if (this._health <= this._max_health / 2) ChatManager._inst.set_angry();
+			
 			if (this._invuln_ct > 0) {
 				this.alpha = Math.floor(_invuln_ct / 5) % 2 == 0?1:0.5;
 				this._invuln_ct--;

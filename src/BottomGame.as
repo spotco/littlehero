@@ -5,6 +5,7 @@ package {
 	import enemy.*;
 	import particles.*;
 	import pickups.*;
+	import flash.ui.*;
 	
 	public class BottomGame extends FlxState{
 		
@@ -79,6 +80,7 @@ package {
 		
 		public override function update():void {
 			super.update();
+			Mouse.hide();
 			_bottom_game_ui._update(this);
 			if (_spin_out_ct > 0) {
 				_spin_out_ct--;

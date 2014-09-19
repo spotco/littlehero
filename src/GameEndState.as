@@ -14,11 +14,10 @@ package  {
 		var _player:FlxSprite = new FlxSprite(0, 0, Resource.TOP_PLAYER);
 		var _teacher:FlxSprite = new FlxSprite(0, 0, Resource.TOP_TEACHER);
 		
-		var _click_to_continue:FlxText;
-		
 		public override function create():void {
 			Util.play_bgm(Resource.BGM_MAIN);
 			this.add(_bg);
+			this.add(Util.cons_text(Util.WID * 0.6, Util.HEI * 0.22 + 90, "The End."));
 			this.add(_teacher);
 			this.add(_player);
 			this.add(_bully_left);
@@ -38,12 +37,6 @@ package  {
 			_bully_center.y = Util.HEI - _bully_center.height + 30;
 			_bully_right.y = Util.HEI - _bully_right.height + 30;
 			_teacher.y = Util.HEI * 0.22;
-			
-			this.add(Util.cons_text(Util.WID/2+95, Util.HEI/2-155, "The End.", 0xFFFFFF, 15));
-			
-			_click_to_continue = Util.cons_text(5, 5, "Click to Continue", 0xFFFFFF, 24);
-			this.add(_click_to_continue);
-			_click_to_continue.alpha = 0;
 		}
 		var _mode:Number = 0;
 		var _fade_cover:FlxSprite = new FlxSprite();
@@ -67,7 +60,7 @@ package  {
 				return;
 				
 			} else if (_fadeout) {
-				_fade_cover.alpha += 0.05;
+				_fade_cover.alpha += 0.02;
 				if (_fade_cover.alpha >= 1) {
 					_fade_cover.alpha = 1;
 					_fadeout = false;
@@ -80,7 +73,7 @@ package  {
 			if (_mode == 0) { 
 				_ct--;
 				if (_ct <= 0) {
-					_teacher.loadGraphic(Resource.TOP_PRINCESS_SILOUHETTE);
+					_teacher.loadGraphic(Resource.TOP_PRINCESS);
 					var i:int = 0;
 					for (i = 0; i < 20; i++)  RotateFadeParticle.cons(_particles).init(_teacher.x + _teacher.frameWidth / 2 + Util.float_random( -60, 60), _teacher.y + _teacher.frameHeight / 2 + Util.float_random( -120, 120)).p_set_ctspeed(0.05).p_set_scale(Util.float_random(3, 6)).p_set_delay(Util.float_random(0, 25));
 					_mode = 1;
@@ -102,6 +95,7 @@ package  {
 				if (_ct <= 0) {
 					_mode = 3;
 					_ct = 100;
+					FlxG.play(Resource.SFX_SPIN);
 				}
 				_ct2++;
 				if (_ct2 % 25 == 0) {
@@ -118,6 +112,7 @@ package  {
 				if (_ct <= 0) {
 					_fadeout = true;
 					_ending = true;
+					FlxG.play(Resource.SFX_POWERUP);
 				}
 			}
 		}

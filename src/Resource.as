@@ -65,7 +65,6 @@ package {
 		[Embed(source = "../resc/bottom_fx/explosion.png")] public static var EXPLOSION:Class;
 		[Embed(source = "../resc/bottom_fx/sweat_ss.png")] public static var SWEAT_SS:Class;
 		
-		[Embed(source = "../resc/top_bg/logo.png")] public static var TOP_LOGO:Class;
 		[Embed(source = "../resc/top_bg/bg.png")] public static var TOP_BG:Class;
 		[Embed(source = "../resc/top_bg/bully_center.png")] public static var TOP_BULLY_CENTER:Class;
 		[Embed(source = "../resc/top_bg/bully_left.png")] public static var TOP_BULLY_LEFT:Class;
@@ -78,9 +77,9 @@ package {
 		[Embed(source = "../resc/top_bg/teacher.png")] public static var TOP_TEACHER:Class;
 		[Embed(source = "../resc/top_bg/princess.png")] public static var TOP_PRINCESS:Class;
 		[Embed(source = "../resc/top_bg/knight.png")] public static var TOP_KNIGHT:Class;
-		[Embed(source = "../resc/top_bg/cage.png")] public static var TOP_CAGE:Class;
+		[Embed(source = "../resc/top_bg/zzz.png")] public static var TOP_ZZZ:Class;
 		
-		[Embed(source = "../resc/top_bg/princess_silouhette.png")] public static var TOP_PRINCESS_SILOUHETTE:Class;
+		[Embed(source = "../resc/top_bg/princess_cage.png")] public static var TOP_PRINCESS_CAGE:Class;
 		
 		[Embed(source = "../resc/shop/icon_2arrow.png")] public static var SHOP_ICON_2ARROW:Class;
 		[Embed(source = "../resc/shop/icon_3arrow.png")] public static var SHOP_ICON_3ARROW:Class;
@@ -114,7 +113,6 @@ package {
 		[Embed( source = "../resc/sound/powerup.mp3" )] public static var SFX_POWERUP:Class; 
 		[Embed( source = "../resc/sound/sfx_bone_1.mp3" )] public static var SFX_COLLECT_1:Class; 
 		[Embed( source = "../resc/sound/sfx_explosion.mp3" )] public static var SFX_EXPLOSION:Class; 
-		[Embed( source = "../resc/sound/sfx_goal.mp3" )] public static var SFX_GOAL:Class; 
 		[Embed( source = "../resc/sound/sfx_hit.mp3" )] public static var SFX_HIT:Class;
 		[Embed( source = "../resc/sound/sfx_rockbreak.mp3" )] public static var SFX_ROCKBREAK:Class; 
 		[Embed( source = "../resc/sound/sfx_spin.mp3" )] public static var SFX_SPIN:Class; 
@@ -123,5 +121,6 @@ package {
 		[Embed( source = "../resc/sound/shoot2.mp3" )] public static var SFX_BULLET4:Class;
 		[Embed( source = "../resc/sound/sfx_boss_enter.mp3" )] public static var SFX_BOSS_ENTER:Class;
 		
+		[Embed( source = "../resc/font.otf", fontFamily="game", embedAsCFF="false")] public static var FONT:Class;
 	}
 }

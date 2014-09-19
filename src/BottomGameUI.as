@@ -36,7 +36,7 @@ package
 			this.add(_energy_bar);
 			energy_bar_pct(1);
 			
-			this.add(Util.cons_text(2, 24, "ENG:",0xFFFFFF,12));
+			this.add(Util.cons_text(2, 24, "ENERGY:",0xFFFFFF,12));
 			this.add(_gold_text);
 			
 			_wave_text = Util.cons_text(0, 0, "WAVE: 0", 0xFFFFFF, 20);

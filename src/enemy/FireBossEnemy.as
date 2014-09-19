@@ -95,8 +95,8 @@ package enemy {
 			} else {
 				this.color = 0xFFFFFF;
 			}
-			
-			if (_mode != 1 && this.hit_player(g)) {
+			if (this._health <= 2) ChatManager._inst.set_angry();
+			if (this.hit_player(g)) {
 				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
 				v.normalize();
 				v.scaleBy(35);
@@ -149,6 +149,7 @@ package enemy {
 						_vx *= -1;
 					}
 					FlxG.shake(0.01, 0.15);
+					FlxG.play(Resource.SFX_ROCKBREAK);
 				}
 				if (this.alive_ct() == 0) {
 					_mode = 1;
@@ -179,18 +180,32 @@ package enemy {
 			} else if (_mode == 2) {
 				var pt:FlxPoint = Util.flxpt(this.get_center().x, this.get_center().y);
 				this.set_center(pt.x + _vx, pt.y + _vy);
+				this.angle += 30;
 				if (this.hit_wall(100)) {
-					this._invuln_ct = 50;
-					FlxG.shake(0.03, 0.35);
-					BottomGame._freeze_frame = 15;
-					_mode = 3;
-					this._health--;
-					FlxG.play(Resource.SFX_ROCKBREAK);
-					FlxG.play(Resource.SFX_ROCKBREAK);
-					FlxG.play(Resource.SFX_ROCKBREAK);
-					FlxG.play(Resource.SFX_BOSS_ENTER);
-					FlxG.play(Resource.SFX_BOSS_ENTER);
-					FlxG.play(Resource.SFX_BOSS_ENTER);
+					_bounce_ct--;
+					if (_bounce_ct > 0) {
+						if (this._hit_wall_top || this._hit_wall_bottom) {
+							_vy *= -1;
+						}
+						if (this._hit_wall_left || this._hit_wall_right) {
+							_vx *= -1;
+						}
+						FlxG.shake(0.01, 0.15);
+						FlxG.play(Resource.SFX_ROCKBREAK);
+						
+					} else {
+						this._invuln_ct = 50;
+						FlxG.shake(0.03, 0.35);
+						BottomGame._freeze_frame = 15;
+						_mode = 3;
+						this._health--;
+						FlxG.play(Resource.SFX_EXPLOSION);
+						FlxG.play(Resource.SFX_EXPLOSION);
+						FlxG.play(Resource.SFX_EXPLOSION);
+						FlxG.play(Resource.SFX_BOSS_ENTER);
+						FlxG.play(Resource.SFX_BOSS_ENTER);
+						FlxG.play(Resource.SFX_BOSS_ENTER);
+					}
 				}
 				
 			} else if (_mode == 3) {
@@ -237,6 +252,8 @@ package enemy {
 			}
 		}
 		
+		var _bounce_ct:Number = 0;
+		
 		public override function _hit(g:BottomGame, bow:Boolean = false):void {
 			if (!bow && _mode == 1) {
 				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
@@ -250,6 +267,13 @@ package enemy {
 				_vx = dv.x;
 				_vy = dv.y;
 				_mode = 2;
+				if (_health > 1) {
+					_bounce_ct = 10;
+				} else {
+					_bounce_ct = 15;
+				}
+				
+				
 			} else if (!bow) {
 				var v:Vector3D = Util.normalized(g._player.get_center().x - this.get_center().x, g._player.get_center().y - this.get_center().y);
 				v.normalize();

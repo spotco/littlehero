@@ -1,1 +1,1 @@
-[2]portraits_0006_spiderboss-hurt.png[1]portraits_0007_spiderboss-talk.png[0]portraits_0008_spiderboss-idle.pngwidth:120 px, height:146 px
+[3]Layer 4[2]Layer 3[1]Layer 2[0]Layer 1width:120 px, height:146 px

@@ -312,7 +312,6 @@ package  {
 			this.add(_continue);
 			
 			this.add(Util.cons_text(25, 10, "Equip Thyself!", 0xFFFFFF, 30));
-			this.add(new FlxSprite(Util.WID*0.65,Util.HEI*0.4,Resource.TOP_KNIGHT));
 			
 			this.add(_particles);
 			
@@ -325,6 +324,7 @@ package  {
 		var _fadeout:Boolean = false;
 		var _fadein:Boolean = true;
 		public override function update():void {
+			Mouse.hide();
 			if (_fadein) {
 				_fade_cover.alpha -= 0.05;
 				if (_fade_cover.alpha <= 0) {

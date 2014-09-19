@@ -18,10 +18,10 @@ package enemy {
 		
 		public function FireBossFistEnemy() {
 			super();
-			this.loadGraphic(Resource.FIREBOSS_FIST, true, false, 76, 238);
-			this.addAnimation("stand", [0], 20);
+			this.loadGraphic(Resource.FIREBOSS_FIST, true, false, 113, 250);
+			this.addAnimation("play", [0, 1, 2], 10);
+			this.play("play");
 			_hitbox.loadGraphic(Resource.FIREBOSS_FIST_HITBOX);
-			
 		}
 		
 		var _follow:FireBossEnemy;
@@ -29,7 +29,7 @@ package enemy {
 		
 		public function init(x:Number,y:Number, g:BottomGame, follow:FireBossEnemy, offset:Number):FireBossFistEnemy {
 			this.reset(x, y);
-			this.play("stand");
+			this.play("play");
 			g._hitboxes.add(_hitbox);
 			this._max_health = 35;
 			if (Main.BOSS_1_HEALTH) {

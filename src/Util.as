@@ -64,12 +64,6 @@ package  {
 			FlxG.camera.antialiasing = true;
 		}
 		
-		public static function more_games(click:Boolean = true):void {
-			//navigateToURL(new URLRequest("http://www.flashegames.net/"));
-			//navigateToURL(new URLRequest("http://www.ppllaayy.com/?utm_source=sponsorship&utm_campaign=windcleaner"),"_self");
-			FlxU.openURL("http://www.ppllaayy.com/?utm_source=sponsorship&utm_campaign=windcleaner",click);
-		}
-		
 		public static function float_random(min:Number, max:Number):Number {
 			return min + Math.random() * (max - min);
 		}
@@ -222,7 +216,7 @@ package  {
 		
 		public static function cons_text(x:Number, y:Number, text:String, color:uint = 0xFFFFFF, font_size:int = 20, width:Number = 1000):FlxText {
 			var _score:FlxText = new FlxText(x,y , width, text);
-			_score.setFormat("system", font_size);
+			_score.setFormat("game", font_size);
 			_score.color = color;
 			return _score;
 		}

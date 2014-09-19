@@ -82,6 +82,9 @@ package enemy {
 		var _red_ct:Number = 0;
 		public override function _update(g:BottomGame):void {
 			super._update(g);
+			
+			if (this._health <= this._max_health / 2) ChatManager._inst.set_angry();
+			
 			_butt_hitbox.x = this.x + 125 + Math.cos((this.angle-90)*Util.DEG_TO_RAD)*130;
 			_butt_hitbox.y = this.y + 90 + Math.sin((this.angle-90)* Util.DEG_TO_RAD) * 160;
 			_body_hitbox.x = this.x + 40;

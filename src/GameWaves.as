@@ -68,7 +68,11 @@ package  {
 					random_spot_not_near_player(g);
 					JellyEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-										
+				/*
+				random_spot_not_near_player(g);
+				FireBossEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
+				*/	
+				
 				_ct = 5000;
 				_wave++;
 			} else if (_wave == 2) {
@@ -152,7 +156,7 @@ package  {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-				
+				//SpiderBossEnemy.cons(g._enemies).init(200, 200, g);
 				_ct = 5000;
 				_wave++;
 			} else if (_wave == 2) {
@@ -232,6 +236,7 @@ package  {
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
 				g._bottom_game_ui.tutorial_text_for("WASD to move, and swing your mouse to swing your sword.");
+				//SnakeBossEnemy.cons(g._enemies).init(0, 0, g);
 				//SpiderBossEnemy.cons(g._enemies).init(200, 200, g);
 				//BoarEnemy.cons(g._enemies).init(0, 0, g);
 				_ct = 5000;

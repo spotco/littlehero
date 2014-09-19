@@ -153,16 +153,19 @@ package  {
 			
 			_fireboss_sprite.loadGraphic(Resource.CHAT_FIREBOSS_SS, true, false, 120, 146);
 			_fireboss_sprite.addAnimation("chat", [0, 1], 10);
+			_fireboss_sprite.addAnimation("chat_angry", [2, 3], 10);
 			_fireboss_sprite.play("chat");
 			_fireboss_sprite.alpha = 0.8;
 			
 			_snakeboss_sprite.loadGraphic(Resource.CHAT_SNAKEBOSS_SS, true, false, 120, 146);
 			_snakeboss_sprite.addAnimation("chat", [0, 1], 10);
+			_snakeboss_sprite.addAnimation("chat_angry", [2, 3], 10);
 			_snakeboss_sprite.play("chat");
 			_snakeboss_sprite.alpha = 0.8;
 			
 			_spider_sprite.loadGraphic(Resource.CHAT_SPIDERBOSS_SS, true, false, 120, 146);
 			_spider_sprite.addAnimation("chat", [0, 1], 10);
+			_spider_sprite.addAnimation("chat_angry", [2, 3],10);
 			_spider_sprite.play("chat");
 			_spider_sprite.alpha = 0.8;
 			
@@ -172,6 +175,15 @@ package  {
 			_text_scroll = new ScrollText(_text, "", 5);
 			_cur_sprite = _teacher_sprite;
 			this.add(_cur_sprite);
+		}
+		
+		var _has_set_angry:Boolean = false;
+		public function set_angry():void {
+			if (!_has_set_angry) {
+				_fireboss_sprite.play("chat_angry");
+				_snakeboss_sprite.play("chat_angry");
+				_spider_sprite.play("chat_angry");
+			}
 		}
 		
 		var _chat_cover_vis_mlt:Number = 1;

@@ -16,8 +16,6 @@ package  {
 		var _bully_center:FlxSprite = new FlxSprite(0, 0, Resource.TOP_BULLY_CENTER);
 		var _bully_right:FlxSprite = new FlxSprite(0, 0, Resource.TOP_BULLY_RIGHT);
 		
-		var _cage:FlxSprite = new FlxSprite(Util.WID * 0.25 - 40, -400, Resource.TOP_CAGE);
-		
 		var _bully_left_offsety:Number = 0;
 		var _bully_center_offsety:Number = 0;
 		var _bully_right_offsety:Number = 0;
@@ -26,29 +24,35 @@ package  {
 		
 		var _player:FlxSprite = new FlxSprite(0, 0, Resource.TOP_PLAYER);
 		var _teacher:FlxSprite = new FlxSprite(0, 0, Resource.TOP_TEACHER);
-		var _logo:FlxSprite = new FlxSprite(Util.WID * 0.3, Util.HEI * 0.18, Resource.TOP_LOGO);
 		var _maintext:ScrollText;
 		var _misctext:FlxGroup = new FlxGroup();
 		
 		var _click_to_continue:FlxText;
 		
+		var _zzz:FlxSprite = new FlxSprite();
+		
 		public override function create():void {			
 			this.add(_bg);
-			_logo.set_scale(0.8);
-			this.add(_logo);
 			this.add(_player);
+			this.add(_zzz);
 			this.add(_teacher);
 			this.add(_bully_left);
 			this.add(_bully_center);
 			this.add(_bully_right);
-			this.add(_cage);
 			this.add(_misctext);
+			
+			_zzz.set_position(Util.WID*0.6 + 100,Util.HEI*0.4 - 30);
+			_zzz.loadGraphic(Resource.TOP_ZZZ, true, false, 61, 82);
+			_zzz.addAnimation("play", [0, 1, 2],5);
+			_zzz.play("play");
 			
 			Mouse.hide();
 			FlxG.mouse.show(Resource.MOUSE_SWORD);
 			
-			_misctext.add(Util.cons_text(0, 0, "F1 to Fullscreen (Recommended)", 0xFFFFFF, 14));
-			_misctext.add(Util.cons_text(0, 16, "M to mute/unmute", 0xFFFFFF, 9));
+			_misctext.add(Util.cons_text(0, 0, "F1 to Fullscreen (Recommended)", 0xFFFFFF, 16));
+			_misctext.add(Util.cons_text(0, 18, "M to mute/unmute", 0xFFFFFF, 12));
+			_click_to_continue = Util.cons_text(Util.WID * 0.4875, 218-15, "Click Anywhere to Continue", 0xFFFFFF, 16);
+			_misctext.add(_click_to_continue);
 			
 			Util.play_bgm(Resource.BGM_MAIN);
 			
@@ -62,8 +66,6 @@ package  {
 				_bully_center.loadGraphic(Resource.TOP_BULLY_CENTER_EMPTY);
 			}
 			
-			_click_to_continue = Util.cons_text(Util.WID/2+20, Util.HEI/2-155, "Click to continue.", 0xFFFFFF, 15);
-			//this.add(_click_to_continue);
 			
 			var maintext:FlxText = Util.cons_text(Util.WID * 0.5, Util.HEI * 0.15, "", 0xFFFFFF, 24, 400);
 			this.add(maintext);
@@ -82,8 +84,7 @@ package  {
 			_player.x = Util.WID * 0.6;
 			_player.y = Util.HEI * 0.4;
 			
-			_teacher.x = Util.WID * 0.25;
-			_teacher.y = Util.HEI * 0.22;
+			set_bully_y();
 			
 			_bully_center.x = Util.WID / 2 - _bully_center.width/2;
 			_bully_right.x = Util.WID - _bully_right.width;
@@ -106,7 +107,8 @@ package  {
 			_bully_left.y = Util.HEI - _bully_left.height + 30 + _bully_left_offsety;
 			_bully_center.y = Util.HEI - _bully_center.height + 30 + _bully_center_offsety;
 			_bully_right.y = Util.HEI - _bully_right.height + 30 + _bully_right_offsety;
-			_teacher.y = Util.HEI * 0.22 + _teacher_offsety;
+			_teacher.x = Util.WID * 0.25;
+			_teacher.y = Util.HEI * 0.2 + _teacher_offsety;
 		}
 		
 		var _state:Number = 0;
@@ -118,8 +120,11 @@ package  {
 		var _ending_ct:Number = 0;
 		var _chat_anim_ct:Number = 0;
 		
+		var _click_to_continue_ct:Number = 0;
+		
 		public override function update():void {
 			super.update();
+			Mouse.hide();
 			ChatManager._inst._update();
 			if (_fadein) {
 				_fade_cover.alpha -= 0.05;
@@ -138,15 +143,22 @@ package  {
 				}
 				return;
 			}
+			_click_to_continue_ct++;
+			if (_click_to_continue_ct % 50 == 0) {
+				_click_to_continue.visible = !_click_to_continue.visible;
+			}
 			
 			if (GameEndState._ending) {
 				_ending_ct++;
+				_zzz.visible = false;
 				if (_ending_ct == 30) {
 					_player.loadGraphic(Resource.TOP_PLAYER_AWAKE);
 				} else if (_ending_ct == 120) {
 					_player.loadGraphic(Resource.TOP_PLAYER);
 					GameEndState._ending = false;
 				}
+			} else {
+				_zzz.visible = true;
 			}
 			
 			for each (var part:BaseParticle in _particles.members) {
@@ -161,7 +173,6 @@ package  {
 			if (!_fadein && _state == 0) {}
 			
 			if (_state == 0) { 
-				this._click_to_continue.alpha = 1;
 				_bully_left_offsety *= 0.95;
 				_bully_center_offsety *= 0.95;
 				_bully_right_offsety *= 0.95;
@@ -190,12 +201,11 @@ package  {
 				}
 				
 			} else if (_state == 1) {
-				this._click_to_continue.alpha = 0;
 				if (_bully_center.alpha > 0) _bully_center.alpha -= 0.01;
 				if (_bully_left.alpha > 0) _bully_left.alpha -= 0.01;
 				if (_bully_right.alpha > 0) _bully_right.alpha -= 0.01;
 				if (_bg.alpha > 0) _bg.alpha -= 0.01;
-				if (_logo.alpha > 0) _logo.alpha -= 0.01;
+				if (_zzz.alpha > 0) _zzz.alpha -= 0.01;
 				_ct++;
 				if (_ct >= 100) {
 					_state = 2;
@@ -206,12 +216,12 @@ package  {
 					FlxG.play(Resource.SFX_EXPLOSION);
 					FlxG.play(Resource.SFX_EXPLOSION);
 					_player.loadGraphic(Resource.TOP_KNIGHT);
-					_teacher.loadGraphic(Resource.TOP_PRINCESS);
+					_teacher.loadGraphic(Resource.TOP_PRINCESS_CAGE);
+					_teacher.x -= 50;
+					_teacher.y -= 30;
 				}
 			
 			} else if (_state == 2) {
-				_cage.x = Util.WID * 0.25 - 20;
-				_cage.y = _teacher.y - 70;
 				_maintext._update();
 				if (_maintext.finished()) {
 					_state = 3;
