@@ -27,7 +27,7 @@ package particles {
 		public override function _update(g:BottomGame):void {
 			this.x = g._player._x - 25;
 			this.y = g._player._y + 5;
-			if (GameStats._energy / GameStats._max_energy < 0.2) {
+			if (GameStats._energy < g._player._sword.get_slash_cost()) {
 				this.alpha = 1;
 			} else {
 				this.alpha = 0;

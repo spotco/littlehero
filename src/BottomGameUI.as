@@ -131,7 +131,8 @@ package
 				this.boss_bar_pct(0);
 			}
 			
-			if (FlxG.mouse.pressed()) {
+			Mouse.hide();
+			if (Util.RIGHT_MOUSE_PRESSED || FlxG.keys.SPACE) {
 				if (_cur_mouse != Resource.MOUSE_CROSSBOW) {
 					FlxG.mouse.show(Resource.MOUSE_CROSSBOW);
 					_cur_mouse = Resource.MOUSE_CROSSBOW;
@@ -143,7 +144,7 @@ package
 				}
 			}
 		}
-		var _cur_mouse = Resource.MOUSE_SWORD;
+		var _cur_mouse = null;
 		
 		private static var BOSS_BAR_RED:FlxSprite = new FlxSprite(0, 0, Resource.BOSS_BAR_RED);
 		private static var BOSS_BAR_EMPTY:FlxSprite = new FlxSprite(0, 0, Resource.BOSS_BAR_EMPTY);

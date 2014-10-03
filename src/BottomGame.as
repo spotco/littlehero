@@ -48,7 +48,7 @@ package {
 			//this.add(_hitboxes);
 			
 			_player._sword = SwordPlayerProjectile.cons(_player_projectiles).init(_player,this);
-			CrossBowPlayerProjectile.cons(_player_projectiles).init(_player);
+			_player._crossbow = CrossBowPlayerProjectile.cons(_player_projectiles).init(_player);
 			_player._arrowretic = ArrowReticuleUIParticle.cons(_particles).init(_player, true);
 			ArrowReticuleUIParticle.cons(_particles).init(_player, false);
 			SweatParticle.cons(_particles);
@@ -80,7 +80,6 @@ package {
 		
 		public override function update():void {
 			super.update();
-			Mouse.hide();
 			_bottom_game_ui._update(this);
 			if (_spin_out_ct > 0) {
 				_spin_out_ct--;

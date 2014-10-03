@@ -18,6 +18,8 @@ package
 		
 		
 		public function Main():void {
+			//super(1000, 500, Bott);
+			//Util.mute_toggle();
 			super(1000,500,TopState);
 			self = this;
 			
@@ -35,6 +37,9 @@ package
 				stage.addChild(_bottomcover);
 				stage.addEventListener(MouseEvent.RIGHT_CLICK, function(e:MouseEvent) { } );
 				
+				stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, function(e:MouseEvent) { Util.RIGHT_MOUSE_PRESSED = true; } );
+				stage.addEventListener(MouseEvent.RIGHT_MOUSE_UP, function(e:MouseEvent) { Util.RIGHT_MOUSE_PRESSED = false; } );
+				stage.addEventListener(Event.MOUSE_LEAVE, function(e:Event) { Util.RIGHT_MOUSE_PRESSED = false; } );
 			})
 		}
 		

@@ -81,7 +81,7 @@ package  {
 			},
 			"sword_size_1": {
 				"price":50,
-				"icon":Resource.SHOP_ICON_SWORD_SIZE,
+				"icon":Resource.SHOP_ICON_SWORD_DAMAGE,
 				"name":"Sword Size+",
 				"desc":"Increase sword size and power.",
 				"func":function() {
@@ -179,10 +179,12 @@ package  {
 			},
 			"sword_damage_2": {
 				"price":100,
-				"icon":Resource.SHOP_ICON_SWORD_DAMAGE,
-				"name":"Sword Damage++",
-				"desc":"Increase Sword Damage.",
+				"icon":Resource.SHOP_ICON_SWORD_SIZE,
+				"name":"Sword Spin",
+				"desc":"Hold down the left mouse to spin!",
 				"func":function() {
+					GameStats._sword_can_spin = true;
+					GameStats._max_energy += 150;
 					GameStats._sword_damage += 8;
 					GameStats._sword_knockback += 8;	
 				},
@@ -219,7 +221,7 @@ package  {
 			},
 			"sword_size_2": {
 				"price":150,
-				"icon":Resource.SHOP_ICON_SWORD_SIZE,
+				"icon":Resource.SHOP_ICON_SWORD_DAMAGE,
 				"name":"Sword Size++",
 				"desc":"Increase sword size and power.",
 				"func":function() {

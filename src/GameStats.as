@@ -23,6 +23,7 @@ package  {
 		public static var _sword_knockback:Number = 10;
 		public static var _sword_stun:Number = 1;
 		public static var _sword_scale:Number = 1;
+		public static var _sword_can_spin:Boolean = false;
 		
 		public static var _knockback_damage:Number = 10;
 

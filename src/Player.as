@@ -10,6 +10,7 @@ package  {
 		public var _body:FlxSprite = new FlxSprite();
 		
 		public var _arrowretic:ArrowReticuleUIParticle;
+		public var _crossbow:CrossBowPlayerProjectile;
 		public var _sword:SwordPlayerProjectile;
 		
 		public var _x:Number, _y:Number;

@@ -235,9 +235,10 @@ package  {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-				g._bottom_game_ui.tutorial_text_for("WASD to move, and swing your mouse to swing your sword.");
+				g._bottom_game_ui.tutorial_text_for("WASD to move, and left click to swing your sword.");
 				//SnakeBossEnemy.cons(g._enemies).init(0, 0, g);
 				//SpiderBossEnemy.cons(g._enemies).init(200, 200, g);
+				//FireBossEnemy.cons(g._enemies).init(0, 0, g);
 				//BoarEnemy.cons(g._enemies).init(0, 0, g);
 				_ct = 5000;
 				_wave++;
@@ -246,7 +247,7 @@ package  {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-				g._bottom_game_ui.tutorial_text_for("Click and release to fire your crossbow.");
+				g._bottom_game_ui.tutorial_text_for("Right click (or Space+Click) to fire your crossbow.");
 				_ct = 5000;
 				_wave++;
 			} else if (_wave == 3) {

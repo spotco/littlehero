@@ -43,14 +43,14 @@ package particles {
 			
 			var offset_left:Vector3D = Util.Z_VEC.crossProduct(offset_forward);
 			offset_left.normalize();
-			offset_left.scaleBy( -15);
+			offset_left.scaleBy( 15);
 			
 			this.x = _follow.get_center().x - this.frameWidth/2 + offset_left.x + offset_forward.x;
 			this.y = _follow.get_center().y  - this.frameHeight / 2 + offset_left.y + offset_forward.y;
 			
-			if (GameStats._energy < 10) {
+			if (GameStats._energy < g._player._crossbow.get_arrow_cost()) {
 				this.alpha = 0;
-			} else if (FlxG.mouse.pressed()) {
+			} else if (Util.get_is_right_mouse_or_equiv_pressed()) {
 				this.alpha = 1;
 				this._ang *= GameStats._bow_focus_factor;
 				this._disp_ang = _ang;

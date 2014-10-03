@@ -40,83 +40,117 @@ package player_projectiles {
 			this.reset(follow._x, follow._y);
 			this._follow = follow;
 			g._hitboxes.add(_hitbox);
-			_last_mouse_x = FlxG.mouse.x;
-			_last_mouse_y = FlxG.mouse.y;
 			this.set_scale(GameStats._sword_scale);
-			//this._hitbox.set_scale(GameStats._sword_scale);
+			this.alpha = 1;
 			return this;
 		}
 		
-		var _last_sword_sfx:Number = 0;
-		
 		public var _sword_invuln:Boolean = false;
-		var _last_mouse_x:Number, _last_mouse_y:Number, _hold_sword_ct:Number = 0;
+		var _swinging:Boolean = false;
+		var _swing_angle:Number = 45;
+		var _swing_prev_angle:Number = 45;
+		var _swing_tar_angle:Number = 45;
+		var _swing_t:Number = 0;
+		
+		var _mouse_hold_count:Number = 0;
+		var _can_spin:Boolean = false;
+		var _slash_cost_mult:Number = 1;
+		
+		public function get_slash_cost():Number {
+			return 25 * _slash_cost_mult;
+		}
+		
 		public override function _update(g:BottomGame):void {
-			_last_sword_sfx--;
-			var sword_speed:Number = Util.point_dist(_last_mouse_x, _last_mouse_y, FlxG.mouse.x, FlxG.mouse.y);
-			/*
-			_hitbox.x = this.x;
-			_hitbox.y = this.y;
-			*/
+			var v:Vector3D = Util.normalized(
+				Math.cos((_follow._angle + _swing_angle) * Util.DEG_TO_RAD),
+				Math.sin((_follow._angle + _swing_angle) * Util.DEG_TO_RAD)
+			);
+			
+			this.angle = _follow._angle + _swing_angle;
 			_hitbox.angle = this.angle;
 			
-			var v:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
-			v.scaleBy(this.frameHeight / 2);
-			
-			var offset_right:Vector3D = Util.Z_VEC.crossProduct(v);
-			offset_right.normalize();
-			offset_right.scaleBy(7);
-			
-			this.x = this._follow._x - this.frameWidth/2 + g._player._body.frameWidth/2 + v.x + offset_right.x;
-			this.y = this._follow._y - this.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_right.y;
-			
-			_hitbox.x = this._follow._x - _hitbox.frameWidth / 2 + g._player._body.frameWidth / 2 + v.x + offset_right.x;
-			_hitbox.y = this._follow._y - _hitbox.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_right.y;
-			
-			if (sword_speed > 40 && !FlxG.mouse.pressed() && GameStats._energy / GameStats._max_energy > 0.2) {
-				if (_last_sword_sfx <= 0) {
-					FlxG.play(Resource.SFX_SPIN);
-					_last_sword_sfx = 15;
-				}
-				GameStats._energy -= 10;
-				GameStats._just_used_energy_ct = GameStats._sword_just_used_energy_ct;
-				this.alpha = 1;
-				this._hold_sword_ct = 5;
-				_sword_invuln = true;
+			if (FlxG.mouse.pressed()) {
+				_mouse_hold_count++;
 			} else {
-				if (this._hold_sword_ct > 0) {
-					if (GameStats._energy > 0) {
-						GameStats._energy -= 5;
-						this._hold_sword_ct--;
-					} else {
-						this._hold_sword_ct = 0;
-					}
-					_sword_invuln = true;
+				_mouse_hold_count = 0;
+			}
+			
+			var SPIN_COST:Number = 7;
+			var SLASH_COST:Number = get_slash_cost();
+			var SPIN_TIME:Number = 25;
+			
+			if (_mouse_hold_count > SPIN_TIME && GameStats._energy <= SPIN_COST + SLASH_COST) {
+				_can_spin = false;
+			} else if (!FlxG.mouse.pressed()) {
+				_can_spin = true;
+			}
+			_slash_cost_mult =  Math.max(1,_slash_cost_mult * 0.99);
+			
+			if (_mouse_hold_count > SPIN_TIME && GameStats._energy > SLASH_COST && _can_spin && GameStats._sword_can_spin && !FlxG.keys.SPACE) {
+				_swing_angle -= 18;
+				this.alpha = 1;
+				//_sword_invuln = true;
+				GameStats._energy -= SPIN_COST;
+				GameStats._just_used_energy_ct = GameStats._sword_just_used_energy_ct;
+				if (_mouse_hold_count%10==0) FlxG.play(Resource.SFX_SPIN);
+				
+			} else {
+				_sword_invuln = false;
+				if (!_swinging && FlxG.mouse.justPressed() && !FlxG.keys.SPACE && GameStats._energy > SLASH_COST) {
+					GameStats._energy -= SLASH_COST;
+					GameStats._just_used_energy_ct = GameStats._sword_just_used_energy_ct;
 					
-				} else if (this.alpha > 0) {
-					if (GameStats._energy > 0) GameStats._energy -= 3;
-					this.alpha -= 0.05;
-					_sword_invuln = false;
+					FlxG.play(Resource.SFX_SPIN);
+					_swinging = true;
+					_swing_t = 0;
+					_swing_angle = 45;
+					_swing_tar_angle = -75;
+					_swing_prev_angle = _swing_angle;
+					_slash_cost_mult += 1;
+				}
+				
+				if (_swinging) {
+					_swing_t += 0.09;
+					_swing_angle = Util.sin_lerp(_swing_prev_angle, _swing_tar_angle, _swing_t);
+					if (_swing_t >= 1) {
+						_swinging = false;
+					}
+					this.alpha = 1;
 				} else {
-					_sword_invuln = false;
+					this.alpha *= 0.9;
 				}
 			}
 			
-			this.angle = _follow._angle;
+			var out_offset:Number = Math.sin(_swing_t * Math.PI);
+			
+			v.normalize();
+			v.scaleBy(this.frameWidth * 0.8 + out_offset * 5);
+			
+			var offset_up:Vector3D = Util.Z_VEC.crossProduct(v);
+			offset_up.normalize();
+			offset_up.scaleBy(this.frameHeight * 0.5 + out_offset * 15);
+			
+			this.x = this._follow._x - this.frameWidth/2 + g._player._body.frameWidth/2 + offset_up.x + v.x;
+			this.y = this._follow._y - this.frameHeight / 2 + g._player._body.frameHeight / 2 + offset_up.y + v.y;
+			
+			_hitbox.x = this._follow._x - _hitbox.frameWidth / 2 + g._player._body.frameWidth / 2 + offset_up.x + v.x;
+			_hitbox.y = this._follow._y - _hitbox.frameHeight / 2 + g._player._body.frameHeight / 2 + offset_up.y + v.y;
 			
 			for each (var enem:BaseEnemy in g._enemies.members) {
-				if (enem.alive && enem._invuln_ct <= 0 && this.alpha > 0.1 && sword_speed > 25 && FlxCollision.pixelPerfectCheck(this._hitbox,enem._hitbox)) {
+				if (enem.alive && enem._invuln_ct <= 0 && this.alpha > 0.1 && FlxCollision.pixelPerfectCheck(this._hitbox,enem._hitbox)) {
 					enem._knockback(enem.x - g._player.get_center().x, enem.y - g._player.get_center().y, 50, GameStats._sword_knockback, GameStats._sword_stun);
 					enem._hit(g);
 					enem._health -= GameStats._sword_damage * enem._sword_damage_mult();
-					FlxG.shake(0.01, 0.075);
-					BottomGame._freeze_frame = Math.max(6, BottomGame._freeze_frame);
-					FlxG.play(Resource.SFX_HIT);
+					if (enem._sword_damage_mult() > 0) {
+						FlxG.shake(0.01, 0.075);
+						BottomGame._freeze_frame = Math.max(6, BottomGame._freeze_frame);
+						FlxG.play(Resource.SFX_HIT);
+					} else {
+						FlxG.shake(0.01, 0.075);
+						BottomGame._freeze_frame = Math.max(1, BottomGame._freeze_frame);
+					}
 				}
 			}
-			
-			_last_mouse_x = FlxG.mouse.x;
-			_last_mouse_y = FlxG.mouse.y;
 		}
 		
 		public override function _should_remove():Boolean {

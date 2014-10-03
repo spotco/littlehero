@@ -93,6 +93,7 @@ package enemy {
 			}
 		}
 		
+		var _ct:Number = 0;
 		public override function _update(g:BottomGame):void {
 			super._update(g);
 			_hitbox.x = this.x;
@@ -108,6 +109,7 @@ package enemy {
 				return;
 			} else if (this._stun_ct > 0) {
 				_stun_ct--;
+				this.alpha = 1;
 				this.color = 0xCC99FF;
 				stand_anim();
 				
@@ -126,7 +128,13 @@ package enemy {
 				return;
 			} else {
 				walk_anim();
-				this.color = 0xFFFFFF;
+				
+				_ct++;
+				if (_pass_stunned) {
+					this.color = 0xFFAAAA;
+				} else {
+					this.color = 0xFFFFFF;
+				}
 			}
 			
 			
@@ -152,7 +160,7 @@ package enemy {
 			}
 			
 			_fire_ct++;
-			if (_fire_ct % 100 == 0) {
+			if (_fire_ct % 40 == 0) {
 				var i:Number = 0.0;
 				var pos:FlxPoint = Util.flxpt(this.x, this.y);
 				if (_side == 0) {
@@ -180,10 +188,14 @@ package enemy {
 		
 		public override function _hit(g:BottomGame, bow:Boolean = false):void {
 			_arrows_to_stun--;
+			if (_pass_stunned && !bow) {
+				_stun_ct -= 70;
+			}
 			if (_arrows_to_stun <= 0 && !_pass_stunned) {
 				_pass_stunned = true;
 				_stun_ct = 80;
 			}
+			
 		}
 		public override function _knockback(dx:Number, dy:Number, invuln_ct:Number, knockback:Number = 14, stun_ct:Number = 0):void {
 			if (_stun_ct > 0) {
@@ -227,7 +239,7 @@ package enemy {
 		}
 		
 		public override function _arrow_damage_mult():Number { return (_stun_ct > 0)?0.2:0.025; }
-		public override function _sword_damage_mult():Number { return (_stun_ct > 0)?0.7:0; }
+		public override function _sword_damage_mult():Number { return (_stun_ct > 0)?0.6:0; }
 		
 	}
 

@@ -289,6 +289,17 @@ package  {
 			return ct_alive;
 		}
 		
+		public static function sin_lerp(min:Number, max:Number, t:Number):Number {
+			t = t > 1 ? 1 : t;
+			t = t < 0 ? 0 : t;
+			return Util.lerp(min, max, ( -Math.cos(t * Math.PI) + 1) / 2);
+		}
+		
+		public static var RIGHT_MOUSE_PRESSED:Boolean = false;
+		public static function get_is_right_mouse_or_equiv_pressed():Boolean {
+			return RIGHT_MOUSE_PRESSED || (FlxG.mouse.pressed() && FlxG.keys.SPACE);
+		}
+		
 	}
 
 }

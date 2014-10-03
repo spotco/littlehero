@@ -31,20 +31,27 @@ package player_projectiles {
 			return this;
 		}
 		
+		var _arrow_cost_mult:Number = 1;
+		public function get_arrow_cost():Number {
+			return 10 * _arrow_cost_mult;
+		}
+		
+		var _last_right_mouse_pressed:Boolean = false;
 		public override function _update(g:BottomGame):void {
+			
 			var v:Vector3D = Util.normalized(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
 			v.scaleBy(this.frameHeight / 2);
 			
 			var offset_left:Vector3D = Util.Z_VEC.crossProduct(v);
 			offset_left.normalize();
-			offset_left.scaleBy( -13.5);
+			offset_left.scaleBy( 13.5);
 			
 			this.x = this._follow._x - this.frameWidth/2 + g._player._body.frameWidth/2 + v.x + offset_left.x;
 			this.y = this._follow._y - this.frameHeight / 2 + g._player._body.frameHeight / 2 + v.y + offset_left.y;
 			
 			this.angle = _follow._angle;
 			
-			if (FlxG.mouse.pressed()) {
+			if (Util.get_is_right_mouse_or_equiv_pressed() || FlxG.keys.SPACE) {
 				this.alpha = 1;
 			} else {
 				if (this.alpha > 0) {
@@ -52,12 +59,10 @@ package player_projectiles {
 				}
 			}
 			
-			if (FlxG.mouse.justReleased() && GameStats._energy > 10) {
-
-				
+			if (_last_right_mouse_pressed && !Util.get_is_right_mouse_or_equiv_pressed() && GameStats._energy > get_arrow_cost()) {		
 				for (var i:int = 0; i < GameStats._bow_num_arrows; i++) {
-					if (GameStats._energy < 10) break;
-					GameStats._energy -= 10;
+					if (GameStats._energy < get_arrow_cost()) break;
+					GameStats._energy -= get_arrow_cost();
 					GameStats._just_used_energy_ct = Math.max(GameStats._just_used_energy_ct,GameStats._bow_just_used_energy_ct);
 					
 					var dv_ang:Number = Util.pt_to_flxrotation(FlxG.mouse.x - g._player.get_center().x, FlxG.mouse.y - g._player.get_center().y);
@@ -88,8 +93,13 @@ package player_projectiles {
 						2-g._player._arrowretic._ang/45
 					);
 				}
+				_arrow_cost_mult += 1;
 				
 			}
+			
+			_arrow_cost_mult = Math.max(1,_arrow_cost_mult*0.98);
+			
+			_last_right_mouse_pressed = Util.get_is_right_mouse_or_equiv_pressed();
 		}
 		
 	}
