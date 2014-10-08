@@ -35,6 +35,7 @@ package
 				});
 				stage.addChild(_topcover);
 				stage.addChild(_bottomcover);
+				stage.addEventListener(MouseEvent.CLICK, function(e:MouseEvent) { Mouse.hide(); } );
 				stage.addEventListener(MouseEvent.RIGHT_CLICK, function(e:MouseEvent) { } );
 				
 				stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, function(e:MouseEvent) { Util.RIGHT_MOUSE_PRESSED = true; } );

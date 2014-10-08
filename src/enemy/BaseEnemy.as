@@ -61,7 +61,7 @@ package enemy {
 		public function invuln_update():void {
 			this.x += _vx;
 			this.y += _vy;
-			if (this.hit_wall()) {
+			if (this.hit_wall(10)) {
 				_health -= GameStats._knockback_damage;;
 				_vx = 0;
 				_vy = 0;

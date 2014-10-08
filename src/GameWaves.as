@@ -247,7 +247,7 @@ package  {
 					random_spot_not_near_player(g);
 					TinySpiderEnemy.cons(g._enemies).init(_random_spot.x, _random_spot.y, g);
 				}
-				g._bottom_game_ui.tutorial_text_for("Right click (or Space+Click) to fire your crossbow.");
+				g._bottom_game_ui.tutorial_text_for("Space (or Right Click) to fire your crossbow.");
 				_ct = 5000;
 				_wave++;
 			} else if (_wave == 3) {

@@ -49,8 +49,8 @@ package  {
 			Mouse.hide();
 			FlxG.mouse.show(Resource.MOUSE_SWORD);
 			
-			_misctext.add(Util.cons_text(0, 0, "F1 to Fullscreen (Recommended)", 0xFFFFFF, 16));
-			_misctext.add(Util.cons_text(0, 18, "M to mute/unmute", 0xFFFFFF, 12));
+			_misctext.add(Util.cons_text(0, 0, "(M)-Mute, (F1)-Fullscreen", 0xFFFFFF, 12));
+			//_misctext.add(Util.cons_text(0, 18, "M to mute/unmute", 0xFFFFFF, 12));
 			_click_to_continue = Util.cons_text(Util.WID * 0.4875, 218-15, "Click Anywhere to Continue", 0xFFFFFF, 16);
 			_misctext.add(_click_to_continue);
 			

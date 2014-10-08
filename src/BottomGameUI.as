@@ -131,7 +131,7 @@ package
 				this.boss_bar_pct(0);
 			}
 			
-			Mouse.hide();
+			
 			if (Util.RIGHT_MOUSE_PRESSED || FlxG.keys.SPACE) {
 				if (_cur_mouse != Resource.MOUSE_CROSSBOW) {
 					FlxG.mouse.show(Resource.MOUSE_CROSSBOW);

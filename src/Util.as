@@ -297,7 +297,7 @@ package  {
 		
 		public static var RIGHT_MOUSE_PRESSED:Boolean = false;
 		public static function get_is_right_mouse_or_equiv_pressed():Boolean {
-			return RIGHT_MOUSE_PRESSED || (FlxG.mouse.pressed() && FlxG.keys.SPACE);
+			return RIGHT_MOUSE_PRESSED || FlxG.keys.SPACE;
 		}
 		
 	}
